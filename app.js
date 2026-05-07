@@ -40,8 +40,6 @@ function switchUser(uid){
   // Re-render current page
   const activePage=document.querySelector('.page.active');
   if(activePage&&activePage.id==='page-history') renderHistory();
-  if(activePage&&activePage.id==='page-dashboard') renderDashboard();
-  if(activePage&&activePage.id==='page-profit') renderProfitReport();
   updateBadge();
 }
 
@@ -1217,127 +1215,6 @@ function confirmAddPlan(btn){
 
 function togglePlan(i,v){adminSettings.discountPlans[i].active=v;localStorage.setItem('fy_admin',JSON.stringify(adminSettings));}
 function deletePlan(i){if(!confirm('確定刪除此方案？'))return;adminSettings.discountPlans.splice(i,1);localStorage.setItem('fy_admin',JSON.stringify(adminSettings));renderDiscountPlans();}
-
-// ── Dashboard ──
-function renderDashboard(){
-  const el=document.getElementById('dashboard-body');
-  const isAdmin=currentUser.role==='admin';
-  if(!isAdmin){el.innerHTML='<div class="empty-state"><div class="empty-icon">🔐</div><div class="empty-title">管理員專屬</div><div class="empty-sub">請切換為管理員身份查看</div></div>';return;}
-  if(!history.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">📊</div><div class="empty-title">尚無報價資料</div></div>';return;}
-
-  const total=history.length;
-  const totalRevenue=history.reduce((s,q)=>s+(q.finalTWD||0),0);
-  const totalProfit=history.reduce((s,q)=>s+(q.netProfit||0),0);
-  const avgMargin=total>0?Math.round(totalProfit/totalRevenue*1000)/10:0;
-
-  // School breakdown
-  const bySchool={};
-  history.forEach(q=>{if(q.school){bySchool[q.school]=(bySchool[q.school]||0)+1;}});
-
-  // Advisor breakdown
-  const byAdvisor={};
-  history.forEach(q=>{const n=q.advisorName||'未知';byAdvisor[n]=(byAdvisor[n]||0)+1;});
-
-  const statCard=(icon,label,val,sub,col)=>`<div class="stat-card" style="border-color:${col||'var(--border)'};flex:1;min-width:140px">
-    <div style="font-size:20px;margin-bottom:4px">${icon}</div>
-    <div style="font-size:22px;font-weight:700;color:${col||'var(--text)'}">${val}</div>
-    <div style="font-size:11px;font-weight:600;color:var(--text2);margin-top:2px">${label}</div>
-    ${sub?`<div style="font-size:10px;color:var(--text3);margin-top:2px">${sub}</div>`:''}
-  </div>`;
-
-  const barRow=(label,val,max,col)=>{const pct=max>0?Math.round(val/max*100):0;return`<div style="margin-bottom:10px">
-    <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
-      <span style="color:var(--text2)">${label}</span><span style="font-weight:600">${val} 筆</span>
-    </div>
-    <div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden">
-      <div style="background:${col||'var(--pink)'};height:100%;width:${pct}%;border-radius:4px;transition:width .4s"></div>
-    </div>
-  </div>`;};
-
-  const maxSch=Math.max(...Object.values(bySchool));
-  const maxAdv=Math.max(...Object.values(byAdvisor));
-  const schoolColors={EP:'#e91e8c',ILSC:'#7c3aed',Kaplan:'#0369a1'};
-
-  el.innerHTML=`
-    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px">
-      ${statCard('📋','總報價件數',total,'件','var(--text)')}
-      ${statCard('💰','總含稅售價','NT$ '+Math.round(totalRevenue/10000)+'萬','累計','#0369a1')}
-      ${statCard('📈','預估淨利','NT$ '+Math.round(totalProfit/10000)+'萬','合計','#059669')}
-      ${statCard('🎯','平均淨利率',avgMargin.toFixed(1)+'%','整體','#7c3aed')}
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-      <div class="settings-card">
-        <div class="settings-card-title">各學校成交件數</div>
-        ${Object.entries(bySchool).sort((a,b)=>b[1]-a[1]).map(([s,v])=>barRow(s,v,maxSch,schoolColors[s]||'var(--pink)')).join('')}
-      </div>
-      <div class="settings-card">
-        <div class="settings-card-title">顧問報價件數</div>
-        ${Object.entries(byAdvisor).sort((a,b)=>b[1]-a[1]).map(([n,v])=>barRow(n,v,maxAdv,'#e91e8c')).join('')}
-      </div>
-    </div>`;
-}
-
-// ── Profit Report ──
-function renderProfitReport(){
-  const el=document.getElementById('profit-body');
-  const isAdmin=currentUser.role==='admin';
-  if(!isAdmin){el.innerHTML='<div class="empty-state"><div class="empty-icon">🔐</div><div class="empty-title">管理員專屬</div></div>';return;}
-
-  const school=document.getElementById('profit-filter-school')?.value||'';
-  const month=document.getElementById('profit-filter-month')?.value||'';
-
-  let qs=history.filter(q=>{
-    if(school&&q.school!==school)return false;
-    if(month&&q.date){
-      const d=q.date.replace(/\//g,'-');
-      if(!d.startsWith(month))return false;
-    }
-    return true;
-  });
-
-  if(!qs.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">💹</div><div class="empty-title">此篩選條件無資料</div></div>';return;}
-
-  const totRev=qs.reduce((s,q)=>s+(q.finalTWD||0),0);
-  const totProfit=qs.reduce((s,q)=>s+(q.netProfit||0),0);
-  const avgM=totRev>0?Math.round(totProfit/totRev*1000)/10:0;
-
-  const rows=qs.map(q=>{
-    const margin=q.finalTWD>0?Math.round((q.netProfit||0)/(q.finalTWD)*1000)/10:0;
-    const marginColor=margin>=15?'#059669':margin>=5?'#d97706':'#dc2626';
-    return`<div class="history-row">
-      <div class="td" style="font-weight:500">${q.studentName}</div>
-      <div class="td" style="font-size:11px">${q.school||'—'} · ${q.campus||'—'}</div>
-      <div class="td" style="font-size:11px;color:var(--text3)">${q.advisorName||'—'}</div>
-      <div class="td td-amount">NT$ ${Math.round(q.finalTWD||0).toLocaleString()}</div>
-      <div class="td td-amount" style="color:#059669">+NT$ ${Math.round(q.rebateTWD||0).toLocaleString()}</div>
-      <div class="td td-amount" style="color:${marginColor};font-weight:700">NT$ ${Math.round(q.netProfit||0).toLocaleString()}</div>
-      <div class="td" style="color:${marginColor};font-weight:600;text-align:right">${margin.toFixed(1)}%</div>
-      <div class="td" style="font-size:11px;color:var(--text3)">${q.date||'—'}</div>
-    </div>`;
-  }).join('');
-
-  el.innerHTML=`
-    <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
-      <div class="stat-card" style="flex:1;min-width:120px"><div style="font-size:18px;font-weight:700;color:#0369a1">NT$ ${Math.round(totRev/10000)}萬</div><div style="font-size:11px;color:var(--text2)">含稅售價合計</div></div>
-      <div class="stat-card" style="flex:1;min-width:120px"><div style="font-size:18px;font-weight:700;color:#059669">NT$ ${Math.round(totProfit/10000)}萬</div><div style="font-size:11px;color:var(--text2)">預估淨利合計</div></div>
-      <div class="stat-card" style="flex:1;min-width:120px"><div style="font-size:18px;font-weight:700;color:#7c3aed">${avgM.toFixed(1)}%</div><div style="font-size:11px;color:var(--text2)">平均淨利率</div></div>
-      <div class="stat-card" style="flex:1;min-width:120px"><div style="font-size:18px;font-weight:700">${qs.length} 筆</div><div style="font-size:11px;color:var(--text2)">報價筆數</div></div>
-    </div>
-    <div class="history-table">
-      <div class="table-head">
-        <div class="th">學生</div><div class="th">學校・校區</div><div class="th">顧問</div>
-        <div class="th">含稅售價</div><div class="th">回傭</div><div class="th">預估淨利</div>
-        <div class="th">淨利率</div><div class="th">日期</div>
-      </div>
-      ${rows}
-    </div>`;
-
-  // Bind filters
-  ['profit-filter-school','profit-filter-month'].forEach(id=>{
-    const el2=document.getElementById(id);
-    if(el2&&!el2._bound){el2.addEventListener('change',renderProfitReport);el2._bound=true;}
-  });
-}
 
 // Init
 renderWizard();renderQP();updateBadge();
