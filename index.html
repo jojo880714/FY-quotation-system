@@ -1039,7 +1039,8 @@ function step6confirm(){
     +'<div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:16px 18px;margin-top:12px">'
     +'<div style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#059669;margin-bottom:10px">淨利試算（管理員）</div>'
     +'<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #dcfce7;font-size:12px"><span style="color:#555">含稅售價</span><span style="font-weight:600">NT$ '+calc.finalTWD.toLocaleString()+'</span></div>'
-    +'<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #dcfce7;font-size:12px"><span style="color:#555">－ 台幣成本（含匯差）</span><span style="color:#dc2626;font-weight:500">－NT$ '+calc.costTWD.toLocaleString()+'</span></div>'
+    +'<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #dcfce7;font-size:12px"><span style="color:#555">－ 原始成本（外幣）</span><span style="color:#dc2626;font-weight:500">－NT$ '+calc.rawCostTWD.toLocaleString()+'</span></div>'
+    +(calc.schoolDiscAmt>0?'<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #dcfce7;font-size:12px"><span style="color:#0369a1">＋ 廠商折扣省下</span><span style="color:#0369a1;font-weight:500">＋NT$ '+calc.schoolDiscAmt.toLocaleString()+'</span></div>':'')
     +'<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #dcfce7;font-size:12px"><span style="color:#555">＋ 預估回傭（'+calc.rebatePct+'%）</span><span style="color:#059669;font-weight:500">＋NT$ '+calc.rebateTWD.toLocaleString()+'</span></div>'
     +'<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #dcfce7;font-size:12px"><span style="color:#555">－ 顧問獎金</span><span style="color:#dc2626;font-weight:500">－NT$ '+calc.commissionTWD.toLocaleString()+'</span></div>'
     +'<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #dcfce7;font-size:12px"><span style="color:#555">－ 營業稅</span><span style="color:#dc2626;font-weight:500">－NT$ '+calc.taxAmt.toLocaleString()+'</span></div>'
@@ -1061,7 +1062,7 @@ function step6confirm(){
 
 // ── Calculate ──
 function calculate(){
-  if(!state.school||!state.campus||!state.course)return{items:[],costTWD:0,preTaxSell:0,discountAmt:0,taxAmt:0,finalTWD:0,totalOrig:'',discLines:[]};
+  if(!state.school||!state.campus||!state.course)return{items:[],costTWD:0,preTaxSell:0,discountAmt:0,taxAmt:0,finalTWD:0,totalOrig:'',discLines:[],fxBuf:1,commPct:0,rebatePct:0,rebateTWD:0,commissionTWD:0,netProfit:0,netMargin:0,rawCostTWD:0,discountedCostTWD:0,schoolDiscAmt:0};
   const campusData=SCHOOL_DATA[state.school][state.campus];
   const fees=campusData?.fees||[];
   const w=state.weeks||4;
@@ -1106,54 +1107,65 @@ function calculate(){
     items.push({name:f.name,note:f.category,amt:a,twd:twd(a,aC),currency:aC,display:fmt(a,aC)});
   });
 
-  // ── 外幣成本 → 台幣成本（含匯差緩衝）──
-  const fxBuf=1+(adminSettings.fxBuffer||0)/100;
-  const costTWD=Math.round(items.reduce((s,i)=>s+(i.twd||0),0)*fxBuf);
+  // ── Layer 1: 外幣原始成本合計 ──
+  const rawCostTWD = items.reduce((s,i)=>s+(i.twd||0), 0);
 
-  // ── 顧問獎金 ──
-  const commPct=(adminSettings.commissionPct||0)/100;
-  const preTaxSell=Math.round(costTWD*(1+commPct));
+  // ── Layer 2: 廠商折扣（折的是「成本」，代表學校給放洋的優惠）──
+  const disc = state.disc || {type:'原價', pct:0, fixed:0, schoolDiscount:null};
+  const discLines = [];
+  let schoolDiscAmt = 0;   // 廠商折扣省下的成本金額
+  let discountedCostTWD = rawCostTWD;
 
-  // ── 折扣層 ──
-  const disc=state.disc||{type:'原價',pct:0,fixed:0,schoolDiscount:null};
-  const discLines=[];
-
-  // 廠商折扣（% 折）
-  let afterSchoolDisc=preTaxSell;
   if(disc.schoolDiscount){
-    const sd=disc.schoolDiscount;
-    const sdAmt=sd.pct>0?Math.round(preTaxSell*sd.pct/100):(sd.fixed||0);
-    afterSchoolDisc=preTaxSell-sdAmt;
-    discLines.push({label:sd.label+'（廠商折扣）',amt:-sdAmt,type:'school'});
+    const sd = disc.schoolDiscount;
+    // 廠商折扣折的是學費成本（rawCostTWD），不是售價
+    schoolDiscAmt = sd.pct > 0
+      ? Math.round(rawCostTWD * sd.pct / 100)
+      : (sd.fixed || 0);
+    discountedCostTWD = rawCostTWD - schoolDiscAmt;
+    discLines.push({label: sd.label + '（廠商折扣）', amt: -schoolDiscAmt, type:'school'});
   }
 
-  // 公司折扣
-  let afterCoDisc=afterSchoolDisc;
-  if(disc.type!=='原價'){
-    let coAmt=0;
-    if(disc.pct>0) coAmt=Math.round(afterSchoolDisc*disc.pct/100);
-    else if(disc.fixed>0) coAmt=disc.fixed;
-    afterCoDisc=afterSchoolDisc-coAmt;
-    if(coAmt>0) discLines.push({label:disc.type+'（公司折扣）',amt:-coAmt,type:'company'});
+  // ── Layer 3: 匯差緩衝（套用在折後成本上）──
+  const fxBuf = 1 + (adminSettings.fxBuffer||0) / 100;
+  const costTWD = Math.round(discountedCostTWD * fxBuf);
+
+  // ── Layer 4: 顧問獎金加成 ──
+  const commPct = (adminSettings.commissionPct||0) / 100;
+  const preTaxSell = Math.round(costTWD * (1 + commPct));
+
+  // ── Layer 5: 公司折扣（從售價折）──
+  let afterCoDisc = preTaxSell;
+  if(disc.type !== '原價'){
+    let coAmt = 0;
+    if(disc.pct > 0)   coAmt = Math.round(preTaxSell * disc.pct / 100);
+    else if(disc.fixed > 0) coAmt = disc.fixed;
+    afterCoDisc = preTaxSell - coAmt;
+    if(coAmt > 0) discLines.push({label: disc.type + '（公司折扣）', amt: -coAmt, type:'company'});
   }
 
-  const discountAmt=preTaxSell-afterCoDisc;
-  const taxAmt=Math.round(afterCoDisc*(adminSettings.taxRate||5)/100);
-  const finalTWD=afterCoDisc+taxAmt;
+  // ── Layer 6: 營業稅 ──
+  const taxAmt  = Math.round(afterCoDisc * (adminSettings.taxRate||5) / 100);
+  const finalTWD = afterCoDisc + taxAmt;
 
-  const byCur={};items.forEach(i=>{byCur[i.currency]=(byCur[i.currency]||0)+i.amt;});
-  const totalOrig=Object.entries(byCur).map(([c,v])=>fmt(v,c)).join(' + ');
+  const discountAmt = preTaxSell - afterCoDisc;  // 公司折扣金額（for display）
+
+  const byCur = {};
+  items.forEach(i=>{ byCur[i.currency] = (byCur[i.currency]||0) + i.amt; });
+  const totalOrig = Object.entries(byCur).map(([cur,v])=>fmt(v,cur)).join(' + ');
 
   // ── 淨利試算 ──
-  const rebatePct=(adminSettings.rebates&&adminSettings.rebates[state.school])||0;
-  const rawCostTWD=items.reduce((s,i)=>s+(i.twd||0),0);
-  const rebateTWD=Math.round(rawCostTWD*rebatePct/100);
-  const commissionTWD=preTaxSell-costTWD;
-  const netProfit=finalTWD-costTWD+rebateTWD-commissionTWD-taxAmt;
-  const netMargin=finalTWD>0?Math.round(netProfit/finalTWD*1000)/10:0;
+  // 回傭以「折後原始成本（未含匯差）」計算，即學校實際給的金額
+  const rebatePct    = (adminSettings.rebates && adminSettings.rebates[state.school]) || 0;
+  const rebateTWD    = Math.round(discountedCostTWD * rebatePct / 100);
+  const commissionTWD = preTaxSell - costTWD;  // 顧問獎金金額
+  // 淨利 = 含稅售價 - 折後台幣成本(含匯差) + 回傭 - 顧問獎金 - 營業稅
+  const netProfit = afterCoDisc - costTWD + rebateTWD;  // 稅前收入 - 實際成本 + 回傭
+  const netMargin = finalTWD > 0 ? Math.round(netProfit / finalTWD * 1000) / 10 : 0;
 
-  return{items,costTWD,preTaxSell,discountAmt,taxAmt,finalTWD,totalOrig,discLines,fxBuf,commPct,
-    rebatePct,rebateTWD,commissionTWD,netProfit,netMargin,rawCostTWD};
+  return{items, costTWD, preTaxSell, discountAmt, taxAmt, finalTWD, totalOrig, discLines,
+    fxBuf, commPct, rawCostTWD, discountedCostTWD, schoolDiscAmt,
+    rebatePct, rebateTWD, commissionTWD, netProfit, netMargin};
 }
 
 // ── Quote Panel (Internal view - shows all layers) ──
@@ -1180,8 +1192,16 @@ function renderQP(){
   // Pricing layers
   html+='<div class="qp-divider"></div>';
   html+='<div class="qp-section-title">計費層（內部）</div>';
-  html+='<div class="qp-row"><div><div class="qp-item-name">台幣成本</div>'
-    +'<div class="qp-item-note">含匯差緩衝 +'+(((calc.fxBuf||1)-1)*100).toFixed(0)+'%</div></div>'
+  html+='<div class="qp-row"><div><div class="qp-item-name">外幣原始成本</div>'
+    +'<div class="qp-item-note">未含匯差</div></div>'
+    +'<div style="text-align:right"><div class="qp-item-price" style="color:var(--text)">NT$ '+calc.rawCostTWD.toLocaleString()+'</div></div></div>';
+  if((calc.schoolDiscAmt||0)>0){
+    html+='<div class="qp-row"><div><div class="qp-item-name" style="color:#0369a1">廠商折扣省下成本</div>'
+      +'<div class="qp-item-note" style="color:#0369a1">學校給放洋的優惠</div></div>'
+      +'<div style="text-align:right"><div class="qp-item-price" style="color:#0369a1">－NT$ '+calc.schoolDiscAmt.toLocaleString()+'</div></div></div>';
+  }
+  html+='<div class="qp-row"><div><div class="qp-item-name">台幣成本（折後含匯差）</div>'
+    +'<div class="qp-item-note">匯差緩衝 +'+(((calc.fxBuf||1)-1)*100).toFixed(0)+'%</div></div>'
     +'<div style="text-align:right"><div class="qp-item-price" style="color:var(--text)">NT$ '+calc.costTWD.toLocaleString()+'</div></div></div>';
   html+='<div class="qp-row"><div><div class="qp-item-name">未稅售價</div>'
     +'<div class="qp-item-note">含顧問獎金 +'+(((calc.commPct||0))*100).toFixed(0)+'%</div></div>'
