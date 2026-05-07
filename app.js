@@ -19,6 +19,50 @@ const STEPS=[
 
 let state={step:0,school:null,campus:null,course:null,weeks:4,startDate:'',accomm:null,extras:{},disc:{type:'原價',pct:0,fixed:0,schoolDiscount:null},studentName:'',studentEmail:'',notes:''};
 let rates=JSON.parse(localStorage.getItem('fy_rates')||'null')||{AUD:21.5,GBP:40.2,EUR:33.8,USD:32.1,CAD:23.5};
+// ── Users ──
+const DEFAULT_USERS=[
+  {id:'admin',name:'管理員',role:'admin',avatar:'管'},
+  {id:'u1',name:'Emily',role:'advisor',avatar:'E'},
+  {id:'u2',name:'Aaron',role:'advisor',avatar:'A'},
+  {id:'u3',name:'Bobo',role:'advisor',avatar:'B'},
+  {id:'u4',name:'Yiwei',role:'advisor',avatar:'Y'},
+];
+let users=JSON.parse(localStorage.getItem('fy_users')||'null')||DEFAULT_USERS;
+let currentUser=JSON.parse(localStorage.getItem('fy_current_user')||'null')||users[0];
+
+function switchUser(uid){
+  currentUser=users.find(u=>u.id===uid)||users[0];
+  localStorage.setItem('fy_current_user',JSON.stringify(currentUser));
+  document.getElementById('user-avatar').textContent=currentUser.avatar;
+  document.getElementById('user-name-display').textContent=currentUser.name;
+  document.getElementById('user-role-display').textContent=(currentUser.role==='admin'?'管理員':'顧問')+'・點擊切換';
+  document.getElementById('user-modal').style.display='none';
+  // Re-render current page
+  const activePage=document.querySelector('.page.active');
+  if(activePage&&activePage.id==='page-history') renderHistory();
+  if(activePage&&activePage.id==='page-dashboard') renderDashboard();
+  if(activePage&&activePage.id==='page-profit') renderProfitReport();
+  updateBadge();
+}
+
+function showUserSwitch(){
+  const list=document.getElementById('user-list');
+  list.innerHTML=users.map(u=>`
+    <div onclick="switchUser('${u.id}')" style="display:flex;align-items:center;gap:12px;padding:10px 12px;
+      border-radius:8px;cursor:pointer;background:${currentUser.id===u.id?'var(--pink-light)':'var(--bg)'};
+      border:1px solid ${currentUser.id===u.id?'var(--pink)':'var(--border)'}">
+      <div style="width:32px;height:32px;border-radius:50%;background:${u.role==='admin'?'var(--pink)':'var(--pink-light)'};
+        color:${u.role==='admin'?'#fff':'var(--pink)'};display:flex;align-items:center;justify-content:center;
+        font-size:13px;font-weight:600">${u.avatar}</div>
+      <div>
+        <div style="font-size:13px;font-weight:500">${u.name}</div>
+        <div style="font-size:11px;color:var(--text3)">${u.role==='admin'?'管理員（全部可見）':'顧問（只看自己的報價）'}</div>
+      </div>
+      ${currentUser.id===u.id?'<div style="margin-left:auto;color:var(--pink);font-size:12px">✓ 目前</div>':''}
+    </div>`).join('');
+  document.getElementById('user-modal').style.display='flex';
+}
+
 let adminSettings=JSON.parse(localStorage.getItem('fy_admin')||'null')||{
   fxBuffer:2,commissionPct:2,taxRate:5,quoteValidDays:30,
   rateUpdatedAt:new Date().toISOString().split('T')[0],
@@ -745,7 +789,7 @@ function renderQP(){
 // ── Save ──
 function saveQuote(){
   const calc=calculate();
-  const q={id:Date.now(),date:new Date().toLocaleDateString('zh-TW'),studentName:state.studentName||'未填',studentEmail:state.studentEmail,school:state.school,campus:state.campus,course:state.course?.name,weeks:state.weeks,startDate:state.startDate,accomm:state.accomm==='none'?null:state.accomm?.name,costTWD:calc.costTWD,preTaxSell:calc.preTaxSell,finalTWD:calc.finalTWD,totalOrig:calc.totalOrig,items:calc.items,discLines:calc.discLines,status:'draft'};
+  const q={id:Date.now(),date:new Date().toLocaleDateString('zh-TW'),advisorId:currentUser.id,advisorName:currentUser.name,studentName:state.studentName||'未填',studentEmail:state.studentEmail,school:state.school,campus:state.campus,course:state.course?.name,weeks:state.weeks,startDate:state.startDate,accomm:state.accomm==='none'?null:state.accomm?.name,costTWD:calc.costTWD,preTaxSell:calc.preTaxSell,finalTWD:calc.finalTWD,discountAmt:calc.discountAmt,totalOrig:calc.totalOrig,items:calc.items,discLines:calc.discLines,netProfit:calc.netProfit,netMargin:calc.netMargin,rebateTWD:calc.rebateTWD,schoolDiscAmt:calc.schoolDiscAmt,status:'draft'};
   history.unshift(q);
   localStorage.setItem('fy_history',JSON.stringify(history));
   updateBadge();
@@ -838,15 +882,32 @@ function saveSettings(){
 // ── History ──
 function renderHistory(){
   const list=document.getElementById('history-list');
-  if(!history.length){list.innerHTML=`<div class="empty-state"><div class="empty-state-icon">📋</div><div class="empty-state-title">尚無報價紀錄</div><div class="empty-state-sub">建立第一份報價後將顯示於此</div></div>`;return;}
-  list.innerHTML=history.map(q=>`<div class="history-row">
-    <div class="td td-name">${q.studentName}</div>
-    <div class="td">${q.school} · ${q.campus}</div>
-    <div class="td" style="font-size:11px">${q.course||'—'}</div>
-    <div class="td td-amount">NT$ ${Math.round(q.finalTWD||q.totalTWD||0).toLocaleString()}</div>
-    <div class="td"><span class="status-pill ${q.status==='draft'?'status-draft':'status-sent'}">${q.status==='draft'?'草稿':'已寄出'}</span></div>
-    <div class="td"><button class="btn btn-sm" onclick="loadQ(${q.id})">載入</button></div>
-  </div>`).join('');
+  const isAdmin=currentUser.role==='admin';
+  const validDays=adminSettings.quoteValidDays||30;
+  const qs=isAdmin?history:history.filter(q=>!q.advisorId||q.advisorId===currentUser.id);
+  if(!qs.length){
+    list.innerHTML='<div class="empty-state"><div class="empty-state-icon">📋</div><div class="empty-state-title">'+(isAdmin?'尚無報價紀錄':'您尚無報價紀錄')+'</div><div class="empty-state-sub">建立第一份報價後將顯示於此</div></div>';
+    return;
+  }
+  list.innerHTML=qs.map(q=>{
+    const expired=(function(){
+      if(!q.date)return false;
+      const d=new Date(q.date.replace(/\//g,'-'));
+      return(Date.now()-d.getTime())>validDays*86400000;
+    })();
+    return '<div class="history-row" style="'+(expired?'opacity:.65':'')+'">'+
+      '<div class="td td-name">'+q.studentName+'</div>'+
+      '<div class="td">'+(q.school||'—')+' · '+(q.campus||'—')+'</div>'+
+      '<div class="td" style="font-size:11px">'+(q.course||'—')+'</div>'+
+      '<div class="td td-amount">NT$ '+Math.round(q.finalTWD||q.totalTWD||0).toLocaleString()+'</div>'+
+      '<div class="td">'+
+        '<span class="status-pill '+(q.status==='draft'?'status-draft':'status-sent')+'">'+(q.status==='draft'?'草稿':'已寄出')+'</span>'+
+        (expired?'<span style="font-size:10px;background:#fef2f2;color:#dc2626;border:1px solid #fecaca;border-radius:4px;padding:1px 6px;margin-left:4px">已過期</span>':'')+
+        (isAdmin&&q.advisorName?'<div style="font-size:10px;color:var(--text3);margin-top:1px">'+q.advisorName+'</div>':'')+
+      '</div>'+
+      '<div class="td"><button class="btn btn-sm" onclick="loadQ('+q.id+')">載入</button></div>'+
+      '</div>';
+  }).join('');
 }
 
 function filterHistory(q){
@@ -1157,5 +1218,127 @@ function confirmAddPlan(btn){
 function togglePlan(i,v){adminSettings.discountPlans[i].active=v;localStorage.setItem('fy_admin',JSON.stringify(adminSettings));}
 function deletePlan(i){if(!confirm('確定刪除此方案？'))return;adminSettings.discountPlans.splice(i,1);localStorage.setItem('fy_admin',JSON.stringify(adminSettings));renderDiscountPlans();}
 
+// ── Dashboard ──
+function renderDashboard(){
+  const el=document.getElementById('dashboard-body');
+  const isAdmin=currentUser.role==='admin';
+  if(!isAdmin){el.innerHTML='<div class="empty-state"><div class="empty-icon">🔐</div><div class="empty-title">管理員專屬</div><div class="empty-sub">請切換為管理員身份查看</div></div>';return;}
+  if(!history.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">📊</div><div class="empty-title">尚無報價資料</div></div>';return;}
+
+  const total=history.length;
+  const totalRevenue=history.reduce((s,q)=>s+(q.finalTWD||0),0);
+  const totalProfit=history.reduce((s,q)=>s+(q.netProfit||0),0);
+  const avgMargin=total>0?Math.round(totalProfit/totalRevenue*1000)/10:0;
+
+  // School breakdown
+  const bySchool={};
+  history.forEach(q=>{if(q.school){bySchool[q.school]=(bySchool[q.school]||0)+1;}});
+
+  // Advisor breakdown
+  const byAdvisor={};
+  history.forEach(q=>{const n=q.advisorName||'未知';byAdvisor[n]=(byAdvisor[n]||0)+1;});
+
+  const statCard=(icon,label,val,sub,col)=>`<div class="stat-card" style="border-color:${col||'var(--border)'};flex:1;min-width:140px">
+    <div style="font-size:20px;margin-bottom:4px">${icon}</div>
+    <div style="font-size:22px;font-weight:700;color:${col||'var(--text)'}">${val}</div>
+    <div style="font-size:11px;font-weight:600;color:var(--text2);margin-top:2px">${label}</div>
+    ${sub?`<div style="font-size:10px;color:var(--text3);margin-top:2px">${sub}</div>`:''}
+  </div>`;
+
+  const barRow=(label,val,max,col)=>{const pct=max>0?Math.round(val/max*100):0;return`<div style="margin-bottom:10px">
+    <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
+      <span style="color:var(--text2)">${label}</span><span style="font-weight:600">${val} 筆</span>
+    </div>
+    <div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden">
+      <div style="background:${col||'var(--pink)'};height:100%;width:${pct}%;border-radius:4px;transition:width .4s"></div>
+    </div>
+  </div>`;};
+
+  const maxSch=Math.max(...Object.values(bySchool));
+  const maxAdv=Math.max(...Object.values(byAdvisor));
+  const schoolColors={EP:'#e91e8c',ILSC:'#7c3aed',Kaplan:'#0369a1'};
+
+  el.innerHTML=`
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px">
+      ${statCard('📋','總報價件數',total,'件','var(--text)')}
+      ${statCard('💰','總含稅售價','NT$ '+Math.round(totalRevenue/10000)+'萬','累計','#0369a1')}
+      ${statCard('📈','預估淨利','NT$ '+Math.round(totalProfit/10000)+'萬','合計','#059669')}
+      ${statCard('🎯','平均淨利率',avgMargin.toFixed(1)+'%','整體','#7c3aed')}
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div class="settings-card">
+        <div class="settings-card-title">各學校成交件數</div>
+        ${Object.entries(bySchool).sort((a,b)=>b[1]-a[1]).map(([s,v])=>barRow(s,v,maxSch,schoolColors[s]||'var(--pink)')).join('')}
+      </div>
+      <div class="settings-card">
+        <div class="settings-card-title">顧問報價件數</div>
+        ${Object.entries(byAdvisor).sort((a,b)=>b[1]-a[1]).map(([n,v])=>barRow(n,v,maxAdv,'#e91e8c')).join('')}
+      </div>
+    </div>`;
+}
+
+// ── Profit Report ──
+function renderProfitReport(){
+  const el=document.getElementById('profit-body');
+  const isAdmin=currentUser.role==='admin';
+  if(!isAdmin){el.innerHTML='<div class="empty-state"><div class="empty-icon">🔐</div><div class="empty-title">管理員專屬</div></div>';return;}
+
+  const school=document.getElementById('profit-filter-school')?.value||'';
+  const month=document.getElementById('profit-filter-month')?.value||'';
+
+  let qs=history.filter(q=>{
+    if(school&&q.school!==school)return false;
+    if(month&&q.date){
+      const d=q.date.replace(/\//g,'-');
+      if(!d.startsWith(month))return false;
+    }
+    return true;
+  });
+
+  if(!qs.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">💹</div><div class="empty-title">此篩選條件無資料</div></div>';return;}
+
+  const totRev=qs.reduce((s,q)=>s+(q.finalTWD||0),0);
+  const totProfit=qs.reduce((s,q)=>s+(q.netProfit||0),0);
+  const avgM=totRev>0?Math.round(totProfit/totRev*1000)/10:0;
+
+  const rows=qs.map(q=>{
+    const margin=q.finalTWD>0?Math.round((q.netProfit||0)/(q.finalTWD)*1000)/10:0;
+    const marginColor=margin>=15?'#059669':margin>=5?'#d97706':'#dc2626';
+    return`<div class="history-row">
+      <div class="td" style="font-weight:500">${q.studentName}</div>
+      <div class="td" style="font-size:11px">${q.school||'—'} · ${q.campus||'—'}</div>
+      <div class="td" style="font-size:11px;color:var(--text3)">${q.advisorName||'—'}</div>
+      <div class="td td-amount">NT$ ${Math.round(q.finalTWD||0).toLocaleString()}</div>
+      <div class="td td-amount" style="color:#059669">+NT$ ${Math.round(q.rebateTWD||0).toLocaleString()}</div>
+      <div class="td td-amount" style="color:${marginColor};font-weight:700">NT$ ${Math.round(q.netProfit||0).toLocaleString()}</div>
+      <div class="td" style="color:${marginColor};font-weight:600;text-align:right">${margin.toFixed(1)}%</div>
+      <div class="td" style="font-size:11px;color:var(--text3)">${q.date||'—'}</div>
+    </div>`;
+  }).join('');
+
+  el.innerHTML=`
+    <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+      <div class="stat-card" style="flex:1;min-width:120px"><div style="font-size:18px;font-weight:700;color:#0369a1">NT$ ${Math.round(totRev/10000)}萬</div><div style="font-size:11px;color:var(--text2)">含稅售價合計</div></div>
+      <div class="stat-card" style="flex:1;min-width:120px"><div style="font-size:18px;font-weight:700;color:#059669">NT$ ${Math.round(totProfit/10000)}萬</div><div style="font-size:11px;color:var(--text2)">預估淨利合計</div></div>
+      <div class="stat-card" style="flex:1;min-width:120px"><div style="font-size:18px;font-weight:700;color:#7c3aed">${avgM.toFixed(1)}%</div><div style="font-size:11px;color:var(--text2)">平均淨利率</div></div>
+      <div class="stat-card" style="flex:1;min-width:120px"><div style="font-size:18px;font-weight:700">${qs.length} 筆</div><div style="font-size:11px;color:var(--text2)">報價筆數</div></div>
+    </div>
+    <div class="history-table">
+      <div class="table-head">
+        <div class="th">學生</div><div class="th">學校・校區</div><div class="th">顧問</div>
+        <div class="th">含稅售價</div><div class="th">回傭</div><div class="th">預估淨利</div>
+        <div class="th">淨利率</div><div class="th">日期</div>
+      </div>
+      ${rows}
+    </div>`;
+
+  // Bind filters
+  ['profit-filter-school','profit-filter-month'].forEach(id=>{
+    const el2=document.getElementById(id);
+    if(el2&&!el2._bound){el2.addEventListener('change',renderProfitReport);el2._bound=true;}
+  });
+}
+
 // Init
 renderWizard();renderQP();updateBadge();
+switchUser(currentUser.id);
