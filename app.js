@@ -1,0 +1,1082 @@
+const SCHOOL_DATA={"EP":{"Brisbane":{"courses":[{"name":"經典上午課程 (15h)","category":"課程","currency":"AUD","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":400.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":380.0,"fixed":0.0,"peak":0}]},{"name":"半密集上午課程 (20h)","category":"課程","currency":"AUD","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":475.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":455.0,"fixed":0.0,"peak":0},{"wf":24,"wt":99,"price":430.0,"fixed":0.0,"peak":0}]},{"name":"一對一課程","category":"課程","currency":"AUD","unit":"按堂計算","tiers":[{"wf":1,"wt":99,"price":135.0,"fixed":0.0,"peak":0}]}],"accomm":[{"type":"行政","name":"住宿安排費","currency":"AUD","price":0.0,"fixed":385.0,"unit":"固定金額","note":"18歲以上適用"},{"type":"寄宿家庭","name":"寄宿家庭-單人房 (特別半食宿)","currency":"AUD","price":420.0,"fixed":0.0,"unit":"按週計算","note":"限18歲以上, 平日2餐/週末3餐"},{"type":"寄宿家庭","name":"寄宿家庭-單人房 (僅供晚餐)","currency":"AUD","price":385.0,"fixed":0.0,"unit":"按週計算","note":"限18歲以上"},{"type":"寄宿家庭","name":"寄宿家庭-單人房 (不含餐)","currency":"AUD","price":340.0,"fixed":0.0,"unit":"按週計算","note":"限18歲以上, 可自炊"},{"type":"寄宿家庭","name":"寄宿家庭-雙人房 (特別半食宿)","currency":"AUD","price":385.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行, 平日2餐/週末3餐"},{"type":"寄宿家庭","name":"寄宿家庭-雙人房 (僅供晚餐)","currency":"AUD","price":355.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行"},{"type":"寄宿家庭","name":"寄宿家庭-雙人房 (不含餐)","currency":"AUD","price":310.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行"},{"type":"額外加成","name":"特殊飲食需求加價","currency":"AUD","price":50.0,"fixed":0.0,"unit":"按週計算","note":"如全素、無麩質、清真等"},{"type":"額外加成","name":"額外住宿費 (每晚)","currency":"AUD","price":70.0,"fixed":0.0,"unit":"按天計算","note":"第7晚起算 (延回)"},{"type":"宿舍","name":"EP 學生公寓 (單人房)","currency":"AUD","price":300.0,"fixed":0.0,"unit":"按週計算","note":"18歲以上, 通勤約40-50分"},{"type":"宿舍","name":"EP 學生公寓 (雙人房單人住)","currency":"AUD","price":340.0,"fixed":0.0,"unit":"按週計算","note":"Double Room Single Occupancy"},{"type":"宿舍","name":"EP 學生公寓 (雙人房)","currency":"AUD","price":450.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行"},{"type":"宿舍","name":"Bunk Brisbane (4-6人房)","currency":"AUD","price":415.0,"fixed":0.0,"unit":"按週計算","note":"18歲以上, 通勤約10分鐘"},{"type":"宿舍","name":"Bunk Brisbane (8-10人房)","currency":"AUD","price":395.0,"fixed":0.0,"unit":"按週計算","note":"18歲以上"},{"type":"宿舍","name":"Bunk Brisbane (女性4人房)","currency":"AUD","price":438.0,"fixed":0.0,"unit":"按週計算","note":"18歲以上, 限女性"},{"type":"宿舍","name":"Student One (Studio 套房)","currency":"AUD","price":679.0,"fixed":0.0,"unit":"按週計算","note":"18歲以上, 步行約12分鐘"},{"type":"宿舍","name":"Student One (5房公寓雅房)","currency":"AUD","price":479.0,"fixed":0.0,"unit":"按週計算","note":"18歲以上, Shared Room"},{"type":"行政","name":"寢具包 (Student One)","currency":"AUD","price":0.0,"fixed":195.0,"unit":"固定金額","note":"一次性費用 (抵達時支付)"},{"type":"宿舍","name":"CLLIX (Studio 套房)","currency":"AUD","price":1332.0,"fixed":0.0,"unit":"按週計算","note":"18歲以上, 步行約11分鐘"},{"type":"宿舍","name":"CLLIX (一房公寓)","currency":"AUD","price":1450.0,"fixed":0.0,"unit":"按週計算","note":"1 Bed Apartment"}],"fees":[{"category":"註冊","name":"註冊費","currency":"AUD","price":0.0,"fixed":250.0,"unit":"固定金額","wf":1,"wt":99},{"category":"教材","name":"教材費 (短期)","currency":"AUD","price":0.0,"fixed":75.0,"unit":"固定金額","wf":1,"wt":4},{"category":"教材","name":"教材費 (中期)","currency":"AUD","price":0.0,"fixed":150.0,"unit":"固定金額","wf":5,"wt":11},{"category":"教材","name":"教材費 (長期)","currency":"AUD","price":0.0,"fixed":250.0,"unit":"固定金額","wf":12,"wt":23},{"category":"教材","name":"教材費 (超長期)","currency":"AUD","price":0.0,"fixed":325.0,"unit":"固定金額","wf":24,"wt":99},{"category":"銀行","name":"銀行轉帳手續費","currency":"AUD","price":0.0,"fixed":110.0,"unit":"固定金額","wf":1,"wt":99}]},"Canary Wharf":{"courses":[{"name":"經典上午課程 (20h)","category":"課程","currency":"GBP","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":405.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":365.0,"fixed":0.0,"peak":0},{"wf":24,"wt":99,"price":325.0,"fixed":0.0,"peak":0}]},{"name":"經典下午課程 (20h)","category":"課程","currency":"GBP","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":300.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":280.0,"fixed":0.0,"peak":0},{"wf":24,"wt":99,"price":255.0,"fixed":0.0,"peak":0}]},{"name":"半密集上午課程 (27h)","category":"課程","currency":"GBP","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":450.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":410.0,"fixed":0.0,"peak":0},{"wf":24,"wt":99,"price":380.0,"fixed":0.0,"peak":0}]},{"name":"半密集下午課程 (25h)","category":"課程","currency":"GBP","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":350.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":300.0,"fixed":0.0,"peak":0},{"wf":24,"wt":99,"price":275.0,"fixed":0.0,"peak":0}]},{"name":"超密集課程 (40h)","category":"課程","currency":"GBP","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":510.0,"fixed":0.0,"peak":0}]},{"name":"一對一課程","category":"課程","currency":"GBP","unit":"按堂計算","tiers":[{"wf":1,"wt":99,"price":90.0,"fixed":0.0,"peak":0}]}],"accomm":[{"type":"行政","name":"住宿安排費","currency":"GBP","price":0.0,"fixed":45.0,"unit":"固定金額","note":"Accommodation Placement Fee"},{"type":"寄宿家庭","name":"寄宿家庭-標準單人房 (僅含早餐)","currency":"GBP","price":270.0,"fixed":0.0,"unit":"按週計算","note":"60分車程"},{"type":"寄宿家庭","name":"寄宿家庭-標準單人房 (含早晚餐)","currency":"GBP","price":305.0,"fixed":0.0,"unit":"按週計算","note":"60分車程"},{"type":"寄宿家庭","name":"寄宿家庭-標準雙人房 (僅含早餐)","currency":"GBP","price":260.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行"},{"type":"寄宿家庭","name":"寄宿家庭-標準雙人房 (含早晚餐)","currency":"GBP","price":290.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行"},{"type":"額外加成","name":"特殊飲食需求加價","currency":"GBP","price":40.0,"fixed":0.0,"unit":"按週計算","note":"Halal/Vegan等"},{"type":"額外加成","name":"獨立衛浴加價 (寄宿家庭)","currency":"GBP","price":55.0,"fixed":0.0,"unit":"按週計算","note":"需視供應狀況"},{"type":"額外加成","name":"未成年住宿加價 (Under 18)","currency":"GBP","price":25.0,"fixed":0.0,"unit":"按週計算","note":"強制項目"},{"type":"額外加成","name":"聖誕節加價 (12/24-12/31)","currency":"GBP","price":70.0,"fixed":0.0,"unit":"按週計算","note":"僅聖誕週"},{"type":"宿舍","name":"Sterling Court 宿舍 (Studio 套房)","currency":"GBP","price":430.0,"fixed":0.0,"unit":"按週計算","note":"18+, 60分車程, 最少1週"},{"type":"宿舍","name":"McMillan Residence 宿舍 (Studio 套房)","currency":"GBP","price":460.0,"fixed":0.0,"unit":"按週計算","note":"18+, 40分車程, 最少4週"},{"type":"額外加成","name":"延回加價 (Homestay/Residence)","currency":"GBP","price":60.0,"fixed":0.0,"unit":"按天計算","note":"Extra Night"}],"fees":[{"category":"註冊","name":"註冊費","currency":"GBP","price":0.0,"fixed":50.0,"unit":"固定金額","wf":1,"wt":99},{"category":"銀行","name":"銀行轉帳手續費","currency":"GBP","price":0.0,"fixed":45.0,"unit":"固定金額","wf":1,"wt":99},{"category":"教材","name":"教材費 (標準課程)","currency":"GBP","price":0.0,"fixed":45.0,"unit":"固定金額","wf":1,"wt":4},{"category":"教材","name":"教材費 (標準課程)","currency":"GBP","price":0.0,"fixed":85.0,"unit":"固定金額","wf":5,"wt":11},{"category":"教材","name":"教材費 (標準課程)","currency":"GBP","price":0.0,"fixed":130.0,"unit":"固定金額","wf":12,"wt":23},{"category":"教材","name":"教材費 (標準課程)","currency":"GBP","price":0.0,"fixed":175.0,"unit":"固定金額","wf":24,"wt":99},{"category":"教材","name":"教材費 (超密集課程)","currency":"GBP","price":0.0,"fixed":85.0,"unit":"固定金額","wf":1,"wt":4},{"category":"教材","name":"教材費 (超密集課程)","currency":"GBP","price":0.0,"fixed":175.0,"unit":"固定金額","wf":5,"wt":11}]},"Birmingham":{"courses":[{"name":"經典上午課程 (20h)","category":"課程","currency":"GBP","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":380.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":345.0,"fixed":0.0,"peak":0},{"wf":24,"wt":99,"price":290.0,"fixed":0.0,"peak":0}]},{"name":"半密集上午課程 (27h)","category":"課程","currency":"GBP","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":435.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":365.0,"fixed":0.0,"peak":0},{"wf":24,"wt":99,"price":330.0,"fixed":0.0,"peak":0}]},{"name":"一對一課程","category":"課程","currency":"GBP","unit":"按堂計算","tiers":[{"wf":1,"wt":99,"price":90.0,"fixed":0.0,"peak":0}]}],"accomm":[{"type":"行政","name":"住宿安排費","currency":"GBP","price":0.0,"fixed":45.0,"unit":"固定金額","note":"Accommodation Placement Fee"},{"type":"寄宿家庭","name":"寄宿家庭-標準單人房 (僅含早餐)","currency":"GBP","price":210.0,"fixed":0.0,"unit":"按週計算","note":"通勤約60分"},{"type":"寄宿家庭","name":"寄宿家庭-標準單人房 (半食宿)","currency":"GBP","price":240.0,"fixed":0.0,"unit":"按週計算","note":"供早晚餐"},{"type":"寄宿家庭","name":"寄宿家庭-標準單人房 (自炊)","currency":"GBP","price":210.0,"fixed":0.0,"unit":"按週計算","note":"Self Catering"},{"type":"寄宿家庭","name":"寄宿家庭-標準雙人房 (僅含早餐)","currency":"GBP","price":195.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行"},{"type":"寄宿家庭","name":"寄宿家庭-標準雙人房 (半食宿)","currency":"GBP","price":220.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行"},{"type":"寄宿家庭","name":"寄宿家庭-標準雙人房 (自炊)","currency":"GBP","price":190.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行"},{"type":"額外加成","name":"特殊飲食需求加價","currency":"GBP","price":40.0,"fixed":0.0,"unit":"按週計算","note":"Halal/Vegan等"},{"type":"額外加成","name":"獨立衛浴加價 (寄宿家庭)","currency":"GBP","price":55.0,"fixed":0.0,"unit":"按週計算","note":"需視供應狀況"},{"type":"額外加成","name":"未成年住宿加價 (Under 18)","currency":"GBP","price":25.0,"fixed":0.0,"unit":"按週計算","note":"強制項目"},{"type":"額外加成","name":"聖誕節加價 (12/24-12/31)","currency":"GBP","price":70.0,"fixed":0.0,"unit":"按週計算","note":"僅聖誕週"},{"type":"宿舍","name":"IQ 51 Studios 宿舍 (Studio 套房)","currency":"GBP","price":295.0,"fixed":0.0,"unit":"按週計算","note":"18+, 通勤15分, 最少4週"},{"type":"宿舍","name":"The Heights 宿舍 (單人套房)","currency":"GBP","price":280.0,"fixed":0.0,"unit":"按週計算","note":"18+, En-suite Room, 最少4週"},{"type":"額外加成","name":"延回加價 (Homestay/Residence)","currency":"GBP","price":60.0,"fixed":0.0,"unit":"按天計算","note":"Extra Night"}],"fees":[{"category":"註冊","name":"註冊費","currency":"GBP","price":0.0,"fixed":50.0,"unit":"固定金額","wf":1,"wt":99},{"category":"銀行","name":"銀行轉帳手續費","currency":"GBP","price":0.0,"fixed":45.0,"unit":"固定金額","wf":1,"wt":99},{"category":"教材","name":"教材費 (標準課程)","currency":"GBP","price":0.0,"fixed":45.0,"unit":"固定金額","wf":1,"wt":4},{"category":"教材","name":"教材費 (標準課程)","currency":"GBP","price":0.0,"fixed":85.0,"unit":"固定金額","wf":5,"wt":11},{"category":"教材","name":"教材費 (標準課程)","currency":"GBP","price":0.0,"fixed":130.0,"unit":"固定金額","wf":12,"wt":23},{"category":"教材","name":"教材費 (標準課程)","currency":"GBP","price":0.0,"fixed":175.0,"unit":"固定金額","wf":24,"wt":99}]},"Leeds":{"courses":[{"name":"經典上午課程 (20h)","category":"課程","currency":"GBP","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":380.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":345.0,"fixed":0.0,"peak":0},{"wf":24,"wt":99,"price":290.0,"fixed":0.0,"peak":0}]},{"name":"半密集上午課程 (27h)","category":"課程","currency":"GBP","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":435.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":365.0,"fixed":0.0,"peak":0},{"wf":24,"wt":99,"price":330.0,"fixed":0.0,"peak":0}]},{"name":"一對一課程","category":"課程","currency":"GBP","unit":"按堂計算","tiers":[{"wf":1,"wt":99,"price":90.0,"fixed":0.0,"peak":0}]}],"accomm":[{"type":"行政","name":"住宿安排費","currency":"GBP","price":0.0,"fixed":45.0,"unit":"固定金額","note":"Accommodation Placement Fee"},{"type":"寄宿家庭","name":"寄宿家庭-標準單人房 (僅含早餐)","currency":"GBP","price":210.0,"fixed":0.0,"unit":"按週計算","note":"通勤約60分"},{"type":"寄宿家庭","name":"寄宿家庭-標準單人房 (半食宿)","currency":"GBP","price":240.0,"fixed":0.0,"unit":"按週計算","note":"供早晚餐"},{"type":"寄宿家庭","name":"寄宿家庭-標準單人房 (自炊)","currency":"GBP","price":210.0,"fixed":0.0,"unit":"按週計算","note":"Self Catering"},{"type":"寄宿家庭","name":"寄宿家庭-標準雙人房 (僅含早餐)","currency":"GBP","price":195.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行"},{"type":"寄宿家庭","name":"寄宿家庭-標準雙人房 (半食宿)","currency":"GBP","price":220.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行"},{"type":"寄宿家庭","name":"寄宿家庭-標準雙人房 (自炊)","currency":"GBP","price":190.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行"},{"type":"額外加成","name":"特殊飲食需求加價","currency":"GBP","price":40.0,"fixed":0.0,"unit":"按週計算","note":"Halal/Vegan等"},{"type":"額外加成","name":"獨立衛浴加價 (寄宿家庭)","currency":"GBP","price":55.0,"fixed":0.0,"unit":"按週計算","note":"需視供應狀況"},{"type":"額外加成","name":"未成年住宿加價 (Under 18)","currency":"GBP","price":25.0,"fixed":0.0,"unit":"按週計算","note":"強制項目"},{"type":"額外加成","name":"聖誕節加價 (12/24-12/31)","currency":"GBP","price":70.0,"fixed":0.0,"unit":"按週計算","note":"僅聖誕週"},{"type":"宿舍","name":"IQ Leeds 宿舍 (單人套房)","currency":"GBP","price":210.0,"fixed":0.0,"unit":"按週計算","note":"18+, En-suite Room, 最少1週"},{"type":"宿舍","name":"Threadworks 宿舍 (單人套房)","currency":"GBP","price":300.0,"fixed":0.0,"unit":"按週計算","note":"18+, En-suite Room, 最少4週"},{"type":"宿舍","name":"Briggate 宿舍 (Studio 套房)","currency":"GBP","price":320.0,"fixed":0.0,"unit":"按週計算","note":"18+, Studio, 最少4週"},{"type":"額外加成","name":"延回加價 (Homestay/Residence)","currency":"GBP","price":60.0,"fixed":0.0,"unit":"按天計算","note":"Extra Night"}],"fees":[{"category":"註冊","name":"註冊費","currency":"GBP","price":0.0,"fixed":50.0,"unit":"固定金額","wf":1,"wt":99},{"category":"銀行","name":"銀行轉帳手續費","currency":"GBP","price":0.0,"fixed":45.0,"unit":"固定金額","wf":1,"wt":99},{"category":"教材","name":"教材費 (標準課程)","currency":"GBP","price":0.0,"fixed":45.0,"unit":"固定金額","wf":1,"wt":4},{"category":"教材","name":"教材費 (標準課程)","currency":"GBP","price":0.0,"fixed":85.0,"unit":"固定金額","wf":5,"wt":11},{"category":"教材","name":"教材費 (標準課程)","currency":"GBP","price":0.0,"fixed":130.0,"unit":"固定金額","wf":12,"wt":23},{"category":"教材","name":"教材費 (標準課程)","currency":"GBP","price":0.0,"fixed":175.0,"unit":"固定金額","wf":24,"wt":99}]},"Dublin":{"courses":[{"name":"經典上午課程 (20h)","category":"課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":6,"price":380.0,"fixed":0.0,"peak":0},{"wf":7,"wt":12,"price":360.0,"fixed":0.0,"peak":0},{"wf":13,"wt":24,"price":280.0,"fixed":0.0,"peak":0}]},{"name":"經典下午課程 (20h)","category":"課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":6,"price":270.0,"fixed":0.0,"peak":0},{"wf":7,"wt":12,"price":250.0,"fixed":0.0,"peak":0},{"wf":13,"wt":24,"price":230.0,"fixed":0.0,"peak":0}]},{"name":"經典下午課程-四天班 (20h)","category":"課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":6,"price":270.0,"fixed":0.0,"peak":0},{"wf":7,"wt":12,"price":250.0,"fixed":0.0,"peak":0},{"wf":13,"wt":24,"price":230.0,"fixed":0.0,"peak":0}]},{"name":"半密集上午課程 (25h)","category":"課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":6,"price":440.0,"fixed":0.0,"peak":0},{"wf":7,"wt":12,"price":420.0,"fixed":0.0,"peak":0},{"wf":13,"wt":24,"price":365.0,"fixed":0.0,"peak":0}]},{"name":"半密集下午課程 (25h)","category":"課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":6,"price":315.0,"fixed":0.0,"peak":0},{"wf":7,"wt":12,"price":295.0,"fixed":0.0,"peak":0},{"wf":13,"wt":24,"price":275.0,"fixed":0.0,"peak":0}]},{"name":"超密集課程 (40h)","category":"課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":6,"price":590.0,"fixed":0.0,"peak":0},{"wf":7,"wt":12,"price":550.0,"fixed":0.0,"peak":0}]},{"name":"打工遊學套裝課程 (25週)","category":"課程","currency":"EUR","unit":"固定金額","tiers":[{"wf":25,"wt":25,"price":0.0,"fixed":6500.0,"peak":0},{"wf":25,"wt":25,"price":0.0,"fixed":5250.0,"peak":0},{"wf":25,"wt":25,"price":0.0,"fixed":8625.0,"peak":0},{"wf":25,"wt":25,"price":0.0,"fixed":6375.0,"peak":0}]},{"name":"一對一課程","category":"課程","currency":"EUR","unit":"按堂計算","tiers":[{"wf":1,"wt":99,"price":130.0,"fixed":0.0,"peak":0}]}],"accomm":[{"type":"行政","name":"住宿安排費","currency":"EUR","price":0.0,"fixed":75.0,"unit":"固定金額","note":"Accommodation Placement Fee"},{"type":"寄宿家庭","name":"寄宿家庭-標準單人房 (半食宿)","currency":"EUR","price":285.0,"fixed":0.0,"unit":"按週計算","note":"16+, Half Board"},{"type":"寄宿家庭","name":"寄宿家庭-標準單人房 (全食宿)","currency":"EUR","price":300.0,"fixed":0.0,"unit":"按週計算","note":"16+, Full Board"},{"type":"寄宿家庭","name":"寄宿家庭-標準雙人房 (半食宿)","currency":"EUR","price":275.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行"},{"type":"寄宿家庭","name":"寄宿家庭-標準雙人房 (全食宿)","currency":"EUR","price":290.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行"},{"type":"額外加成","name":"特殊飲食需求加價","currency":"EUR","price":40.0,"fixed":0.0,"unit":"按週計算","note":"Halal/Vegan等"},{"type":"額外加成","name":"深夜入住費 (Late check-in)","currency":"EUR","price":0.0,"fixed":80.0,"unit":"固定金額","note":"23:00 - 07:00 (Mon-Sun)"},{"type":"額外加成","name":"聖誕節加價 (12/24-12/31)","currency":"EUR","price":70.0,"fixed":0.0,"unit":"按週計算","note":"僅聖誕週"},{"type":"宿舍","name":"Shared House 雅房 (單人)","currency":"EUR","price":300.0,"fixed":0.0,"unit":"按週計算","note":"20-35歲, 50分車程, 共用衛浴"},{"type":"宿舍","name":"Shared House 雅房 (雙人)","currency":"EUR","price":230.0,"fixed":0.0,"unit":"按週計算","note":"20-35歲, 共用衛浴"},{"type":"宿舍","name":"Shared House 雅房 (三人)","currency":"EUR","price":195.0,"fixed":0.0,"unit":"按週計算","note":"20-35歲, 共用衛浴"},{"type":"宿舍","name":"Shared House 套房 (雙人)","currency":"EUR","price":240.0,"fixed":0.0,"unit":"按週計算","note":"20-35歲, 獨立衛浴 (Ensuite)"},{"type":"宿舍","name":"Shared House 套房 (三人)","currency":"EUR","price":205.0,"fixed":0.0,"unit":"按週計算","note":"20-35歲, 獨立衛浴 (Ensuite)"},{"type":"宿舍","name":"Niche Living 宿舍 (單人 Studio)","currency":"EUR","price":700.0,"fixed":0.0,"unit":"按週計算","note":"18+, 5分步行, 短期價"},{"type":"宿舍","name":"Niche Living 宿舍 (單人 Studio)","currency":"EUR","price":535.0,"fixed":0.0,"unit":"按週計算","note":"18+, 5分步行, 8週以上優惠"},{"type":"宿舍","name":"Niche Living 宿舍 (雙人 Studio)","currency":"EUR","price":375.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行, 短期價"},{"type":"宿舍","name":"Niche Living 宿舍 (雙人 Studio)","currency":"EUR","price":295.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行, 8週以上優惠"},{"type":"飯店","name":"Royal Marine Hotel (單人含早)","currency":"EUR","price":900.0,"fixed":0.0,"unit":"按週計算","note":"淡季價格 (01/01-03/30)"},{"type":"飯店","name":"Royal Marine Hotel (單人含早)","currency":"EUR","price":1200.0,"fixed":0.0,"unit":"按週計算","note":"旺季價格 (04/01-12/31)"},{"type":"飯店","name":"Royal Marine Hotel (雙人無早)","currency":"EUR","price":500.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行, 淡季 (01/01-03/30)"},{"type":"飯店","name":"Royal Marine Hotel (雙人無早)","currency":"EUR","price":650.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行, 旺季 (04/01-12/31)"}],"fees":[{"category":"註冊","name":"註冊費","currency":"EUR","price":0.0,"fixed":75.0,"unit":"固定金額","wf":1,"wt":99},{"category":"銀行","name":"銀行轉帳手續費","currency":"EUR","price":0.0,"fixed":50.0,"unit":"固定金額","wf":1,"wt":99},{"category":"銀行","name":"學員保護費 (PEL Fee)","currency":"EUR","price":0.0,"fixed":50.0,"unit":"固定金額","wf":1,"wt":99},{"category":"雜費","name":"考試費 (TIE)","currency":"EUR","price":0.0,"fixed":150.0,"unit":"固定金額","wf":1,"wt":99},{"category":"雜費","name":"考試費 (IELTS)","currency":"EUR","price":0.0,"fixed":250.0,"unit":"固定金額","wf":1,"wt":99},{"category":"教材","name":"教材費 (標準課程)","currency":"EUR","price":0.0,"fixed":50.0,"unit":"固定金額","wf":1,"wt":4},{"category":"教材","name":"教材費 (標準課程)","currency":"EUR","price":0.0,"fixed":100.0,"unit":"固定金額","wf":5,"wt":11},{"category":"教材","name":"教材費 (標準課程)","currency":"EUR","price":0.0,"fixed":150.0,"unit":"固定金額","wf":12,"wt":23},{"category":"教材","name":"教材費 (標準課程)","currency":"EUR","price":0.0,"fixed":200.0,"unit":"固定金額","wf":24,"wt":99},{"category":"教材","name":"教材費 (超密集課程)","currency":"EUR","price":0.0,"fixed":100.0,"unit":"固定金額","wf":1,"wt":4},{"category":"教材","name":"教材費 (超密集課程)","currency":"EUR","price":0.0,"fixed":200.0,"unit":"固定金額","wf":5,"wt":12}]},"Berlin":{"courses":[{"name":"德語經典上午課程 (20h)","category":"德語課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":320.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":285.0,"fixed":0.0,"peak":0},{"wf":24,"wt":99,"price":265.0,"fixed":0.0,"peak":0}]},{"name":"德語半密集上午課程 (25h)","category":"德語課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":360.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":325.0,"fixed":0.0,"peak":0},{"wf":24,"wt":99,"price":310.0,"fixed":0.0,"peak":0}]},{"name":"德語白金課程 (30h)","category":"德語課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":500.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":485.0,"fixed":0.0,"peak":0},{"wf":24,"wt":99,"price":470.0,"fixed":0.0,"peak":0}]},{"name":"英語經典下午課程 (20h)","category":"英語課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":320.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":285.0,"fixed":0.0,"peak":0},{"wf":24,"wt":99,"price":265.0,"fixed":0.0,"peak":0}]},{"name":"英語半密集下午課程 (25h)","category":"英語課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":360.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":325.0,"fixed":0.0,"peak":0},{"wf":24,"wt":99,"price":310.0,"fixed":0.0,"peak":0}]},{"name":"英語白金課程 (30h)","category":"英語課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":500.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":485.0,"fixed":0.0,"peak":0},{"wf":24,"wt":99,"price":470.0,"fixed":0.0,"peak":0}]},{"name":"一對一課程 (德語/英語)","category":"課程","currency":"EUR","unit":"按堂計算","tiers":[{"wf":1,"wt":99,"price":90.0,"fixed":0.0,"peak":0}]}],"accomm":[{"type":"行政","name":"住宿安排費","currency":"EUR","price":0.0,"fixed":45.0,"unit":"固定金額","note":"Accommodation Placement Fee"},{"type":"寄宿家庭","name":"寄宿家庭-標準單人房 (半食宿)","currency":"EUR","price":305.0,"fixed":0.0,"unit":"按週計算","note":"需另付 7.5% 城市稅"},{"type":"額外加成","name":"聖誕節加價 (12/21-01/04)","currency":"EUR","price":65.0,"fixed":0.0,"unit":"按週計算","note":"Christmas Supplement"},{"type":"額外加成","name":"特殊飲食需求加價","currency":"EUR","price":40.0,"fixed":0.0,"unit":"按週計算","note":"Halal/Vegan等"},{"type":"額外加成","name":"深夜入住費 (Late check-in)","currency":"EUR","price":0.0,"fixed":45.0,"unit":"固定金額","note":"22:00 - 06:00"},{"type":"宿舍","name":"Kiez Hostel 青年旅館 (多人房)","currency":"EUR","price":150.0,"fixed":0.0,"unit":"按週計算","note":"共用衛浴, 需另付 7.5% 城市稅"},{"type":"宿舍","name":"Kiez Hostel 青年旅館 (單人房)","currency":"EUR","price":363.0,"fixed":0.0,"unit":"按週計算","note":"共用衛浴, 需另付 7.5% 城市稅"},{"type":"公寓","name":"Berlin Karlshorst 公寓 (Studio 套房)","currency":"EUR","price":596.0,"fixed":0.0,"unit":"按週計算","note":"1-3週短租價, 需另付 7.5% 城市稅"},{"type":"公寓","name":"Berlin Karlshorst 公寓 (Studio 套房)","currency":"EUR","price":483.0,"fixed":0.0,"unit":"按週計算","note":"4週以上優惠, 需另付 7.5% 城市稅"},{"type":"公寓","name":"Berlin Karlshorst 公寓 (雙人 Studio)","currency":"EUR","price":644.0,"fixed":0.0,"unit":"按週計算","note":"價格為整間房價 (兩人均分), 需兩人同行"},{"type":"公寓","name":"Berlin Karlshorst 公寓 (雙人 Studio)","currency":"EUR","price":555.0,"fixed":0.0,"unit":"按週計算","note":"價格為整間房價 (兩人均分), 需兩人同行"},{"type":"公寓","name":"Berlin Karlshorst 公寓 (Studio XL)","currency":"EUR","price":813.0,"fixed":0.0,"unit":"按週計算","note":"加大套房, 需另付 7.5% 城市稅"},{"type":"公寓","name":"Berlin Karlshorst 公寓 (Studio XL)","currency":"EUR","price":716.0,"fixed":0.0,"unit":"按週計算","note":"加大套房, 需另付 7.5% 城市稅"},{"type":"公寓","name":"Berlin Karlshorst 公寓 (一房公寓)","currency":"EUR","price":902.0,"fixed":0.0,"unit":"按週計算","note":"Apartment, 需另付 7.5% 城市稅"},{"type":"公寓","name":"Berlin Karlshorst 公寓 (一房公寓)","currency":"EUR","price":805.0,"fixed":0.0,"unit":"按週計算","note":"Apartment, 需另付 7.5% 城市稅"},{"type":"宿舍","name":"Berlin Prenzlauer Berg 宿舍 (Studio)","currency":"EUR","price":588.0,"fixed":0.0,"unit":"按週計算","note":"1-3週短租價, 需另付 7.5% 城市稅"},{"type":"宿舍","name":"Berlin Prenzlauer Berg 宿舍 (Studio)","currency":"EUR","price":475.0,"fixed":0.0,"unit":"按週計算","note":"4週以上優惠, 需另付 7.5% 城市稅"},{"type":"飯店","name":"Meininger Hotel (單人含早)","currency":"EUR","price":555.0,"fixed":0.0,"unit":"按週計算","note":"旺季加價邏輯, 需另付 7.5% 城市稅"},{"type":"飯店","name":"Meininger Hotel (雙人含早)","currency":"EUR","price":660.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行, 需另付 7.5% 城市稅"}],"fees":[{"category":"註冊","name":"註冊費","currency":"EUR","price":0.0,"fixed":70.0,"unit":"固定金額","wf":1,"wt":99},{"category":"銀行","name":"銀行轉帳手續費","currency":"EUR","price":0.0,"fixed":50.0,"unit":"固定金額","wf":1,"wt":99},{"category":"教材","name":"教材費","currency":"EUR","price":0.0,"fixed":50.0,"unit":"固定金額","wf":1,"wt":4},{"category":"教材","name":"教材費","currency":"EUR","price":0.0,"fixed":100.0,"unit":"固定金額","wf":5,"wt":11},{"category":"教材","name":"教材費","currency":"EUR","price":0.0,"fixed":150.0,"unit":"固定金額","wf":12,"wt":23},{"category":"教材","name":"教材費","currency":"EUR","price":0.0,"fixed":200.0,"unit":"固定金額","wf":24,"wt":99}]},"Paris":{"courses":[{"name":"法語經典上午課程 (20h)","category":"法語課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":320.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":285.0,"fixed":0.0,"peak":0},{"wf":24,"wt":99,"price":265.0,"fixed":0.0,"peak":0}]},{"name":"法語半密集上午課程 (25h)","category":"法語課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":360.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":325.0,"fixed":0.0,"peak":0},{"wf":24,"wt":99,"price":310.0,"fixed":0.0,"peak":0}]},{"name":"英語經典下午課程 (20h)","category":"英語課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":320.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":285.0,"fixed":0.0,"peak":0},{"wf":24,"wt":99,"price":265.0,"fixed":0.0,"peak":0}]},{"name":"英語半密集下午課程 (25h)","category":"英語課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":360.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":325.0,"fixed":0.0,"peak":0},{"wf":24,"wt":99,"price":310.0,"fixed":0.0,"peak":0}]},{"name":"一對一課程 (法語/英語)","category":"課程","currency":"EUR","unit":"按堂計算","tiers":[{"wf":1,"wt":99,"price":90.0,"fixed":0.0,"peak":0}]}],"accomm":[{"type":"行政","name":"住宿安排費","currency":"EUR","price":0.0,"fixed":45.0,"unit":"固定金額","note":"Accommodation Placement Fee"},{"type":"寄宿家庭","name":"寄宿家庭-單人房 (半食宿)","currency":"EUR","price":440.0,"fixed":0.0,"unit":"按週計算","note":"18+ (提供早晚餐)"},{"type":"寄宿家庭","name":"寄宿家庭-單人房 (僅含早餐)","currency":"EUR","price":355.0,"fixed":0.0,"unit":"按週計算","note":"18+ (僅提供早餐)"},{"type":"寄宿家庭","name":"寄宿家庭-雙人房 (半食宿)","currency":"EUR","price":422.0,"fixed":0.0,"unit":"按週計算","note":"18+, 需兩人同行 (每人價格)"},{"type":"寄宿家庭","name":"寄宿家庭-雙人房 (僅含早餐)","currency":"EUR","price":337.0,"fixed":0.0,"unit":"按週計算","note":"18+, 需兩人同行 (每人價格)"},{"type":"寄宿家庭","name":"寄宿家庭-未成年單人房 (半食宿)","currency":"EUR","price":530.0,"fixed":0.0,"unit":"按週計算","note":"16-17歲專用價格 (含監護)"},{"type":"額外加成","name":"聖誕節加價 (12/20-12/28)","currency":"EUR","price":70.0,"fixed":0.0,"unit":"按週計算","note":"僅聖誕週"},{"type":"宿舍","name":"Enjoy Hostel 2* 青年旅館 (3人房)","currency":"EUR","price":350.0,"fixed":0.0,"unit":"按週計算","note":"需另付城市稅 (約€2.60/晚)"},{"type":"公寓","name":"Adagio XV 公寓 (單人 Studio)","currency":"EUR","price":775.0,"fixed":0.0,"unit":"按週計算","note":"最少4週, 需另付城市稅 (約€5.20/晚)"},{"type":"公寓","name":"Adagio Access Vanves (單人 Studio)","currency":"EUR","price":680.0,"fixed":0.0,"unit":"按週計算","note":"最少4週, 需另付城市稅 (約€5.53/晚)"},{"type":"宿舍","name":"FIAP 3* 宿舍 (單人套房)","currency":"EUR","price":780.0,"fixed":0.0,"unit":"按週計算","note":"18+, 半食宿, 需另付城市稅 (約€2.60/晚)"},{"type":"宿舍","name":"FIAP 3* 宿舍 (雙人房共用衛浴)","currency":"EUR","price":548.0,"fixed":0.0,"unit":"按週計算","note":"18+, 半食宿, 需另付城市稅 (約€2.60/晚)"},{"type":"宿舍","name":"FIAP 3* 宿舍 (三人高級房)","currency":"EUR","price":550.0,"fixed":0.0,"unit":"按週計算","note":"18+, 半食宿, 需另付城市稅 (約€2.60/晚)"}],"fees":[{"category":"註冊","name":"註冊費","currency":"EUR","price":0.0,"fixed":70.0,"unit":"固定金額","wf":1,"wt":99},{"category":"銀行","name":"銀行轉帳手續費","currency":"EUR","price":0.0,"fixed":50.0,"unit":"固定金額","wf":1,"wt":99},{"category":"教材","name":"教材費","currency":"EUR","price":0.0,"fixed":50.0,"unit":"固定金額","wf":1,"wt":4},{"category":"教材","name":"教材費","currency":"EUR","price":0.0,"fixed":100.0,"unit":"固定金額","wf":5,"wt":11},{"category":"教材","name":"教材費","currency":"EUR","price":0.0,"fixed":150.0,"unit":"固定金額","wf":12,"wt":23},{"category":"教材","name":"教材費","currency":"EUR","price":0.0,"fixed":200.0,"unit":"固定金額","wf":24,"wt":99}]},"Toronto":{"courses":[{"name":"經典上午課程 (20堂)","category":"課程","currency":"CAD","unit":"按週計算","tiers":[{"wf":1,"wt":6,"price":430.0,"fixed":0.0,"peak":0},{"wf":7,"wt":12,"price":420.0,"fixed":0.0,"peak":0},{"wf":13,"wt":24,"price":410.0,"fixed":0.0,"peak":0}]},{"name":"半密集上午課程 (25堂)","category":"課程","currency":"CAD","unit":"按週計算","tiers":[{"wf":1,"wt":6,"price":480.0,"fixed":0.0,"peak":0},{"wf":7,"wt":12,"price":470.0,"fixed":0.0,"peak":0},{"wf":13,"wt":24,"price":460.0,"fixed":0.0,"peak":0}]},{"name":"一對一課程","category":"課程","currency":"CAD","unit":"按堂計算","tiers":[{"wf":1,"wt":99,"price":160.0,"fixed":0.0,"peak":0}]}],"accomm":[{"type":"行政","name":"住宿安排費","currency":"CAD","price":0.0,"fixed":250.0,"unit":"固定金額","note":"Accommodation Placement Fee"},{"type":"行政","name":"住宿急件安排費","currency":"CAD","price":0.0,"fixed":150.0,"unit":"固定金額","note":"抵達前1週內預訂需加收"},{"type":"寄宿家庭","name":"寄宿家庭-單人房 (自炊)","currency":"CAD","price":340.0,"fixed":0.0,"unit":"按週計算","note":"Self Catering"},{"type":"寄宿家庭","name":"寄宿家庭-單人房 (僅含早餐)","currency":"CAD","price":350.0,"fixed":0.0,"unit":"按週計算","note":"Bed & Breakfast"},{"type":"寄宿家庭","name":"寄宿家庭-單人房 (半食宿)","currency":"CAD","price":360.0,"fixed":0.0,"unit":"按週計算","note":"Half Board (18歲以下強制)"},{"type":"寄宿家庭","name":"寄宿家庭-單人房 (全食宿)","currency":"CAD","price":390.0,"fixed":0.0,"unit":"按週計算","note":"Full Board"},{"type":"寄宿家庭","name":"寄宿家庭-雙人房 (半食宿)","currency":"CAD","price":312.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行"},{"type":"寄宿家庭","name":"寄宿家庭-雙人房 (全食宿)","currency":"CAD","price":336.0,"fixed":0.0,"unit":"按週計算","note":"需兩人同行"},{"type":"額外加成","name":"特殊飲食需求加價","currency":"CAD","price":55.0,"fixed":0.0,"unit":"按週計算","note":"Halal/Vegan等"},{"type":"額外加成","name":"獨立衛浴加價 (寄宿家庭)","currency":"CAD","price":45.0,"fixed":0.0,"unit":"按週計算","note":"Private bathroom"},{"type":"宿舍","name":"CASA - Residence 宿舍 (雙人房共用衛浴)","currency":"CAD","price":365.0,"fixed":0.0,"unit":"按週計算","note":"18+, Shared bedroom & shared bathroom"},{"type":"宿舍","name":"CASA - Residence 宿舍 (雙人房共用衛浴)","currency":"CAD","price":365.0,"fixed":0.0,"unit":"按週計算","note":"18+, Shared bedroom & shared bathroom"},{"type":"宿舍","name":"CASA - Student House 宿舍 (單人房共用衛浴)","currency":"CAD","price":400.0,"fixed":0.0,"unit":"按週計算","note":"18+, Single room & shared bathroom"},{"type":"宿舍","name":"CASA - Student House 宿舍 (單人房共用衛浴)","currency":"CAD","price":400.0,"fixed":0.0,"unit":"按週計算","note":"18+, Single room & shared bathroom"},{"type":"宿舍","name":"CASA - Dreamhouse Village (單人房共用衛浴)","currency":"CAD","price":465.0,"fixed":0.0,"unit":"按週計算","note":"18+, Single room & shared bathroom"},{"type":"宿舍","name":"CASA - Dreamhouse Village (單人房共用衛浴)","currency":"CAD","price":440.0,"fixed":0.0,"unit":"按週計算","note":"18+, 5週以上優惠價"},{"type":"宿舍","name":"CASA - Dreamhouse Village (單人房半獨立衛浴)","currency":"CAD","price":515.0,"fixed":0.0,"unit":"按週計算","note":"18+, Semi-private bathroom"},{"type":"宿舍","name":"CASA - Dreamhouse Village (單人房半獨立衛浴)","currency":"CAD","price":490.0,"fixed":0.0,"unit":"按週計算","note":"18+, 5週以上優惠價"},{"type":"宿舍","name":"CASA - Dreamhouse Yorkville (單人房獨立衛浴)","currency":"CAD","price":615.0,"fixed":0.0,"unit":"按週計算","note":"18+, Private bathroom"},{"type":"宿舍","name":"CASA - Dreamhouse Yorkville (單人房獨立衛浴)","currency":"CAD","price":590.0,"fixed":0.0,"unit":"按週計算","note":"18+, 5週以上優惠價"}],"fees":[{"category":"註冊","name":"註冊費","currency":"CAD","price":0.0,"fixed":175.0,"unit":"固定金額","wf":1,"wt":99},{"category":"銀行","name":"銀行轉帳手續費","currency":"CAD","price":0.0,"fixed":60.0,"unit":"固定金額","wf":1,"wt":99},{"category":"雜費","name":"監護人信函費 (Custodianship)","currency":"CAD","price":0.0,"fixed":125.0,"unit":"固定金額","wf":1,"wt":99},{"category":"教材","name":"教材費","currency":"CAD","price":0.0,"fixed":85.0,"unit":"固定金額","wf":1,"wt":4},{"category":"教材","name":"教材費","currency":"CAD","price":0.0,"fixed":170.0,"unit":"固定金額","wf":5,"wt":11},{"category":"教材","name":"教材費","currency":"CAD","price":0.0,"fixed":250.0,"unit":"固定金額","wf":12,"wt":24}]},"Dubai":{"courses":[{"name":"經典上午課程 (20堂)","category":"課程","currency":"USD","unit":"按週計算","tiers":[{"wf":1,"wt":6,"price":350.0,"fixed":0.0,"peak":0},{"wf":7,"wt":12,"price":305.0,"fixed":0.0,"peak":0},{"wf":13,"wt":24,"price":285.0,"fixed":0.0,"peak":0}]},{"name":"經典早午餐課程 (20堂)","category":"課程","currency":"USD","unit":"按週計算","tiers":[{"wf":1,"wt":6,"price":320.0,"fixed":0.0,"peak":0},{"wf":7,"wt":12,"price":275.0,"fixed":0.0,"peak":0},{"wf":13,"wt":24,"price":255.0,"fixed":0.0,"peak":0}]},{"name":"經典輕量彈性課程 (15堂)","category":"課程","currency":"USD","unit":"按週計算","tiers":[{"wf":1,"wt":6,"price":280.0,"fixed":0.0,"peak":0},{"wf":7,"wt":12,"price":235.0,"fixed":0.0,"peak":0},{"wf":13,"wt":24,"price":215.0,"fixed":0.0,"peak":0}]},{"name":"超密集課程 (40堂)","category":"課程","currency":"USD","unit":"按週計算","tiers":[{"wf":1,"wt":6,"price":505.0,"fixed":0.0,"peak":0},{"wf":7,"wt":12,"price":465.0,"fixed":0.0,"peak":0}]},{"name":"一對一課程","category":"課程","currency":"USD","unit":"按堂計算","tiers":[{"wf":1,"wt":99,"price":125.0,"fixed":0.0,"peak":0}]}],"accomm":[{"type":"行政","name":"住宿安排費","currency":"USD","price":0.0,"fixed":75.0,"unit":"固定金額","note":"Accommodation Placement Fee"},{"type":"宿舍","name":"ESAW 宿舍 (雙人房-4人共用)","currency":"USD","price":240.0,"fixed":0.0,"unit":"按週計算","note":"Twin Room (up to 4 students), Shuttle 20 mins"},{"type":"宿舍","name":"ESAW 宿舍 (雙人房-5人共用)","currency":"USD","price":230.0,"fixed":0.0,"unit":"按週計算","note":"Twin Room (up to 5 students), Shuttle 20 mins"},{"type":"宿舍","name":"ESAW 宿舍 (雙人 Studio)","currency":"USD","price":330.0,"fixed":0.0,"unit":"按週計算","note":"Twin studio, Shuttle 20 mins"},{"type":"宿舍","name":"ESAW 宿舍 (單人雅房)","currency":"USD","price":305.0,"fixed":0.0,"unit":"按週計算","note":"Private Room (6人共用衛浴), Shuttle 20 mins"},{"type":"宿舍","name":"Myriad 或 KSK homes (雙人房)","currency":"USD","price":350.0,"fixed":0.0,"unit":"按週計算","note":"Twin room, 1-2週短期價, Shuttle 40 mins"},{"type":"宿舍","name":"Myriad 或 KSK homes (雙人房)","currency":"USD","price":260.0,"fixed":0.0,"unit":"按週計算","note":"Twin room, 3週以上優惠價, Shuttle 40 mins"},{"type":"宿舍","name":"Myriad 或 KSK homes (單人房)","currency":"USD","price":520.0,"fixed":0.0,"unit":"按週計算","note":"Single room, 1-2週短期價"},{"type":"宿舍","name":"Myriad 或 KSK homes (單人房)","currency":"USD","price":450.0,"fixed":0.0,"unit":"按週計算","note":"Single room, 3週以上優惠價"},{"type":"宿舍","name":"Myriad 或 KSK homes (單人 Studio)","currency":"USD","price":570.0,"fixed":0.0,"unit":"按週計算","note":"Single studio, 1-2週短期價"},{"type":"宿舍","name":"Myriad 或 KSK homes (單人 Studio)","currency":"USD","price":500.0,"fixed":0.0,"unit":"按週計算","note":"Single studio, 3週以上優惠價"}],"fees":[{"category":"註冊","name":"註冊費","currency":"USD","price":0.0,"fixed":75.0,"unit":"固定金額","wf":1,"wt":99},{"category":"銀行","name":"銀行轉帳手續費","currency":"USD","price":0.0,"fixed":60.0,"unit":"固定金額","wf":1,"wt":99},{"category":"教材","name":"教材費 (標準課程)","currency":"USD","price":0.0,"fixed":65.0,"unit":"固定金額","wf":1,"wt":4},{"category":"教材","name":"教材費 (標準課程)","currency":"USD","price":0.0,"fixed":130.0,"unit":"固定金額","wf":5,"wt":11},{"category":"教材","name":"教材費 (標準課程)","currency":"USD","price":0.0,"fixed":190.0,"unit":"固定金額","wf":12,"wt":23},{"category":"教材","name":"教材費 (標準課程)","currency":"USD","price":0.0,"fixed":260.0,"unit":"固定金額","wf":24,"wt":99},{"category":"教材","name":"教材費 (超密集課程)","currency":"USD","price":0.0,"fixed":130.0,"unit":"固定金額","wf":1,"wt":4},{"category":"教材","name":"教材費 (超密集課程)","currency":"USD","price":0.0,"fixed":260.0,"unit":"固定金額","wf":5,"wt":12}]},"Malta":{"courses":[{"name":"經典上午課程 (20堂)","category":"課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":295.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":255.0,"fixed":0.0,"peak":0},{"wf":24,"wt":35,"price":190.0,"fixed":0.0,"peak":0},{"wf":36,"wt":99,"price":160.0,"fixed":0.0,"peak":0}]},{"name":"經典下午課程 (20堂)","category":"課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":240.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":200.0,"fixed":0.0,"peak":0},{"wf":24,"wt":35,"price":190.0,"fixed":0.0,"peak":0},{"wf":36,"wt":99,"price":160.0,"fixed":0.0,"peak":0}]},{"name":"經典晚間課程 (20堂)","category":"課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":200.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":160.0,"fixed":0.0,"peak":0},{"wf":24,"wt":35,"price":130.0,"fixed":0.0,"peak":0}]},{"name":"半密集上午課程 (25堂)","category":"課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":405.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":315.0,"fixed":0.0,"peak":0},{"wf":24,"wt":35,"price":265.0,"fixed":0.0,"peak":0},{"wf":36,"wt":99,"price":200.0,"fixed":0.0,"peak":0}]},{"name":"半密集下午課程 (25堂)","category":"課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":285.0,"fixed":0.0,"peak":0},{"wf":12,"wt":23,"price":245.0,"fixed":0.0,"peak":0},{"wf":24,"wt":35,"price":265.0,"fixed":0.0,"peak":0},{"wf":36,"wt":99,"price":200.0,"fixed":0.0,"peak":0}]},{"name":"超密集課程 (40堂)","category":"課程","currency":"EUR","unit":"按週計算","tiers":[{"wf":1,"wt":11,"price":535.0,"fixed":0.0,"peak":0}]},{"name":"一對一課程","category":"課程","currency":"EUR","unit":"按堂計算","tiers":[{"wf":1,"wt":99,"price":105.0,"fixed":0.0,"peak":0}]}],"accomm":[{"type":"行政","name":"住宿安排費","currency":"EUR","price":0.0,"fixed":35.0,"unit":"固定金額","note":"Accommodation Placement Fee"},{"type":"宿舍","name":"Student Residence Campus Hub (單人套房)","currency":"EUR","price":375.0,"fixed":0.0,"unit":"按週計算","note":"16+, 20分車程, Single En-suite"},{"type":"宿舍","name":"Student Residence Campus Hub (雙人套房)","currency":"EUR","price":250.0,"fixed":0.0,"unit":"按週計算","note":"16+, 20分車程, Twin En-suite"},{"type":"宿舍","name":"Shared Apartments (標準合住房)","currency":"EUR","price":190.0,"fixed":0.0,"unit":"按週計算","note":"18+, 30分車程, Shared Room"}],"fees":[{"category":"註冊","name":"註冊費","currency":"EUR","price":0.0,"fixed":50.0,"unit":"固定金額","wf":1,"wt":99},{"category":"銀行","name":"銀行轉帳手續費","currency":"EUR","price":0.0,"fixed":50.0,"unit":"固定金額","wf":1,"wt":99},{"category":"稅金","name":"環境稅 (ECO Tax)","currency":"EUR","price":0.0,"fixed":5.0,"unit":"固定金額","wf":1,"wt":99},{"category":"簽證","name":"簽證服務費 (Visa Service)","currency":"EUR","price":0.0,"fixed":50.0,"unit":"固定金額","wf":1,"wt":99},{"category":"簽證","name":"簽證費 (Extended)","currency":"EUR","price":0.0,"fixed":160.0,"unit":"固定金額","wf":1,"wt":99},{"category":"教材","name":"教材費 (標準課程)","currency":"EUR","price":0.0,"fixed":47.0,"unit":"固定金額","wf":1,"wt":4},{"category":"教材","name":"教材費 (標準課程)","currency":"EUR","price":0.0,"fixed":94.0,"unit":"固定金額","wf":5,"wt":11},{"category":"教材","name":"教材費 (標準課程)","currency":"EUR","price":0.0,"fixed":141.0,"unit":"固定金額","wf":12,"wt":23},{"category":"教材","name":"教材費 (標準課程)","currency":"EUR","price":0.0,"fixed":188.0,"unit":"固定金額","wf":24,"wt":99},{"category":"教材","name":"教材費 (超密集課程)","currency":"EUR","price":0.0,"fixed":94.0,"unit":"固定金額","wf":1,"wt":4},{"category":"教材","name":"教材費 (超密集課程)","currency":"EUR","price":0.0,"fixed":188.0,"unit":"固定金額","wf":5,"wt":11}]}},"ILSC":{"Adelaide, Brisbane, Melbourne, Perth, Sydney":{"courses":[{"name":"全日制上午課程 FT AM (24堂/20小時)","category":"英語課程","currency":"AUD","unit":"每週","tiers":[{"wf":1,"wt":11,"price":460.0,"fixed":0,"peak":0},{"wf":12,"wt":23,"price":440.0,"fixed":0,"peak":0},{"wf":24,"wt":999,"price":420.0,"fixed":0,"peak":0}]},{"name":"全日制晚間課程 FT PM (24堂/20小時)","category":"英語課程","currency":"AUD","unit":"每週","tiers":[{"wf":1,"wt":99,"price":380.0,"fixed":0,"peak":0}]},{"name":"半全日制上午課程 PT AM (14.5堂/12小時)","category":"英語課程","currency":"AUD","unit":"每週","tiers":[{"wf":1,"wt":99,"price":400.0,"fixed":0,"peak":0}]},{"name":"半全日制晚間課程 PT PM (14.5堂/12小時)","category":"英語課程","currency":"AUD","unit":"每週","tiers":[{"wf":1,"wt":99,"price":370.0,"fixed":0,"peak":0}]}],"accomm":[],"fees":[{"category":"註冊相關","name":"註冊費 (Registration Fee)","currency":"AUD","price":0,"fixed":250.0,"unit":"每次","wf":1,"wt":99},{"category":"教材相關","name":"教材費 (Textbook & Material Fee) - 短期","currency":"AUD","price":0,"fixed":60.0,"unit":"每次","wf":1,"wt":4},{"category":"教材相關","name":"教材費 (Textbook & Material Fee) - 長期","currency":"AUD","price":15.0,"fixed":0,"unit":"每週","wf":5,"wt":99},{"category":"未成年服務","name":"未成年服務費 (Underage Service Fee)","currency":"AUD","price":0,"fixed":175.0,"unit":"每次","wf":1,"wt":99},{"category":"簽證相關","name":"學生簽證重新處理費 (Reprocessing Fee)","currency":"AUD","price":0,"fixed":100.0,"unit":"每次","wf":1,"wt":99},{"category":"行政相關","name":"COE 行政/重發費 (COE Administration Fee)","currency":"AUD","price":0,"fixed":30.0,"unit":"每次","wf":1,"wt":99}]},"Brisbane, Melbourne, Sydney":{"courses":[{"name":"全日制下午課程 FT AFT (24堂/20小時)","category":"英語課程","currency":"AUD","unit":"每週","tiers":[{"wf":1,"wt":99,"price":380.0,"fixed":0,"peak":0}]}],"accomm":[],"fees":[]},"Adelaide, Perth":{"courses":[],"accomm":[{"type":"寄宿家庭","name":"Homestay (Half board—no lunch) 18+ yrs","currency":"AUD","price":385.0,"fixed":0,"unit":"每週","note":"18歲以上"},{"type":"寄宿家庭","name":"Homestay (Half board—no lunch) Under 18 yrs","currency":"AUD","price":410.0,"fixed":0,"unit":"每週","note":"18歲以下"}],"fees":[]},"Brisbane":{"courses":[],"accomm":[{"type":"寄宿家庭","name":"Homestay (Half board—no lunch) 18+ yrs","currency":"AUD","price":395.0,"fixed":0,"unit":"每週","note":"18歲以上"},{"type":"寄宿家庭","name":"Homestay (Half board—no lunch) Under 18 yrs","currency":"AUD","price":420.0,"fixed":0,"unit":"每週","note":"18歲以下"},{"type":"學生宿舍","name":"5-Bedroom CBD Single (shared bathroom) - By Student One","currency":"AUD","price":550.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"5-Bedroom CBD Single (shared bathroom) - By Student One","currency":"AUD","price":470.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"5-Bedroom CBD Single (shared bathroom) - By Student One","currency":"AUD","price":430.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"Twin Shared Apartment (shared bathroom) - By Student One","currency":"AUD","price":405.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"Twin Shared Apartment (shared bathroom) - By Student One","currency":"AUD","price":375.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"Twin Shared Apartment (shared bathroom) - By Student One","currency":"AUD","price":340.0,"fixed":0,"unit":"每週","note":""}],"fees":[]},"Melbourne, Sydney":{"courses":[],"accomm":[{"type":"寄宿家庭","name":"Homestay (Half board—no lunch) 18+ yrs","currency":"AUD","price":415.0,"fixed":0,"unit":"每週","note":"18歲以上"},{"type":"寄宿家庭","name":"Homestay (Half board—no lunch) Under 18 yrs","currency":"AUD","price":440.0,"fixed":0,"unit":"每週","note":"18歲以下"}],"fees":[]},"All AU Campuses":{"courses":[],"accomm":[{"type":"寄宿家庭","name":"Homestay Extra Night (any age)","currency":"AUD","price":100.0,"fixed":0,"unit":"每晚","note":"額外加住一晚"},{"type":"寄宿家庭","name":"Special Dietary (特殊飲食)","currency":"AUD","price":70.0,"fixed":0,"unit":"每週","note":"需先詢問供應狀況"}],"fees":[{"category":"住宿行政","name":"住宿安排費 (Accommodation Administration Fee)","currency":"AUD","price":0,"fixed":370.0,"unit":"每次","wf":1,"wt":99},{"category":"住宿行政","name":"住宿更改費 (Accommodation Change Fee)","currency":"AUD","price":0,"fixed":150.0,"unit":"每次","wf":1,"wt":99},{"category":"住宿行政","name":"未成年服務費 (Underage Service Fee for Student Under 18 Years)","currency":"AUD","price":0,"fixed":175.0,"unit":"每次","wf":1,"wt":99},{"category":"住宿行政","name":"退房清潔費 (Exit Cleaning Fee)","currency":"AUD","price":0,"fixed":250.0,"unit":"每次","wf":1,"wt":99}]},"Melbourne":{"courses":[],"accomm":[{"type":"學生宿舍","name":"Studio Single (ensuite) - By Campus Melbourne","currency":"AUD","price":495.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"Studio Single (ensuite) - By Campus Melbourne","currency":"AUD","price":460.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"Studio Single (ensuite) - By Campus Melbourne","currency":"AUD","price":385.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"6-Bedroom CBD Single (ensuite) - By Iglu","currency":"AUD","price":615.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"6-Bedroom CBD Single (ensuite) - By Iglu","currency":"AUD","price":570.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"6-Bedroom CBD Single (ensuite) - By Iglu","currency":"AUD","price":540.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"6-Bedroom Carlton Single (ensuite) - By Scape","currency":"AUD","price":610.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"6-Bedroom Carlton Single (ensuite) - By Scape","currency":"AUD","price":560.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"6-Bedroom Carlton Single (ensuite) - By Scape","currency":"AUD","price":535.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"6-Bedroom Carlton Single (shared bathroom) - By Scape","currency":"AUD","price":570.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"6-Bedroom Carlton Single (shared bathroom) - By Scape","currency":"AUD","price":520.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"6-Bedroom Carlton Single (shared bathroom) - By Scape","currency":"AUD","price":480.0,"fixed":0,"unit":"每週","note":""}],"fees":[]},"Sydney":{"courses":[],"accomm":[{"type":"學生宿舍","name":"5-Bedroom Chatswood Single (ensuite) - By Iglu","currency":"AUD","price":690.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"5-Bedroom Chatswood Single (ensuite) - By Iglu","currency":"AUD","price":670.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"5-Bedroom Chatswood Single (ensuite) - By Iglu","currency":"AUD","price":605.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"Large Twin Shared Apartment Sydney Central (shared bathroom) - By Scape","currency":"AUD","price":570.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"Large Twin Shared Apartment Sydney Central (shared bathroom) - By Scape","currency":"AUD","price":535.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"Large Twin Shared Apartment Sydney Central (shared bathroom) - By Scape","currency":"AUD","price":495.0,"fixed":0,"unit":"每週","note":""}],"fees":[]},"Perth":{"courses":[],"accomm":[{"type":"學生宿舍","name":"4-Bed Shared Apartment (shared bathroom) - By Campus Perth","currency":"AUD","price":330.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"4-Bed Shared Apartment (shared bathroom) - By Campus Perth","currency":"AUD","price":300.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"4-Bed Shared Apartment (shared bathroom) - By Campus Perth","currency":"AUD","price":295.0,"fixed":0,"unit":"每週","note":""}],"fees":[]},"Gold Coast":{"courses":[],"accomm":[],"fees":[]},"Montréal":{"courses":[{"name":"全日制加強密集課程 FTI (30堂/週)","category":"英語/法語","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":11,"price":470.0,"fixed":0,"peak":0},{"wf":12,"wt":23,"price":450.0,"fixed":0,"peak":0},{"wf":24,"wt":35,"price":440.0,"fixed":0,"peak":0},{"wf":36,"wt":999,"price":430.0,"fixed":0,"peak":0}]},{"name":"全日制上午課程 FT AM (24堂/週)","category":"英語/法語","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":11,"price":420.0,"fixed":0,"peak":0},{"wf":12,"wt":23,"price":400.0,"fixed":0,"peak":0},{"wf":24,"wt":35,"price":390.0,"fixed":0,"peak":0},{"wf":36,"wt":999,"price":380.0,"fixed":0,"peak":0}]},{"name":"全日制下午課程 FT AFT (24堂/週)","category":"英語/法語","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":999,"price":350.0,"fixed":0,"peak":0}]},{"name":"半全日制上午課程 PT AM (17堂/週)","category":"英語/法語","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":999,"price":315.0,"fixed":0,"peak":0}]},{"name":"半全日制下午課程 PT AFT (15堂/週)","category":"英語/法語","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":999,"price":200.0,"fixed":0,"peak":0}]}],"accomm":[{"type":"學生宿舍","name":"Single room (Shared bathroom) - LA MARQ","currency":"CAD","price":460.0,"fixed":0,"unit":"每週","note":"雅房"},{"type":"學生宿舍","name":"Single room (Shared bathroom) - LA MARQ","currency":"CAD","price":440.0,"fixed":0,"unit":"每週","note":"雅房"}],"fees":[]},"Toronto, Vancouver":{"courses":[{"name":"全日制加強密集課程 FTI (30堂/週)","category":"英語課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":11,"price":480.0,"fixed":0,"peak":0},{"wf":12,"wt":23,"price":460.0,"fixed":0,"peak":0},{"wf":24,"wt":35,"price":450.0,"fixed":0,"peak":0},{"wf":36,"wt":999,"price":440.0,"fixed":0,"peak":0}]},{"name":"全日制上午課程 FT AM (24堂/週)","category":"英語課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":11,"price":430.0,"fixed":0,"peak":0},{"wf":12,"wt":23,"price":410.0,"fixed":0,"peak":0},{"wf":24,"wt":35,"price":400.0,"fixed":0,"peak":0},{"wf":36,"wt":999,"price":390.0,"fixed":0,"peak":0}]},{"name":"全日制下午課程 FT AFT (24堂/週)","category":"英語課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":999,"price":360.0,"fixed":0,"peak":0}]},{"name":"半全日制上午課程 PT AM (17堂/週)","category":"英語課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":999,"price":325.0,"fixed":0,"peak":0}]},{"name":"半全日制下午課程 PT AFT (15堂/週)","category":"英語課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":999,"price":210.0,"fixed":0,"peak":0}]}],"accomm":[],"fees":[{"category":"註冊相關","name":"學簽申請費 (Study Permit Allocation + Reg Fee)","currency":"CAD","price":0,"fixed":750.0,"unit":"每次","wf":1,"wt":99}]},"All CA Campuses":{"courses":[],"accomm":[{"type":"寄宿家庭","name":"Homestay Full Board (18+ yrs)","currency":"CAD","price":350.0,"fixed":0,"unit":"每週","note":"含三餐"},{"type":"寄宿家庭","name":"Homestay Half Board (18+ yrs)","currency":"CAD","price":325.0,"fixed":0,"unit":"每週","note":"含早晚餐"},{"type":"寄宿家庭","name":"Homestay Full Board (Under 18 yrs)","currency":"CAD","price":370.0,"fixed":0,"unit":"每週","note":"含三餐"},{"type":"寄宿家庭","name":"Homestay Half Board (Under 18 yrs)","currency":"CAD","price":345.0,"fixed":0,"unit":"每週","note":"含早晚餐"},{"type":"寄宿家庭","name":"Homestay Extra Night (any age)","currency":"CAD","price":80.0,"fixed":0,"unit":"每晚","note":"額外加住一晚"},{"type":"寄宿家庭","name":"Special Diet (特殊飲食)","currency":"CAD","price":50.0,"fixed":0,"unit":"每週","note":""}],"fees":[{"category":"註冊相關","name":"註冊費 (Registration Fee)","currency":"CAD","price":0,"fixed":220.0,"unit":"每次","wf":1,"wt":99},{"category":"教材相關","name":"教材費 (Textbook & Material Fee) - 短期","currency":"CAD","price":0,"fixed":60.0,"unit":"每次","wf":1,"wt":4},{"category":"教材相關","name":"教材費 (Textbook & Material Fee) - 長期","currency":"CAD","price":15.0,"fixed":0,"unit":"每週","wf":5,"wt":999},{"category":"住宿行政","name":"住宿安排費 (Accommodation Admin Fee)","currency":"CAD","price":0,"fixed":250.0,"unit":"每次","wf":1,"wt":99},{"category":"住宿行政","name":"住宿更改費 (Accommodation Change Fee)","currency":"CAD","price":0,"fixed":150.0,"unit":"每次","wf":1,"wt":99},{"category":"接機","name":"機場接送 (Airport Transfer One Way)","currency":"CAD","price":0,"fixed":135.0,"unit":"單程","wf":1,"wt":99}]},"Toronto":{"courses":[],"accomm":[{"type":"學生宿舍","name":"Economy Single (Shared bath) - HARRINGTON HOUSING","currency":"CAD","price":390.0,"fixed":0,"unit":"每週","note":"經濟單人房 (Jan 2026起)"},{"type":"學生宿舍","name":"Economy Single (Shared bath) - HARRINGTON HOUSING","currency":"CAD","price":370.0,"fixed":0,"unit":"每週","note":"經濟單人房 (Jan 2026起)"},{"type":"學生宿舍","name":"Single room (Shared bath) - HARRINGTON HOUSING","currency":"CAD","price":450.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"Single room (Shared bath) - HARRINGTON HOUSING","currency":"CAD","price":430.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"Ensuite Single (Private bath) - HARRINGTON HOUSING","currency":"CAD","price":500.0,"fixed":0,"unit":"每週","note":"套房 (Jan 2026起)"},{"type":"學生宿舍","name":"Ensuite Single (Private bath) - HARRINGTON HOUSING","currency":"CAD","price":480.0,"fixed":0,"unit":"每週","note":"套房 (Jan 2026起)"},{"type":"學生宿舍","name":"Single room (Shared bath) - MADDOX SHERBOURNE","currency":"CAD","price":465.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"Single room (Shared bath) - MADDOX SHERBOURNE","currency":"CAD","price":445.0,"fixed":0,"unit":"每週","note":""},{"type":"學生宿舍","name":"Single room (Shared bath) - REPLIN CO-LIVING","currency":"CAD","price":405.0,"fixed":0,"unit":"每週","note":"限女性"},{"type":"學生宿舍","name":"Single room (Shared bath) - REPLIN CO-LIVING","currency":"CAD","price":385.0,"fixed":0,"unit":"每週","note":"限女性"},{"type":"學生宿舍","name":"Single Lower level ensuite - REPLIN CO-LIVING","currency":"CAD","price":455.0,"fixed":0,"unit":"每週","note":"限女性, 低樓層套房"},{"type":"學生宿舍","name":"Single Lower level ensuite - REPLIN CO-LIVING","currency":"CAD","price":435.0,"fixed":0,"unit":"每週","note":"限女性, 低樓層套房"},{"type":"學生宿舍","name":"Single Upper level ensuite - REPLIN CO-LIVING","currency":"CAD","price":500.0,"fixed":0,"unit":"每週","note":"限女性, 高樓層套房"},{"type":"學生宿舍","name":"Single Upper level ensuite - REPLIN CO-LIVING","currency":"CAD","price":480.0,"fixed":0,"unit":"每週","note":"限女性, 高樓層套房"},{"type":"學生宿舍","name":"Shared Room (Shared bath) - THE ELM & THE LEDBURY","currency":"CAD","price":400.0,"fixed":0,"unit":"每週","note":"雙人房"},{"type":"學生宿舍","name":"Shared Room (Shared bath) - THE ELM & THE LEDBURY","currency":"CAD","price":380.0,"fixed":0,"unit":"每週","note":"雙人房"},{"type":"學生宿舍","name":"Single Room (Private bath) - THE ELM & THE LEDBURY","currency":"CAD","price":615.0,"fixed":0,"unit":"每週","note":"套房"},{"type":"學生宿舍","name":"Single Room (Private bath) - THE ELM & THE LEDBURY","currency":"CAD","price":595.0,"fixed":0,"unit":"每週","note":"套房"},{"type":"學生宿舍","name":"Single Room (Private bath) - THE PARKER","currency":"CAD","price":595.0,"fixed":0,"unit":"每週","note":"套房"},{"type":"學生宿舍","name":"Single Room (Private bath) - THE PARKER","currency":"CAD","price":575.0,"fixed":0,"unit":"每週","note":"套房"}],"fees":[]},"Vancouver":{"courses":[],"accomm":[{"type":"學生宿舍","name":"Private studio (Private bath) - APT LIVING","currency":"CAD","price":570.0,"fixed":0,"unit":"每週","note":"獨立衛浴 Studio"},{"type":"學生宿舍","name":"Private studio (Private bath) - APT LIVING","currency":"CAD","price":550.0,"fixed":0,"unit":"每週","note":"獨立衛浴 Studio"},{"type":"學生宿舍","name":"Single room (Shared bath) - HARRINGTON (OCEAN PARK)","currency":"CAD","price":450.0,"fixed":0,"unit":"每週","note":"Jan 2026起"},{"type":"學生宿舍","name":"Single room (Shared bath) - HARRINGTON (OCEAN PARK)","currency":"CAD","price":430.0,"fixed":0,"unit":"每週","note":"Jan 2026起"},{"type":"學生宿舍","name":"Shared room (Shared bath) - MARZENA CO-LIVING","currency":"CAD","price":300.0,"fixed":0,"unit":"每週","note":"雙人房"},{"type":"學生宿舍","name":"Shared room (Shared bath) - MARZENA CO-LIVING","currency":"CAD","price":280.0,"fixed":0,"unit":"每週","note":"雙人房"},{"type":"學生宿舍","name":"Single room (Shared bath) - MARZENA CO-LIVING","currency":"CAD","price":455.0,"fixed":0,"unit":"每週","note":"單人房"},{"type":"學生宿舍","name":"Single room (Shared bath) - MARZENA CO-LIVING","currency":"CAD","price":435.0,"fixed":0,"unit":"每週","note":"單人房"},{"type":"學生宿舍","name":"Ensuite Single (Private bath) - MARZENA CO-LIVING","currency":"CAD","price":505.0,"fixed":0,"unit":"每週","note":"套房 (Jan 2026起)"},{"type":"學生宿舍","name":"Ensuite Single (Private bath) - MARZENA CO-LIVING","currency":"CAD","price":485.0,"fixed":0,"unit":"每週","note":"套房 (Jan 2026起)"},{"type":"學生宿舍","name":"Shared room (Shared bath) - MEADOW CO-LIVING","currency":"CAD","price":300.0,"fixed":0,"unit":"每週","note":"限女性, 雙人房"},{"type":"學生宿舍","name":"Shared room (Shared bath) - MEADOW CO-LIVING","currency":"CAD","price":280.0,"fixed":0,"unit":"每週","note":"限女性, 雙人房"},{"type":"學生宿舍","name":"Single room (Shared bath) - MEADOW CO-LIVING","currency":"CAD","price":455.0,"fixed":0,"unit":"每週","note":"限女性, 單人房"},{"type":"學生宿舍","name":"Single room (Shared bath) - MEADOW CO-LIVING","currency":"CAD","price":435.0,"fixed":0,"unit":"每週","note":"限女性, 單人房"},{"type":"學生宿舍","name":"Single Room Ensuite - MEADOW CO-LIVING","currency":"CAD","price":505.0,"fixed":0,"unit":"每週","note":"限女性, 套房"},{"type":"學生宿舍","name":"Single Room Ensuite - MEADOW CO-LIVING","currency":"CAD","price":485.0,"fixed":0,"unit":"每週","note":"限女性, 套房"},{"type":"學生宿舍","name":"Shared room (Shared bath) - GRAND HOUSE CO-LIVING","currency":"CAD","price":300.0,"fixed":0,"unit":"每週","note":"雙人房"},{"type":"學生宿舍","name":"Shared room (Shared bath) - GRAND HOUSE CO-LIVING","currency":"CAD","price":280.0,"fixed":0,"unit":"每週","note":"雙人房"},{"type":"學生宿舍","name":"Single room (Shared bath) - GRAND HOUSE CO-LIVING","currency":"CAD","price":455.0,"fixed":0,"unit":"每週","note":"單人房"},{"type":"學生宿舍","name":"Single room (Shared bath) - GRAND HOUSE CO-LIVING","currency":"CAD","price":435.0,"fixed":0,"unit":"每週","note":"單人房"},{"type":"學生宿舍","name":"Single Room Ensuite - GRAND HOUSE CO-LIVING","currency":"CAD","price":505.0,"fixed":0,"unit":"每週","note":"套房"},{"type":"學生宿舍","name":"Single Room Ensuite - GRAND HOUSE CO-LIVING","currency":"CAD","price":485.0,"fixed":0,"unit":"每週","note":"套房"},{"type":"學生宿舍","name":"Shared room (Shared bath) - GATEWAY","currency":"CAD","price":435.0,"fixed":0,"unit":"每週","note":"雙人房"},{"type":"學生宿舍","name":"Shared room (Shared bath) - GATEWAY","currency":"CAD","price":415.0,"fixed":0,"unit":"每週","note":"雙人房"},{"type":"學生宿舍","name":"Single room (Shared bath) - GATEWAY","currency":"CAD","price":635.0,"fixed":0,"unit":"每週","note":"單人房"},{"type":"學生宿舍","name":"Single room (Shared bath) - GATEWAY","currency":"CAD","price":615.0,"fixed":0,"unit":"每週","note":"單人房"}],"fees":[]},"New Delhi":{"courses":[{"name":"全日制加強密集課程 FTI (30堂/週)","category":"英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":99,"price":235.0,"fixed":0,"peak":0}]},{"name":"全日制課程 FT (24堂/週)","category":"英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":99,"price":205.0,"fixed":0,"peak":0}]},{"name":"半全日制上午課程 PT AM (17堂/週)","category":"英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":99,"price":170.0,"fixed":0,"peak":0}]},{"name":"半全日制下午課程 PT PM (13堂/週)","category":"英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":99,"price":145.0,"fixed":0,"peak":0}]},{"name":"半全日制印地語 Part-Time Hindi AM/PM (13堂/週)","category":"印地語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":99,"price":170.0,"fixed":0,"peak":0}]},{"name":"私人家教 (Private Tutoring)","category":"家教課程","currency":"USD","unit":"每小時","tiers":[{"wf":1,"wt":99,"price":35.0,"fixed":0,"peak":0}]},{"name":"迷你小組家教 (Mini-group Tutoring)","category":"家教課程","currency":"USD","unit":"每小時","tiers":[{"wf":1,"wt":99,"price":25.0,"fixed":0,"peak":0}]},{"name":"早晨家教套裝 (Early Morning Package) - 2週","category":"家教套裝","currency":"USD","unit":"套裝","tiers":[{"wf":1,"wt":99,"price":0,"fixed":200.0,"peak":0}]},{"name":"早晨家教套裝 (Early Morning Package) - 4週","category":"家教套裝","currency":"USD","unit":"套裝","tiers":[{"wf":1,"wt":99,"price":0,"fixed":355.0,"peak":0}]},{"name":"瑜珈套裝 (Yoga Package) - 2週","category":"瑜珈課程","currency":"USD","unit":"套裝","tiers":[{"wf":1,"wt":99,"price":0,"fixed":250.0,"peak":0}]},{"name":"瑜珈套裝 (Yoga Package) - 4週","category":"瑜珈課程","currency":"USD","unit":"套裝","tiers":[{"wf":1,"wt":99,"price":0,"fixed":400.0,"peak":0}]}],"accomm":[{"type":"寄宿家庭","name":"Homestay - Half board (2 meals)","currency":"USD","price":350.0,"fixed":0,"unit":"每週","note":"含早晚餐"},{"type":"公寓","name":"Student Apartment - Single","currency":"USD","price":280.0,"fixed":0,"unit":"每週","note":"單人房"},{"type":"公寓","name":"Student Apartment - Shared","currency":"USD","price":205.0,"fixed":0,"unit":"每週","note":"雙人房 (共用)"},{"type":"其他","name":"Bed & Breakfast","currency":"USD","price":300.0,"fixed":0,"unit":"每週","note":""},{"type":"其他","name":"All Accommodation Extra Night","currency":"USD","price":50.0,"fixed":0,"unit":"每晚","note":"額外加住一晚"}],"fees":[{"category":"註冊相關","name":"註冊與評測費 (Registration & Assessment Fee)","currency":"USD","price":0,"fixed":75.0,"unit":"每次","wf":1,"wt":99},{"category":"教材相關","name":"教材費 (Materials Fee)","currency":"USD","price":0,"fixed":35.0,"unit":"每次","wf":1,"wt":99},{"category":"郵寄相關","name":"快遞費 (Speed Post Charges)","currency":"USD","price":0,"fixed":65.0,"unit":"每次","wf":1,"wt":99},{"category":"實習相關","name":"志工實習安置費 (Social Volunteer Placement Fee)","currency":"USD","price":0,"fixed":200.0,"unit":"每次","wf":1,"wt":99},{"category":"住宿行政","name":"住宿安排費 (Accommodation Administration Fee)","currency":"USD","price":0,"fixed":100.0,"unit":"每次","wf":1,"wt":99},{"category":"接機","name":"機場接送 (Airport Transfer One Way)","currency":"USD","price":0,"fixed":40.0,"unit":"單程","wf":1,"wt":99},{"category":"接機","name":"機場接送 (Airport Transfer Two Way)","currency":"USD","price":0,"fixed":75.0,"unit":"全程","wf":1,"wt":99}]}},"Kaplan":{"波士頓":{"courses":[{"name":"General English","category":"通用英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":520.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":500.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":470.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":420.0,"fixed":0,"peak":0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":590.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":560.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":530.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":470.0,"fixed":0,"peak":0}]},{"name":"Intensive English","category":"強化英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":650.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":620.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":590.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":520.0,"fixed":0,"peak":0}]},{"name":"Business Supplementary","category":"商務英語補充課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":650.0,"fixed":0,"peak":0},{"wf":5,"wt":10,"price":620.0,"fixed":0,"peak":0}]},{"name":"TOEFL® 和強化學術英語課程","category":"考試準備課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":650.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":620.0,"fixed":0,"peak":0},{"wf":12,"wt":16,"price":590.0,"fixed":0,"peak":0}]},{"name":"TOEFL® 和學術英語課程（非全日制）","category":"考試準備課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":590.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":560.0,"fixed":0,"peak":0},{"wf":12,"wt":12,"price":530.0,"fixed":0,"peak":0}]}],"accomm":[{"type":"寄宿家庭 (18歲+)","name":"單人房 (不含餐)","currency":"USD","price":320.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週7餐)","currency":"USD","price":340.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐)","currency":"USD","price":430.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"雙人房 (每週14餐)","currency":"USD","price":340.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週7餐)","currency":"USD","price":380.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐)","currency":"USD","price":470.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"雙人房 (每週14餐)","currency":"USD","price":380.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"學生公寓","name":"The Bon (Luxury Single)","currency":"USD","price":760.0,"fixed":0,"unit":"每週","note":"豪華單人房、共用衛浴、不含餐、最低年齡18歲"},{"type":"學生公寓","name":"The Bon (Single)","currency":"USD","price":730.0,"fixed":0,"unit":"每週","note":"單人房、共用衛浴、不含餐、最低年齡18歲"}],"fees":[{"category":"申請費","name":"申請費 (Application Fee)","currency":"USD","price":0,"fixed":200.0,"unit":"次","wf":1,"wt":99},{"category":"住宿費","name":"住宿安置費 (Accommodation Placement Fee)","currency":"USD","price":0,"fixed":100.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"變更費 (Change Fee)","currency":"USD","price":0,"fixed":110.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"大學申請服務 (University Placement Service)","currency":"USD","price":0,"fixed":250.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"波士頓洛根 (Boston Logan) 機場接機","currency":"USD","price":0,"fixed":190.0,"unit":"次","wf":1,"wt":99},{"category":"保險費","name":"醫療與旅行保險","currency":"USD","price":50.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":100.0,"fixed":0,"unit":"堂","wf":1,"wt":4},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":90.0,"fixed":0,"unit":"堂","wf":5,"wt":9},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":80.0,"fixed":0,"unit":"堂","wf":10,"wt":19},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":70.0,"fixed":0,"unit":"堂","wf":20,"wt":99},{"category":"課程升級","name":"強化升級課程 (Intensive Upgrade)","currency":"USD","price":120.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"保證上午課程 (Guaranteed Morning Class)","currency":"USD","price":20.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (12個月)","currency":"USD","price":0,"fixed":140.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (3個月)","currency":"USD","price":0,"fixed":70.0,"unit":"次","wf":1,"wt":99},{"category":"其他服務","name":"寄宿家庭特殊飲食 (Special Diet)","currency":"USD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"行李寄存 (Luggage Retainer)","currency":"USD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"住宿附加費","name":"寄宿家庭聖誕節附加費","currency":"USD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99}]},"芝加哥":{"courses":[{"name":"General English","category":"通用英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":470.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":440.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":420.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":370.0,"fixed":0,"peak":0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":520.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":500.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":480.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":420.0,"fixed":0,"peak":0}]},{"name":"Intensive English","category":"強化英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":580.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":550.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":520.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":470.0,"fixed":0,"peak":0}]},{"name":"Business Supplementary","category":"商務英語補充課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":580.0,"fixed":0,"peak":0},{"wf":5,"wt":10,"price":550.0,"fixed":0,"peak":0}]}],"accomm":[{"type":"寄宿家庭 (18歲+)","name":"單人房 (不含餐)","currency":"USD","price":250.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週7餐)","currency":"USD","price":310.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐)","currency":"USD","price":370.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"雙人房 (每週14餐)","currency":"USD","price":320.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週7餐)","currency":"USD","price":350.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐)","currency":"USD","price":410.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"雙人房 (每週14餐)","currency":"USD","price":350.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"學生公寓","name":"The Flats (Single)","currency":"USD","price":580.0,"fixed":0,"unit":"每週","note":"單人房、共用衛浴、最低年齡18歲"},{"type":"學生公寓","name":"The Flats (Studio)","currency":"USD","price":690.0,"fixed":0,"unit":"每週","note":"獨立套間、獨立衛浴、最低年齡18歲"},{"type":"學生公寓","name":"The Flats (Twin)","currency":"USD","price":420.0,"fixed":0,"unit":"每週","note":"雙人房、共用衛浴、最低年齡18歲"}],"fees":[{"category":"申請費","name":"申請費 (Application Fee)","currency":"USD","price":0,"fixed":200.0,"unit":"次","wf":1,"wt":99},{"category":"住宿費","name":"住宿安置費 (Accommodation Placement Fee)","currency":"USD","price":0,"fixed":100.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"變更費 (Change Fee)","currency":"USD","price":0,"fixed":110.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"大學申請服務 (University Placement Service)","currency":"USD","price":0,"fixed":250.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"芝加哥奧黑爾 (Chicago O'Hare) 機場接機","currency":"USD","price":0,"fixed":220.0,"unit":"次","wf":1,"wt":99},{"category":"保險費","name":"醫療與旅行保險","currency":"USD","price":50.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":100.0,"fixed":0,"unit":"堂","wf":1,"wt":4},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":90.0,"fixed":0,"unit":"堂","wf":5,"wt":9},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":80.0,"fixed":0,"unit":"堂","wf":10,"wt":19},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":70.0,"fixed":0,"unit":"堂","wf":20,"wt":99},{"category":"課程升級","name":"強化升級課程 (Intensive Upgrade)","currency":"USD","price":120.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"保證上午課程 (Guaranteed Morning Class)","currency":"USD","price":20.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"僅選修課程 (Elective Only Classes)","currency":"USD","price":260.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"托福補充課程 (TOEFL Supplementary)","currency":"USD","price":180.0,"fixed":0,"unit":"每週","wf":1,"wt":5},{"category":"課程服務","name":"托福補充課程 (TOEFL Supplementary)","currency":"USD","price":150.0,"fixed":0,"unit":"每週","wf":6,"wt":99},{"category":"線上資源","name":"K+ Online (12個月)","currency":"USD","price":0,"fixed":140.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (3個月)","currency":"USD","price":0,"fixed":70.0,"unit":"次","wf":1,"wt":99},{"category":"其他服務","name":"寄宿家庭特殊飲食 (Special Diet)","currency":"USD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"行李寄存 (Luggage Retainer)","currency":"USD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"住宿附加費","name":"寄宿家庭聖誕節附加費","currency":"USD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99}]},"洛杉磯":{"courses":[{"name":"General English","category":"通用英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":510.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":480.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":460.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":410.0,"fixed":0,"peak":0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":570.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":550.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":520.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":460.0,"fixed":0,"peak":0}]},{"name":"Intensive English","category":"強化英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":630.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":600.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":570.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":510.0,"fixed":0,"peak":0}]},{"name":"Business Supplementary","category":"商務英語補充課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":630.0,"fixed":0,"peak":0},{"wf":5,"wt":10,"price":600.0,"fixed":0,"peak":0}]}],"accomm":[{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週7餐)","currency":"USD","price":360.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐)","currency":"USD","price":450.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"雙人房 (每週14餐)","currency":"USD","price":360.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週7餐)","currency":"USD","price":400.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐)","currency":"USD","price":490.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"雙人房 (每週14餐)","currency":"USD","price":400.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"學生公寓","name":"Westwood Residence (Luxury Single)","currency":"USD","price":800.0,"fixed":0,"unit":"每週","note":"豪華單人房、獨立衛浴、最低年齡17歲"},{"type":"學生公寓","name":"Westwood Residence (Single)","currency":"USD","price":750.0,"fixed":0,"unit":"每週","note":"單人房、獨立衛浴、最低年齡17歲"},{"type":"學生公寓","name":"Westwood Residence (Economy Single)","currency":"USD","price":580.0,"fixed":0,"unit":"每週","note":"經濟型單人房、獨立衛浴、最低年齡17歲"},{"type":"學生公寓","name":"Westwood Residence (Twin)","currency":"USD","price":490.0,"fixed":0,"unit":"每週","note":"雙人房、共用衛浴、最低年齡17歲 (僅限未成年一同預訂)"}],"fees":[{"category":"申請費","name":"申請費 (Application Fee)","currency":"USD","price":0,"fixed":200.0,"unit":"次","wf":1,"wt":99},{"category":"住宿費","name":"住宿安置費 (Accommodation Placement Fee)","currency":"USD","price":0,"fixed":100.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"變更費 (Change Fee)","currency":"USD","price":0,"fixed":110.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"大學申請服務 (University Placement Service)","currency":"USD","price":0,"fixed":250.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"洛杉磯 (Los Angeles) 機場接機","currency":"USD","price":0,"fixed":190.0,"unit":"次","wf":1,"wt":99},{"category":"保險費","name":"醫療與旅行保險","currency":"USD","price":50.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":100.0,"fixed":0,"unit":"堂","wf":1,"wt":4},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":90.0,"fixed":0,"unit":"堂","wf":5,"wt":9},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":80.0,"fixed":0,"unit":"堂","wf":10,"wt":19},{"category":"課程升級","name":"強化升級課程 (Intensive Upgrade)","currency":"USD","price":120.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"保證上午課程 (Guaranteed Morning Class)","currency":"USD","price":20.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"僅選修課程 (Elective Only Classes)","currency":"USD","price":260.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"托福補充課程 (TOEFL Supplementary)","currency":"USD","price":180.0,"fixed":0,"unit":"每週","wf":1,"wt":5},{"category":"課程服務","name":"托福補充課程 (TOEFL Supplementary)","currency":"USD","price":150.0,"fixed":0,"unit":"每週","wf":6,"wt":99},{"category":"線上資源","name":"K+ Online (12個月)","currency":"USD","price":0,"fixed":140.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (3個月)","currency":"USD","price":0,"fixed":70.0,"unit":"次","wf":1,"wt":99},{"category":"其他服務","name":"寄宿家庭特殊飲食 (Special Diet)","currency":"USD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"行李寄存 (Luggage Retainer)","currency":"USD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"住宿附加費","name":"寄宿家庭聖誕節附加費","currency":"USD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99}]},"紐約":{"courses":[{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":630.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":600.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":570.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":500.0,"fixed":0,"peak":0}]},{"name":"Intensive English","category":"強化英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":690.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":660.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":630.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":560.0,"fixed":0,"peak":0}]},{"name":"Business Supplementary","category":"商務英語補充課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":690.0,"fixed":0,"peak":0},{"wf":5,"wt":10,"price":660.0,"fixed":0,"peak":0}]},{"name":"Business Intensive","category":"商務英語強化課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":690.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":660.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":630.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":560.0,"fixed":0,"peak":0}]},{"name":"Business English (Part-time)","category":"商務英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":630.0,"fixed":0,"peak":0},{"wf":5,"wt":10,"price":600.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":570.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":500.0,"fixed":0,"peak":0}]},{"name":"TOEFL® 和強化學術英語課程","category":"考試準備課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":690.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":660.0,"fixed":0,"peak":0},{"wf":12,"wt":16,"price":630.0,"fixed":0,"peak":0}]},{"name":"TOEFL® 和學術英語課程（非全日制）","category":"考試準備課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":630.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":600.0,"fixed":0,"peak":0},{"wf":12,"wt":12,"price":570.0,"fixed":0,"peak":0}]}],"accomm":[{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週7餐)","currency":"USD","price":430.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐)","currency":"USD","price":540.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"雙人房 (每週7餐)","currency":"USD","price":340.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"雙人房 (每週14餐)","currency":"USD","price":460.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週7餐)","currency":"USD","price":470.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐)","currency":"USD","price":580.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"雙人房 (每週7餐)","currency":"USD","price":380.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"雙人房 (每週14餐)","currency":"USD","price":490.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (曼哈頓)","name":"Homestay in Manhattan 單人房","currency":"USD","price":660.0,"fixed":0,"unit":"每週","note":"每週7餐、共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (曼哈頓)","name":"Homestay in Manhattan 雙人房","currency":"USD","price":540.0,"fixed":0,"unit":"每週","note":"每週7餐、共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (曼哈頓)","name":"Homestay in Manhattan (Under 18) 單人房","currency":"USD","price":700.0,"fixed":0,"unit":"每週","note":"每週7餐、共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (曼哈頓)","name":"Homestay in Manhattan (Under 18) 雙人房","currency":"USD","price":580.0,"fixed":0,"unit":"每週","note":"每週7餐、共用衛浴、最低年齡16歲"},{"type":"學生公寓","name":"Midtown East: Turtle Bay (Single)","currency":"USD","price":920.0,"fixed":0,"unit":"每週","note":"單人房、獨立衛浴、不含餐、最低年齡17歲"},{"type":"學生公寓","name":"Midtown East: Turtle Bay (Twin)","currency":"USD","price":610.0,"fixed":0,"unit":"每週","note":"雙人房、共用衛浴、不含餐、最低年齡17歲"},{"type":"學生公寓","name":"Midtown East: Turtle Bay (Triple)","currency":"USD","price":460.0,"fixed":0,"unit":"每週","note":"三人房、共用衛浴、不含餐、最低年齡17歲"},{"type":"學生公寓","name":"Hudson Yards (Single)","currency":"USD","price":700.0,"fixed":0,"unit":"每週","note":"單人房、共用衛浴、不含餐、最低年齡18歲"}],"fees":[{"category":"申請費","name":"申請費 (Application Fee)","currency":"USD","price":0,"fixed":200.0,"unit":"次","wf":1,"wt":99},{"category":"住宿費","name":"住宿安置費 (Accommodation Placement Fee)","currency":"USD","price":0,"fixed":100.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"變更費 (Change Fee)","currency":"USD","price":0,"fixed":110.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"大學申請服務 (University Placement Service)","currency":"USD","price":0,"fixed":250.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"肯尼迪(JFK)/紐瓦克(Newark)/拉瓜迪亞(LaGuardia)","currency":"USD","price":0,"fixed":230.0,"unit":"次","wf":1,"wt":99},{"category":"保險費","name":"醫療與旅行保險","currency":"USD","price":50.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":100.0,"fixed":0,"unit":"堂","wf":1,"wt":4},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":90.0,"fixed":0,"unit":"堂","wf":5,"wt":9},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":80.0,"fixed":0,"unit":"堂","wf":10,"wt":19},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":70.0,"fixed":0,"unit":"堂","wf":20,"wt":99},{"category":"課程升級","name":"強化升級課程 (Intensive Upgrade)","currency":"USD","price":120.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"保證上午課程 (Guaranteed Morning Class)","currency":"USD","price":20.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"僅選修課程 (Elective Only Classes)","currency":"USD","price":260.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (12個月)","currency":"USD","price":0,"fixed":140.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (3個月)","currency":"USD","price":0,"fixed":70.0,"unit":"次","wf":1,"wt":99},{"category":"其他服務","name":"寄宿家庭特殊飲食 (Special Diet)","currency":"USD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"行李寄存 (Luggage Retainer)","currency":"USD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"住宿附加費","name":"寄宿家庭聖誕節附加費","currency":"USD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99}]},"紐約 30+":{"courses":[{"name":"General English","category":"通用英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":560.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":530.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":500.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":450.0,"fixed":0,"peak":0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":630.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":600.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":570.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":500.0,"fixed":0,"peak":0}]},{"name":"Intensive English","category":"強化英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":690.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":660.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":630.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":560.0,"fixed":0,"peak":0}]}],"accomm":[],"fees":[]},"舊金山-伯克利":{"courses":[{"name":"General English","category":"通用英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":490.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":470.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":450.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":390.0,"fixed":0,"peak":0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":550.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":530.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":500.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":450.0,"fixed":0,"peak":0}]},{"name":"Intensive English","category":"強化英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":610.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":580.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":550.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":490.0,"fixed":0,"peak":0}]},{"name":"Business Supplementary","category":"商務英語補充課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":610.0,"fixed":0,"peak":0},{"wf":5,"wt":10,"price":580.0,"fixed":0,"peak":0}]}],"accomm":[{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週7餐)","currency":"USD","price":340.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐)","currency":"USD","price":390.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"雙人房 (每週14餐)","currency":"USD","price":340.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週7餐)","currency":"USD","price":380.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐)","currency":"USD","price":430.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"雙人房 (每週14餐)","currency":"USD","price":380.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"學生公寓","name":"Berkeley City Dorms (Single)","currency":"USD","price":410.0,"fixed":0,"unit":"每週","note":"單人房、共用衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Berkeley City Dorms (Twin)","currency":"USD","price":380.0,"fixed":0,"unit":"每週","note":"雙人房、共用衛浴、最低年齡18歲"}],"fees":[{"category":"申請費","name":"申請費 (Application Fee)","currency":"USD","price":0,"fixed":200.0,"unit":"次","wf":1,"wt":99},{"category":"住宿費","name":"住宿安置費 (Accommodation Placement Fee)","currency":"USD","price":0,"fixed":100.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"變更費 (Change Fee)","currency":"USD","price":0,"fixed":110.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"大學申請服務 (University Placement Service)","currency":"USD","price":0,"fixed":250.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"舊金山 (San Francisco) 機場接機","currency":"USD","price":0,"fixed":230.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"奧克蘭 (Oakland) 機場接機","currency":"USD","price":0,"fixed":230.0,"unit":"次","wf":1,"wt":99},{"category":"保險費","name":"醫療與旅行保險","currency":"USD","price":50.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":100.0,"fixed":0,"unit":"堂","wf":1,"wt":4},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":90.0,"fixed":0,"unit":"堂","wf":5,"wt":9},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":80.0,"fixed":0,"unit":"堂","wf":10,"wt":19},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":70.0,"fixed":0,"unit":"堂","wf":20,"wt":99},{"category":"課程升級","name":"強化升級課程 (Intensive Upgrade)","currency":"USD","price":120.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"保證上午課程 (Guaranteed Morning Class)","currency":"USD","price":20.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"僅選修課程 (Elective Only Classes)","currency":"USD","price":260.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"托福補充課程 (TOEFL Supplementary)","currency":"USD","price":180.0,"fixed":0,"unit":"每週","wf":1,"wt":5},{"category":"課程服務","name":"托福補充課程 (TOEFL Supplementary)","currency":"USD","price":150.0,"fixed":0,"unit":"每週","wf":6,"wt":99},{"category":"線上資源","name":"K+ Online (12個月)","currency":"USD","price":0,"fixed":140.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (3個月)","currency":"USD","price":0,"fixed":70.0,"unit":"次","wf":1,"wt":99},{"category":"其他服務","name":"寄宿家庭特殊飲食 (Special Diet)","currency":"USD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"行李寄存 (Luggage Retainer)","currency":"USD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"住宿附加費","name":"寄宿家庭聖誕節附加費","currency":"USD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99}]},"聖巴巴拉":{"courses":[{"name":"General English","category":"通用英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":490.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":470.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":450.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":400.0,"fixed":0,"peak":0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":550.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":530.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":500.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":450.0,"fixed":0,"peak":0}]},{"name":"Intensive English","category":"強化英語課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":610.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":590.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":550.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":490.0,"fixed":0,"peak":0}]},{"name":"Business Supplementary","category":"商務英語補充課程","currency":"USD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":610.0,"fixed":0,"peak":0},{"wf":5,"wt":10,"price":590.0,"fixed":0,"peak":0}]}],"accomm":[{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週7餐)","currency":"USD","price":370.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐)","currency":"USD","price":400.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"雙人房 (每週14餐)","currency":"USD","price":370.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週7餐)","currency":"USD","price":410.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐)","currency":"USD","price":440.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"雙人房 (每週14餐)","currency":"USD","price":410.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"學生公寓","name":"LA Brezza (Luxury Single)","currency":"USD","price":820.0,"fixed":0,"unit":"每週","note":"豪華單人房、共用衛浴、最低年齡18歲"},{"type":"學生公寓","name":"LA Brezza (Luxury Twin)","currency":"USD","price":550.0,"fixed":0,"unit":"每週","note":"豪華雙人房、共用衛浴、最低年齡18歲 (僅限一同預訂)"},{"type":"學生公寓","name":"LA Brezza (Single)","currency":"USD","price":760.0,"fixed":0,"unit":"每週","note":"單人房、共用衛浴、最低年齡18歲"},{"type":"學生公寓","name":"LA Brezza (Twin)","currency":"USD","price":430.0,"fixed":0,"unit":"每週","note":"雙人房、共用衛浴、最低年齡18歲 (僅限一同預訂)"}],"fees":[{"category":"申請費","name":"申請費 (Application Fee)","currency":"USD","price":0,"fixed":200.0,"unit":"次","wf":1,"wt":99},{"category":"住宿費","name":"住宿安置費 (Accommodation Placement Fee)","currency":"USD","price":0,"fixed":100.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"變更費 (Change Fee)","currency":"USD","price":0,"fixed":110.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"大學申請服務 (University Placement Service)","currency":"USD","price":0,"fixed":250.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"洛杉磯 (Los Angeles) 機場接機","currency":"USD","price":0,"fixed":440.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"聖巴巴拉 (Santa Barbara) 機場接機","currency":"USD","price":0,"fixed":120.0,"unit":"次","wf":1,"wt":99},{"category":"保險費","name":"醫療與旅行保險","currency":"USD","price":50.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":100.0,"fixed":0,"unit":"堂","wf":1,"wt":4},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":90.0,"fixed":0,"unit":"堂","wf":5,"wt":9},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":80.0,"fixed":0,"unit":"堂","wf":10,"wt":19},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"USD","price":70.0,"fixed":0,"unit":"堂","wf":20,"wt":99},{"category":"課程升級","name":"強化升級課程 (Intensive Upgrade)","currency":"USD","price":120.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"保證上午課程 (Guaranteed Morning Class)","currency":"USD","price":20.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"僅選修課程 (Elective Only Classes)","currency":"USD","price":260.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"托福補充課程 (TOEFL Supplementary)","currency":"USD","price":180.0,"fixed":0,"unit":"每週","wf":1,"wt":5},{"category":"課程服務","name":"托福補充課程 (TOEFL Supplementary)","currency":"USD","price":150.0,"fixed":0,"unit":"每週","wf":6,"wt":99},{"category":"線上資源","name":"K+ Online (12個月)","currency":"USD","price":0,"fixed":140.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (3個月)","currency":"USD","price":0,"fixed":70.0,"unit":"次","wf":1,"wt":99},{"category":"其他服務","name":"寄宿家庭特殊飲食 (Special Diet)","currency":"USD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"行李寄存 (Luggage Retainer)","currency":"USD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"住宿附加費","name":"寄宿家庭聖誕節附加費","currency":"USD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99}]},"多倫多":{"courses":[{"name":"General English","category":"通用英語課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":470.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":450.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":430.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":380.0,"fixed":0,"peak":0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":530.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":510.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":480.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":430.0,"fixed":0,"peak":0}]},{"name":"Intensive English","category":"強化英語課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":590.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":560.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":530.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":470.0,"fixed":0,"peak":0}]},{"name":"Business Supplementary","category":"商務英語補充課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":590.0,"fixed":0,"peak":0},{"wf":5,"wt":10,"price":560.0,"fixed":0,"peak":0}]},{"name":"學術英語橋梁課程 (Academic English)","category":"學術英語課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":590.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":560.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":530.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":470.0,"fixed":0,"peak":0}]},{"name":"雅思課程 (非全日制)","category":"考試準備課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":530.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":510.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":480.0,"fixed":0,"peak":0}]},{"name":"雅思強化課程 (Intensive IELTS)","category":"考試準備課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":590.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":560.0,"fixed":0,"peak":0},{"wf":12,"wt":16,"price":530.0,"fixed":0,"peak":0}]},{"name":"TOEFL® 和強化學術英語課程","category":"考試準備課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":590.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":560.0,"fixed":0,"peak":0},{"wf":12,"wt":16,"price":530.0,"fixed":0,"peak":0}]},{"name":"TOEFL® 和學術英語課程（非全日制）","category":"考試準備課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":530.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":510.0,"fixed":0,"peak":0},{"wf":12,"wt":16,"price":480.0,"fixed":0,"peak":0}]}],"accomm":[{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐/共用衛浴)","currency":"CAD","price":370.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐/獨立衛浴)","currency":"CAD","price":500.0,"fixed":0,"unit":"每週","note":"獨立衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"雙人房 (每週14餐/共用衛浴)","currency":"CAD","price":340.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐/共用衛浴)","currency":"CAD","price":410.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐/獨立衛浴)","currency":"CAD","price":540.0,"fixed":0,"unit":"每週","note":"獨立衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"雙人房 (每週14餐/共用衛浴)","currency":"CAD","price":380.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"學生公寓","name":"Parkside Student Residence (Single)","currency":"CAD","price":825.0,"fixed":0,"unit":"每週","note":"單人房、共用衛浴、每週21餐、最低年齡16歲"},{"type":"學生公寓","name":"Cherry House (Luxury Single)","currency":"CAD","price":870.0,"fixed":0,"unit":"每週","note":"豪華單人房、獨立衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Cherry House (Economy Single)","currency":"CAD","price":560.0,"fixed":0,"unit":"每週","note":"經濟型單人房、共用衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Cherry House (1 Bed Apt)","currency":"CAD","price":970.0,"fixed":0,"unit":"每週","note":"一居室公寓、獨立衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Cherry House (Single Shared)","currency":"CAD","price":590.0,"fixed":0,"unit":"每週","note":"單人房、共用衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Cherry House (Single Independent)","currency":"CAD","price":790.0,"fixed":0,"unit":"每週","note":"單人房、獨立衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Cherry House (Twin)","currency":"CAD","price":470.0,"fixed":0,"unit":"每週","note":"雙人房、共用衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Cherry House (Single - Under 18)","currency":"CAD","price":600.0,"fixed":0,"unit":"每週","note":"單人房、共用衛浴、最低年齡16歲"}],"fees":[{"category":"申請費","name":"申請費 (Application Fee)","currency":"CAD","price":0,"fixed":200.0,"unit":"次","wf":1,"wt":99},{"category":"住宿費","name":"住宿安置費 (Accommodation Placement Fee)","currency":"CAD","price":0,"fixed":270.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"變更費 (Change Fee)","currency":"CAD","price":0,"fixed":110.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"大學申請服務 (University Placement Service)","currency":"CAD","price":0,"fixed":200.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"監護費 (Custodianship Fee)","currency":"CAD","price":0,"fixed":110.0,"unit":"次","wf":1,"wt":99},{"category":"材料費","name":"課程材料費","currency":"CAD","price":10.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"接機費","name":"皮尔森 (Pearson) 機場接機","currency":"CAD","price":0,"fixed":150.0,"unit":"次","wf":1,"wt":99},{"category":"保險費","name":"醫療保險 (16-69歲)","currency":"CAD","price":30.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"CAD","price":120.0,"fixed":0,"unit":"堂","wf":1,"wt":4},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"CAD","price":110.0,"fixed":0,"unit":"堂","wf":5,"wt":9},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"CAD","price":100.0,"fixed":0,"unit":"堂","wf":10,"wt":19},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"CAD","price":90.0,"fixed":0,"unit":"堂","wf":20,"wt":99},{"category":"課程升級","name":"強化升級課程 (Intensive Upgrade)","currency":"CAD","price":110.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"保證上午課程 (Guaranteed Morning Class)","currency":"CAD","price":20.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"僅選修課程 (Elective Only Classes)","currency":"CAD","price":260.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (12個月)","currency":"CAD","price":0,"fixed":160.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (3個月)","currency":"CAD","price":0,"fixed":80.0,"unit":"次","wf":1,"wt":99},{"category":"其他服務","name":"寄宿家庭特殊飲食 (Special Diet)","currency":"CAD","price":60.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"行李寄存 (Luggage Retainer)","currency":"CAD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"住宿附加費","name":"寄宿家庭聖誕節附加費","currency":"CAD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99}]},"多倫多 30+":{"courses":[{"name":"General English","category":"通用英語課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":470.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":450.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":430.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":380.0,"fixed":0,"peak":0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":530.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":510.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":480.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":430.0,"fixed":0,"peak":0}]},{"name":"Intensive English","category":"強化英語課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":590.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":560.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":530.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":470.0,"fixed":0,"peak":0}]}],"accomm":[],"fees":[]},"溫哥華":{"courses":[{"name":"General English","category":"通用英語課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":470.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":450.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":430.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":380.0,"fixed":0,"peak":0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":530.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":510.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":480.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":430.0,"fixed":0,"peak":0}]},{"name":"Intensive English","category":"強化英語課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":580.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":560.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":530.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":470.0,"fixed":0,"peak":0}]},{"name":"Business Supplementary","category":"商務英語補充課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":580.0,"fixed":0,"peak":0},{"wf":5,"wt":10,"price":560.0,"fixed":0,"peak":0}]},{"name":"學術英語橋梁課程 (Academic English)","category":"學術英語課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":580.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":560.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":530.0,"fixed":0,"peak":0},{"wf":20,"wt":52,"price":470.0,"fixed":0,"peak":0}]},{"name":"雅思課程 (非全日制)","category":"考試準備課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":530.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":510.0,"fixed":0,"peak":0},{"wf":12,"wt":19,"price":480.0,"fixed":0,"peak":0}]},{"name":"雅思強化課程 (Intensive IELTS)","category":"考試準備課程","currency":"CAD","unit":"每週","tiers":[{"wf":1,"wt":4,"price":580.0,"fixed":0,"peak":0},{"wf":5,"wt":11,"price":560.0,"fixed":0,"peak":0},{"wf":12,"wt":16,"price":530.0,"fixed":0,"peak":0}]}],"accomm":[{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐)","currency":"CAD","price":370.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"雙人房 (每週14餐)","currency":"CAD","price":340.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐)","currency":"CAD","price":410.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"雙人房 (每週14餐)","currency":"CAD","price":380.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"學生公寓","name":"King Edward Townhouse (Single)","currency":"CAD","price":660.0,"fixed":0,"unit":"每週","note":"單人房、共用衛浴、最低年齡18歲"},{"type":"學生公寓","name":"King Edward Townhouse (Twin)","currency":"CAD","price":550.0,"fixed":0,"unit":"每週","note":"雙人房、共用衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Viva Tower Apartments (Single)","currency":"CAD","price":660.0,"fixed":0,"unit":"每週","note":"單人房、共用衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Viva Tower Apartments (Twin)","currency":"CAD","price":550.0,"fixed":0,"unit":"每週","note":"雙人房、共用衛浴、最低年齡18歲"}],"fees":[{"category":"申請費","name":"申請費 (Application Fee)","currency":"CAD","price":0,"fixed":200.0,"unit":"次","wf":1,"wt":99},{"category":"住宿費","name":"住宿安置費 (Accommodation Placement Fee)","currency":"CAD","price":0,"fixed":270.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"變更費 (Change Fee)","currency":"CAD","price":0,"fixed":110.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"監護費 (Custodianship Fee)","currency":"CAD","price":0,"fixed":110.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"材料費 (Materials Fee)","currency":"CAD","price":10.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"服務費","name":"大學申請服務 (University Placement Service)","currency":"CAD","price":0,"fixed":200.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"溫哥華 (Vancouver) 機場接機","currency":"CAD","price":0,"fixed":140.0,"unit":"次","wf":1,"wt":99},{"category":"保險費","name":"醫療保險 (16-69歲)","currency":"CAD","price":30.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"CAD","price":120.0,"fixed":0,"unit":"堂","wf":1,"wt":4},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"CAD","price":110.0,"fixed":0,"unit":"堂","wf":5,"wt":9},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"CAD","price":100.0,"fixed":0,"unit":"堂","wf":10,"wt":19},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"CAD","price":90.0,"fixed":0,"unit":"堂","wf":20,"wt":99},{"category":"課程升級","name":"強化升級課程 (Intensive Upgrade)","currency":"CAD","price":110.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"保證上午課程 (Guaranteed Morning Class)","currency":"CAD","price":20.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"僅選修課程 (Elective Only Classes)","currency":"CAD","price":260.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"托福補充課程 (TOEFL Supplementary)","currency":"CAD","price":180.0,"fixed":0,"unit":"每週","wf":1,"wt":5},{"category":"課程服務","name":"托福補充課程 (TOEFL Supplementary)","currency":"CAD","price":150.0,"fixed":0,"unit":"每週","wf":6,"wt":99},{"category":"線上資源","name":"K+ Online (12個月)","currency":"CAD","price":0,"fixed":160.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (3個月)","currency":"CAD","price":0,"fixed":80.0,"unit":"次","wf":1,"wt":99},{"category":"其他服務","name":"寄宿家庭特殊飲食 (Special Diet)","currency":"CAD","price":60.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"行李寄存 (Luggage Retainer)","currency":"CAD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"住宿附加費","name":"寄宿家庭聖誕節附加費","currency":"CAD","price":80.0,"fixed":0,"unit":"每週","wf":1,"wt":99}]},"伯恩茅斯":{"courses":[{"name":"General English","category":"通用英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":290.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":280.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":250.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":220.0,"fixed":0,"peak":20.0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":320.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":310.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":280.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":240.0,"fixed":0,"peak":20.0}]},{"name":"Intensive English","category":"強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":370.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":360.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":320.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":280.0,"fixed":0,"peak":20.0}]},{"name":"Business Supplementary","category":"商務英語補充課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":370.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":360.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":320.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":280.0,"fixed":0,"peak":20.0}]},{"name":"雅思補充/強化課程 (IELTS Supplementary/Intensive)","category":"考試準備課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":370.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":360.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":320.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":280.0,"fixed":0,"peak":20.0}]}],"accomm":[{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐/共用衛浴)","currency":"GBP","price":210.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐/獨立衛浴)","currency":"GBP","price":260.0,"fixed":0,"unit":"每週","note":"獨立衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"雙人房 (每週14餐/共用衛浴)","currency":"GBP","price":185.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐/共用衛浴)","currency":"GBP","price":230.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐/獨立衛浴)","currency":"GBP","price":280.0,"fixed":0,"unit":"每週","note":"獨立衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"雙人房 (每週14餐/共用衛浴)","currency":"GBP","price":210.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"學生公寓","name":"Lansdowne Point (Single)","currency":"GBP","price":310.0,"fixed":0,"unit":"每週","note":"單人房、獨立衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Lansdowne Point (Single Half-Board)","currency":"GBP","price":500.0,"fixed":0,"unit":"每週","note":"單人房、獨立衛浴、半食宿(供餐期:2026/6/27-8/22)"},{"type":"學生公寓","name":"Oxford Point Residence (Single)","currency":"GBP","price":320.0,"fixed":0,"unit":"每週","note":"單人房、獨立衛浴、最低年齡18歲"}],"fees":[{"category":"申請費","name":"申請及註冊費 (Application Fee)","currency":"GBP","price":0,"fixed":140.0,"unit":"次","wf":1,"wt":99},{"category":"住宿費","name":"住宿安置費 (Accommodation Placement Fee)","currency":"GBP","price":0,"fixed":40.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"變更費 (Change Fee)","currency":"GBP","price":0,"fixed":70.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"希斯羅 (Heathrow) 機場接機","currency":"GBP","price":0,"fixed":225.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"蓋特威克 (Gatwick) 機場接機","currency":"GBP","price":0,"fixed":280.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"南安普敦 (Southampton) 機場接機","currency":"GBP","price":0,"fixed":185.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"盧頓 (Luton) 機場接機","currency":"GBP","price":0,"fixed":300.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"伯恩茅斯 (Bournemouth) 機場接機","currency":"GBP","price":0,"fixed":130.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"倫敦市中心接機","currency":"GBP","price":0,"fixed":400.0,"unit":"次","wf":1,"wt":99},{"category":"保險費","name":"醫療與旅行保險","currency":"GBP","price":10.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":120.0,"fixed":0,"unit":"堂","wf":1,"wt":4},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":110.0,"fixed":0,"unit":"堂","wf":5,"wt":9},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":100.0,"fixed":0,"unit":"堂","wf":10,"wt":19},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":90.0,"fixed":0,"unit":"堂","wf":20,"wt":99},{"category":"課程升級","name":"超級強化升級課程 (Super Intensive Upgrade)","currency":"GBP","price":140.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"保證上午課程 (Guaranteed Morning Class)","currency":"GBP","price":20.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"實習","name":"虛擬實習 (Virtual Internship)","currency":"GBP","price":0,"fixed":1120.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (12個月)","currency":"GBP","price":0,"fixed":100.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (3個月)","currency":"GBP","price":0,"fixed":50.0,"unit":"次","wf":1,"wt":99},{"category":"課程服務","name":"專業沉浸式體驗 (Professional Immersion)","currency":"GBP","price":0,"fixed":800.0,"unit":"次","wf":1,"wt":99},{"category":"其他服務","name":"寄宿家庭特殊飲食 (Special Diet)","currency":"GBP","price":40.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"行李寄存 (Luggage Retainer)","currency":"GBP","price":60.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"近校區住宿 (Close to School)","currency":"GBP","price":60.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"住宿附加費","name":"寄宿家庭聖誕節附加費","currency":"GBP","price":70.0,"fixed":0,"unit":"每週","wf":1,"wt":99}]},"伯恩茅斯 30+":{"courses":[{"name":"General English","category":"通用英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":290.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":280.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":250.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":220.0,"fixed":0,"peak":20.0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":320.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":310.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":280.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":240.0,"fixed":0,"peak":20.0}]},{"name":"Intensive English","category":"強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":370.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":360.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":320.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":280.0,"fixed":0,"peak":20.0}]}],"accomm":[],"fees":[]},"劍橋":{"courses":[{"name":"General English","category":"通用英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":340.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":330.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":300.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":250.0,"fixed":0,"peak":20.0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":370.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":360.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":320.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":280.0,"fixed":0,"peak":20.0}]},{"name":"Intensive English","category":"強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":430.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":420.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":380.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":320.0,"fixed":0,"peak":20.0}]},{"name":"Business Supplementary","category":"商務英語補充課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":430.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":420.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":380.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":320.0,"fixed":0,"peak":20.0}]},{"name":"雅思補充/強化課程 (IELTS Supplementary/Intensive)","category":"考試準備課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":430.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":420.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":380.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":320.0,"fixed":0,"peak":20.0}]}],"accomm":[{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐/共用衛浴)","currency":"GBP","price":250.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐/獨立衛浴)","currency":"GBP","price":290.0,"fixed":0,"unit":"每週","note":"獨立衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"雙人房 (每週14餐/共用衛浴)","currency":"GBP","price":230.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐/共用衛浴)","currency":"GBP","price":270.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐/獨立衛浴)","currency":"GBP","price":310.0,"fixed":0,"unit":"每週","note":"獨立衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"雙人房 (每週14餐/共用衛浴)","currency":"GBP","price":250.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"學生公寓","name":"Student Castle Cambridge (Single)","currency":"GBP","price":390.0,"fixed":0,"unit":"每週","note":"單人房、獨立衛浴、最低年齡18歲"},{"type":"學生公寓","name":"The Cam Foundry (Studio)","currency":"GBP","price":420.0,"fixed":0,"unit":"每週","note":"獨立套間、獨立衛浴、最低年齡18歲"}],"fees":[{"category":"申請費","name":"申請及註冊費 (Application Fee)","currency":"GBP","price":0,"fixed":140.0,"unit":"次","wf":1,"wt":99},{"category":"住宿費","name":"住宿安置費 (Accommodation Placement Fee)","currency":"GBP","price":0,"fixed":40.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"變更費 (Change Fee)","currency":"GBP","price":0,"fixed":70.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"希斯羅 (Heathrow) 機場接機","currency":"GBP","price":0,"fixed":230.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"蓋特威克 (Gatwick) 機場接機","currency":"GBP","price":0,"fixed":270.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"盧頓 (Luton) 機場接機","currency":"GBP","price":0,"fixed":170.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"斯坦斯特德 (Stansted) 機場接機","currency":"GBP","price":0,"fixed":160.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"倫敦城市 (London City) 機場接機","currency":"GBP","price":0,"fixed":210.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"聖潘克拉斯 (St Pancras) 火車站接機","currency":"GBP","price":0,"fixed":210.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"倫敦市中心接機","currency":"GBP","price":0,"fixed":210.0,"unit":"次","wf":1,"wt":99},{"category":"保險費","name":"醫療與旅行保險","currency":"GBP","price":10.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":120.0,"fixed":0,"unit":"堂","wf":1,"wt":4},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":110.0,"fixed":0,"unit":"堂","wf":5,"wt":9},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":100.0,"fixed":0,"unit":"堂","wf":10,"wt":19},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":90.0,"fixed":0,"unit":"堂","wf":20,"wt":99},{"category":"課程升級","name":"超級強化升級課程 (Super Intensive Upgrade)","currency":"GBP","price":150.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"保證上午課程 (Guaranteed Morning Class)","currency":"GBP","price":20.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"實習","name":"虛擬實習 (Virtual Internship)","currency":"GBP","price":0,"fixed":1120.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (12個月)","currency":"GBP","price":0,"fixed":100.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (3個月)","currency":"GBP","price":0,"fixed":50.0,"unit":"次","wf":1,"wt":99},{"category":"課程服務","name":"專業沉浸式體驗 (Professional Immersion)","currency":"GBP","price":0,"fixed":800.0,"unit":"次","wf":1,"wt":99},{"category":"其他服務","name":"寄宿家庭特殊飲食 (Special Diet)","currency":"GBP","price":40.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"行李寄存 (Luggage Retainer)","currency":"GBP","price":60.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"住宿附加費","name":"寄宿家庭聖誕節附加費","currency":"GBP","price":70.0,"fixed":0,"unit":"每週","wf":1,"wt":99}]},"愛丁堡":{"courses":[{"name":"General English","category":"通用英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":330.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":320.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":280.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":240.0,"fixed":0,"peak":20.0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":350.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":340.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":310.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":260.0,"fixed":0,"peak":20.0}]},{"name":"Intensive English","category":"強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":410.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":400.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":360.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":310.0,"fixed":0,"peak":20.0}]},{"name":"Business Supplementary","category":"商務英語補充課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":410.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":400.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":360.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":310.0,"fixed":0,"peak":20.0}]},{"name":"雅思補充/強化課程 (IELTS Supplementary/Intensive)","category":"考試準備課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":410.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":400.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":360.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":310.0,"fixed":0,"peak":20.0}]},{"name":"愛丁堡國際藝術節課程","category":"特別課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":3,"price":410.0,"fixed":0,"peak":20.0}]}],"accomm":[{"type":"寄宿家庭 (18歲+)","name":"單人房 (不含餐/共用衛浴)","currency":"GBP","price":190.0,"fixed":0,"unit":"每週","note":"18歲以上、共用衛浴、不含餐"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (不含餐/獨立衛浴)","currency":"GBP","price":240.0,"fixed":0,"unit":"每週","note":"18歲以上、獨立衛浴、不含餐"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐/共用衛浴)","currency":"GBP","price":260.0,"fixed":0,"unit":"每週","note":"18歲以上、共用衛浴、含餐"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐/獨立衛浴)","currency":"GBP","price":310.0,"fixed":0,"unit":"每週","note":"18歲以上、獨立衛浴、含餐"},{"type":"寄宿家庭 (18歲+)","name":"雙人房 (每週14餐/共用衛浴)","currency":"GBP","price":210.0,"fixed":0,"unit":"每週","note":"18歲以上、共用衛浴、含餐"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐/共用衛浴)","currency":"GBP","price":280.0,"fixed":0,"unit":"每週","note":"16-17歲、共用衛浴、含餐"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐/獨立衛浴)","currency":"GBP","price":330.0,"fixed":0,"unit":"每週","note":"16-17歲、獨立衛浴、含餐"},{"type":"寄宿家庭 (18歲以下)","name":"雙人房 (每週14餐/共用衛浴)","currency":"GBP","price":230.0,"fixed":0,"unit":"每週","note":"16-17歲、共用衛浴、含餐"},{"type":"學生公寓","name":"Arran House (Single)","currency":"GBP","price":360.0,"fixed":0,"unit":"每週","note":"單人房、獨立衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Haymarket (Studio)","currency":"GBP","price":420.0,"fixed":0,"unit":"每週","note":"獨立套間、獨立衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Vita Edinburgh (Studio)","currency":"GBP","price":440.0,"fixed":0,"unit":"每週","note":"獨立套間、獨立衛浴、最低年齡18歲"}],"fees":[{"category":"申請費","name":"申請及註冊費 (Application Fee)","currency":"GBP","price":0,"fixed":140.0,"unit":"次","wf":1,"wt":99},{"category":"住宿費","name":"住宿安置費 (Accommodation Placement Fee)","currency":"GBP","price":0,"fixed":40.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"變更費 (Change Fee)","currency":"GBP","price":0,"fixed":70.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"愛丁堡 (Edinburgh) 機場接機","currency":"GBP","price":0,"fixed":110.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"格拉斯哥 (Glasgow) 機場接機","currency":"GBP","price":0,"fixed":240.0,"unit":"次","wf":1,"wt":99},{"category":"保險費","name":"醫療與旅行保險","currency":"GBP","price":10.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":120.0,"fixed":0,"unit":"堂","wf":1,"wt":4},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":110.0,"fixed":0,"unit":"堂","wf":5,"wt":9},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":100.0,"fixed":0,"unit":"堂","wf":10,"wt":19},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":90.0,"fixed":0,"unit":"堂","wf":20,"wt":99},{"category":"課程服務","name":"保證上午課程 (Guaranteed Morning Class)","currency":"GBP","price":20.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"實習","name":"虛擬實習 (Virtual Internship)","currency":"GBP","price":0,"fixed":1120.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (12個月)","currency":"GBP","price":0,"fixed":100.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (3個月)","currency":"GBP","price":0,"fixed":50.0,"unit":"次","wf":1,"wt":99},{"category":"課程服務","name":"專業沉浸式體驗 (Professional Immersion)","currency":"GBP","price":0,"fixed":800.0,"unit":"次","wf":1,"wt":99},{"category":"其他服務","name":"寄宿家庭特殊飲食 (Special Diet)","currency":"GBP","price":40.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"行李寄存 (Luggage Retainer)","currency":"GBP","price":60.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"近校區住宿 (Close to School)","currency":"GBP","price":60.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"住宿附加費","name":"寄宿家庭聖誕節附加費","currency":"GBP","price":70.0,"fixed":0,"unit":"每週","wf":1,"wt":99}]},"利物浦":{"courses":[{"name":"General English","category":"通用英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":300.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":290.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":260.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":230.0,"fixed":0,"peak":20.0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":330.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":320.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":290.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":250.0,"fixed":0,"peak":20.0}]},{"name":"Intensive English","category":"強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":370.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":360.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":330.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":290.0,"fixed":0,"peak":20.0}]},{"name":"商务英语课程 (补充、强化)","category":"商務英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":370.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":360.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":330.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":290.0,"fixed":0,"peak":20.0}]},{"name":"Cambridge General (B2, C1)","category":"劍橋考試課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":300.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":290.0,"fixed":0,"peak":20.0},{"wf":12,"wt":12,"price":260.0,"fixed":0,"peak":20.0}]},{"name":"Cambridge Intensive (B2, C1)","category":"劍橋考試課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":370.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":360.0,"fixed":0,"peak":20.0},{"wf":12,"wt":12,"price":330.0,"fixed":0,"peak":20.0}]},{"name":"雅思補充/強化課程 (IELTS Supplementary/Intensive)","category":"考試準備課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":370.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":360.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":330.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":290.0,"fixed":0,"peak":20.0}]}],"accomm":[{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐/共用衛浴)","currency":"GBP","price":210.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐/獨立衛浴)","currency":"GBP","price":270.0,"fixed":0,"unit":"每週","note":"獨立衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"雙人房 (每週14餐/共用衛浴)","currency":"GBP","price":180.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐/共用衛浴)","currency":"GBP","price":230.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐/獨立衛浴)","currency":"GBP","price":290.0,"fixed":0,"unit":"每週","note":"獨立衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"雙人房 (每週14餐/共用衛浴)","currency":"GBP","price":200.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"學生公寓","name":"Glassworks Liverpool (Single)","currency":"GBP","price":270.0,"fixed":0,"unit":"每週","note":"單人房、獨立衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Vita Liverpool (Bronze Single)","currency":"GBP","price":270.0,"fixed":0,"unit":"每週","note":"銅級單人房、獨立衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Vita Liverpool (Silver Single)","currency":"GBP","price":300.0,"fixed":0,"unit":"每週","note":"銀級單人房、獨立衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Vita Liverpool (Gold Single)","currency":"GBP","price":330.0,"fixed":0,"unit":"每週","note":"金級單人房、獨立衛浴、最低年齡18歲"}],"fees":[{"category":"申請費","name":"申請及註冊費 (Application Fee)","currency":"GBP","price":0,"fixed":140.0,"unit":"次","wf":1,"wt":99},{"category":"住宿費","name":"住宿安置費 (Accommodation Placement Fee)","currency":"GBP","price":0,"fixed":40.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"變更費 (Change Fee)","currency":"GBP","price":0,"fixed":70.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"希斯羅 (Heathrow) 機場接機","currency":"GBP","price":0,"fixed":590.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"利物浦 (Liverpool) 機場接機","currency":"GBP","price":0,"fixed":100.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"曼徹斯特 (Manchester) 機場接機","currency":"GBP","price":0,"fixed":145.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"利物浦 Lime Street 火車站接機","currency":"GBP","price":0,"fixed":80.0,"unit":"次","wf":1,"wt":99},{"category":"保險費","name":"醫療與旅行保險","currency":"GBP","price":10.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":120.0,"fixed":0,"unit":"堂","wf":1,"wt":4},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":110.0,"fixed":0,"unit":"堂","wf":5,"wt":9},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":100.0,"fixed":0,"unit":"堂","wf":10,"wt":19},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":90.0,"fixed":0,"unit":"堂","wf":20,"wt":99},{"category":"課程升級","name":"強化升級課程 (Intensive Upgrade)","currency":"GBP","price":90.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程升級","name":"超級強化升級課程 (Super Intensive Upgrade)","currency":"GBP","price":140.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"保證上午課程 (Guaranteed Morning Class)","currency":"GBP","price":20.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"實習","name":"虛擬實習 (Virtual Internship)","currency":"GBP","price":0,"fixed":1120.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (12個月)","currency":"GBP","price":0,"fixed":100.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (3個月)","currency":"GBP","price":0,"fixed":50.0,"unit":"次","wf":1,"wt":99},{"category":"課程服務","name":"專業沉浸式體驗 (Professional Immersion)","currency":"GBP","price":0,"fixed":800.0,"unit":"次","wf":1,"wt":99},{"category":"其他服務","name":"寄宿家庭特殊飲食 (Special Diet)","currency":"GBP","price":40.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"行李寄存 (Luggage Retainer)","currency":"GBP","price":60.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"住宿附加費","name":"寄宿家庭聖誕節附加費","currency":"GBP","price":70.0,"fixed":0,"unit":"每週","wf":1,"wt":99}]},"利物浦 30+":{"courses":[{"name":"General English","category":"通用英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":300.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":290.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":260.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":230.0,"fixed":0,"peak":20.0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":330.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":320.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":290.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":250.0,"fixed":0,"peak":20.0}]},{"name":"Intensive English","category":"強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":370.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":360.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":330.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":290.0,"fixed":0,"peak":20.0}]}],"accomm":[],"fees":[]},"倫敦":{"courses":[{"name":"General English","category":"通用英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":370.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":360.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":330.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":290.0,"fixed":0,"peak":20.0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":410.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":400.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":360.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":310.0,"fixed":0,"peak":20.0}]},{"name":"Intensive English","category":"強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":480.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":470.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":420.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":360.0,"fixed":0,"peak":20.0}]},{"name":"Business Supplementary","category":"商務英語補充課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":480.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":470.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":420.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":360.0,"fixed":0,"peak":20.0}]},{"name":"雅思補充/強化課程 (IELTS Supplementary/Intensive)","category":"考試準備課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":480.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":470.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":420.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":360.0,"fixed":0,"peak":20.0}]},{"name":"劍橋英語強化課程 (C2 Proficiency)","category":"考試準備課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":480.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":470.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":420.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":360.0,"fixed":0,"peak":20.0}]}],"accomm":[{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐/共用衛浴) - A","currency":"GBP","price":260.0,"fixed":0,"unit":"每週","note":"價格差異可能因區域不同"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐/共用衛浴) - B","currency":"GBP","price":330.0,"fixed":0,"unit":"每週","note":"價格差異可能因區域不同"},{"type":"寄宿家庭 (18歲+)","name":"雙人房 (每週14餐/獨立衛浴)","currency":"GBP","price":230.0,"fixed":0,"unit":"每週","note":"獨立衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐/共用衛浴) - A","currency":"GBP","price":280.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐/共用衛浴) - B","currency":"GBP","price":350.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"雙人房 (每週14餐/獨立衛浴)","currency":"GBP","price":250.0,"fixed":0,"unit":"每週","note":"獨立衛浴、最低年齡16歲"},{"type":"學生公寓","name":"IQ Shoreditch (Studio)","currency":"GBP","price":610.0,"fixed":0,"unit":"每週","note":"獨立套間、獨立衛浴、最低年齡18歲，最少2週"},{"type":"學生公寓","name":"Scape Wembley (Studio)","currency":"GBP","price":430.0,"fixed":0,"unit":"每週","note":"獨立套間、獨立衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Aldgate Residence (Studio)","currency":"GBP","price":580.0,"fixed":0,"unit":"每週","note":"獨立套間、獨立衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Battersea Residence (Single)","currency":"GBP","price":540.0,"fixed":0,"unit":"每週","note":"單人房、獨立衛浴、最低年齡18歲"}],"fees":[{"category":"申請費","name":"申請及註冊費 (Application Fee)","currency":"GBP","price":0,"fixed":140.0,"unit":"次","wf":1,"wt":99},{"category":"住宿費","name":"住宿安置費 (Accommodation Placement Fee)","currency":"GBP","price":0,"fixed":40.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"變更費 (Change Fee)","currency":"GBP","price":0,"fixed":70.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"希斯羅 (Heathrow) 機場接機","currency":"GBP","price":0,"fixed":150.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"蓋特威克 (Gatwick) 機場接機","currency":"GBP","price":0,"fixed":190.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"盧頓 (Luton) 機場接機","currency":"GBP","price":0,"fixed":185.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"斯坦斯特德 (Stansted) 機場接機","currency":"GBP","price":0,"fixed":190.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"倫敦城市 (London City) 機場接機","currency":"GBP","price":0,"fixed":120.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"聖潘克拉斯 (St Pancras) 火車站接機","currency":"GBP","price":0,"fixed":115.0,"unit":"次","wf":1,"wt":99},{"category":"保險費","name":"醫療與旅行保險","currency":"GBP","price":10.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":120.0,"fixed":0,"unit":"堂","wf":1,"wt":4},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":110.0,"fixed":0,"unit":"堂","wf":5,"wt":9},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":100.0,"fixed":0,"unit":"堂","wf":10,"wt":19},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":90.0,"fixed":0,"unit":"堂","wf":20,"wt":99},{"category":"課程升級","name":"超級強化升級課程 (Super Intensive Upgrade)","currency":"GBP","price":150.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"保證上午課程 (Guaranteed Morning Class)","currency":"GBP","price":20.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"實習","name":"虛擬實習 (Virtual Internship)","currency":"GBP","price":0,"fixed":1120.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (12個月)","currency":"GBP","price":0,"fixed":100.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (3個月)","currency":"GBP","price":0,"fixed":50.0,"unit":"次","wf":1,"wt":99},{"category":"課程服務","name":"專業沉浸式體驗 (Professional Immersion)","currency":"GBP","price":0,"fixed":800.0,"unit":"次","wf":1,"wt":99},{"category":"其他服務","name":"寄宿家庭特殊飲食 (Special Diet)","currency":"GBP","price":40.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"行李寄存 (Luggage Retainer)","currency":"GBP","price":60.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"近校區住宿 (Close to School)","currency":"GBP","price":60.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"住宿附加費","name":"寄宿家庭聖誕節附加費","currency":"GBP","price":70.0,"fixed":0,"unit":"每週","wf":1,"wt":99}]},"倫敦 30+":{"courses":[{"name":"General English","category":"通用英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":400.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":390.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":350.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":300.0,"fixed":0,"peak":20.0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":440.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":420.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":380.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":330.0,"fixed":0,"peak":20.0}]},{"name":"Intensive English","category":"強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":500.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":490.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":450.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":380.0,"fixed":0,"peak":20.0}]},{"name":"商务英语课程 (Business English)","category":"商務英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":500.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":490.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":450.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":380.0,"fixed":0,"peak":20.0}]},{"name":"TOEIC 考試準備課程","category":"考試準備課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":500.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":490.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":450.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":380.0,"fixed":0,"peak":20.0}]},{"name":"海外语言课程 (50+)","category":"50+ 專屬課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":2,"price":500.0,"fixed":0,"peak":20.0}]}],"accomm":[],"fees":[]},"曼徹斯特":{"courses":[{"name":"General English","category":"通用英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":340.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":330.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":300.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":260.0,"fixed":0,"peak":20.0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":370.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":360.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":320.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":280.0,"fixed":0,"peak":20.0}]},{"name":"Intensive English","category":"強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":430.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":420.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":380.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":320.0,"fixed":0,"peak":20.0}]},{"name":"Business Supplementary","category":"商務英語補充課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":430.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":420.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":380.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":320.0,"fixed":0,"peak":20.0}]},{"name":"雅思補充/強化課程 (IELTS Supplementary/Intensive)","category":"考試準備課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":430.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":420.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":380.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":320.0,"fixed":0,"peak":20.0}]}],"accomm":[{"type":"寄宿家庭 (18歲+)","name":"單人房 (不含餐/共用衛浴)","currency":"GBP","price":180.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (不含餐/獨立衛浴)","currency":"GBP","price":230.0,"fixed":0,"unit":"每週","note":"獨立衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐/共用衛浴)","currency":"GBP","price":230.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐/獨立衛浴)","currency":"GBP","price":270.0,"fixed":0,"unit":"每週","note":"獨立衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"雙人房 (每週14餐/共用衛浴)","currency":"GBP","price":210.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐/共用衛浴)","currency":"GBP","price":250.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐/獨立衛浴)","currency":"GBP","price":290.0,"fixed":0,"unit":"每週","note":"獨立衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"雙人房 (每週14餐/共用衛浴)","currency":"GBP","price":230.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"學生公寓","name":"Lambert & Fairfield (Premium Single)","currency":"GBP","price":340.0,"fixed":0,"unit":"每週","note":"高級單人房、獨立衛浴、最低年齡18歲、最少2週"},{"type":"學生公寓","name":"Lambert & Fairfield (Standard Single)","currency":"GBP","price":310.0,"fixed":0,"unit":"每週","note":"標準單人房、獨立衛浴、最低年齡18歲、最少2週"},{"type":"學生公寓","name":"Vita Manchester (Studio)","currency":"GBP","price":400.0,"fixed":0,"unit":"每週","note":"獨立套間、獨立衛浴、最低年齡18歲"}],"fees":[{"category":"申請費","name":"申請及註冊費 (Application Fee)","currency":"GBP","price":0,"fixed":140.0,"unit":"次","wf":1,"wt":99},{"category":"住宿費","name":"住宿安置費 (Accommodation Placement Fee)","currency":"GBP","price":0,"fixed":40.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"變更費 (Change Fee)","currency":"GBP","price":0,"fixed":70.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"曼徹斯特 (Manchester) 機場接機","currency":"GBP","price":0,"fixed":95.0,"unit":"次","wf":1,"wt":99},{"category":"保險費","name":"醫療與旅行保險","currency":"GBP","price":10.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":120.0,"fixed":0,"unit":"堂","wf":1,"wt":4},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":110.0,"fixed":0,"unit":"堂","wf":5,"wt":9},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":100.0,"fixed":0,"unit":"堂","wf":10,"wt":19},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":90.0,"fixed":0,"unit":"堂","wf":20,"wt":99},{"category":"課程升級","name":"強化升級課程 (Intensive Upgrade)","currency":"GBP","price":90.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程升級","name":"超級強化升級課程 (Super Intensive Upgrade)","currency":"GBP","price":140.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"保證上午課程 (Guaranteed Morning Class)","currency":"GBP","price":20.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"實習","name":"虛擬實習 (Virtual Internship)","currency":"GBP","price":0,"fixed":1120.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (12個月)","currency":"GBP","price":0,"fixed":100.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (3個月)","currency":"GBP","price":0,"fixed":50.0,"unit":"次","wf":1,"wt":99},{"category":"課程服務","name":"專業沉浸式體驗 (Professional Immersion)","currency":"GBP","price":0,"fixed":800.0,"unit":"次","wf":1,"wt":99},{"category":"其他服務","name":"寄宿家庭特殊飲食 (Special Diet)","currency":"GBP","price":40.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"行李寄存 (Luggage Retainer)","currency":"GBP","price":60.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"住宿附加費","name":"寄宿家庭聖誕節附加費","currency":"GBP","price":70.0,"fixed":0,"unit":"每週","wf":1,"wt":99}]},"牛津":{"courses":[{"name":"General English","category":"通用英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":340.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":330.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":300.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":260.0,"fixed":0,"peak":20.0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":370.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":360.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":320.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":280.0,"fixed":0,"peak":20.0}]},{"name":"Intensive English","category":"強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":430.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":420.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":380.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":320.0,"fixed":0,"peak":20.0}]},{"name":"Business Supplementary","category":"商務英語補充課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":430.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":420.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":380.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":320.0,"fixed":0,"peak":20.0}]},{"name":"雅思補充/強化課程 (IELTS Supplementary/Intensive)","category":"考試準備課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":430.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":420.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":380.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":320.0,"fixed":0,"peak":20.0}]},{"name":"Cambridge Supplementary","category":"劍橋考試課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":430.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":420.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":380.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":320.0,"fixed":0,"peak":20.0}]}],"accomm":[{"type":"寄宿家庭 (18歲+)","name":"單人房 (不含餐/共用衛浴)","currency":"GBP","price":210.0,"fixed":0,"unit":"每週","note":"共用衛浴、不含餐、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (不含餐/獨立衛浴)","currency":"GBP","price":260.0,"fixed":0,"unit":"每週","note":"獨立衛浴、不含餐、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐/共用衛浴)","currency":"GBP","price":250.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐/獨立衛浴)","currency":"GBP","price":300.0,"fixed":0,"unit":"每週","note":"獨立衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"雙人房 (每週14餐/共用衛浴)","currency":"GBP","price":220.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐/共用衛浴)","currency":"GBP","price":270.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐/獨立衛浴)","currency":"GBP","price":320.0,"fixed":0,"unit":"每週","note":"獨立衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"雙人房 (每週14餐/共用衛浴)","currency":"GBP","price":240.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"學生公寓","name":"Student Castle (Single)","currency":"GBP","price":400.0,"fixed":0,"unit":"每週","note":"單人房、獨立衛浴、最低年齡18歲"},{"type":"學生公寓","name":"The Mews (Studio)","currency":"GBP","price":450.0,"fixed":0,"unit":"每週","note":"獨立套間、獨立衛浴、最低年齡18歲"}],"fees":[{"category":"申請費","name":"申請及註冊費 (Application Fee)","currency":"GBP","price":0,"fixed":140.0,"unit":"次","wf":1,"wt":99},{"category":"住宿費","name":"住宿安置費 (Accommodation Placement Fee)","currency":"GBP","price":0,"fixed":40.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"變更費 (Change Fee)","currency":"GBP","price":0,"fixed":70.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"希斯羅 (Heathrow) 機場接機","currency":"GBP","price":0,"fixed":155.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"蓋特威克 (Gatwick) 機場接機","currency":"GBP","price":0,"fixed":210.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"盧頓 (Luton) 機場接機","currency":"GBP","price":0,"fixed":230.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"斯坦斯特德 (Stansted) 機場接機","currency":"GBP","price":0,"fixed":250.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"聖潘克拉斯 (St Pancras) 火車站接機","currency":"GBP","price":0,"fixed":200.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"倫敦市中心接機","currency":"GBP","price":0,"fixed":195.0,"unit":"次","wf":1,"wt":99},{"category":"保險費","name":"醫療與旅行保險","currency":"GBP","price":10.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":120.0,"fixed":0,"unit":"堂","wf":1,"wt":4},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":110.0,"fixed":0,"unit":"堂","wf":5,"wt":9},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":100.0,"fixed":0,"unit":"堂","wf":10,"wt":19},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":90.0,"fixed":0,"unit":"堂","wf":20,"wt":99},{"category":"課程升級","name":"超級強化升級課程 (Super Intensive Upgrade)","currency":"GBP","price":140.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"保證上午課程 (Guaranteed Morning Class)","currency":"GBP","price":20.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"實習","name":"虛擬實習 (Virtual Internship)","currency":"GBP","price":0,"fixed":1120.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (12個月)","currency":"GBP","price":0,"fixed":100.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (3個月)","currency":"GBP","price":0,"fixed":50.0,"unit":"次","wf":1,"wt":99},{"category":"課程服務","name":"專業沉浸式體驗 (Professional Immersion)","currency":"GBP","price":0,"fixed":800.0,"unit":"次","wf":1,"wt":99},{"category":"其他服務","name":"寄宿家庭特殊飲食 (Special Diet)","currency":"GBP","price":40.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"行李寄存 (Luggage Retainer)","currency":"GBP","price":60.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"近校區住宿 (Close to School)","currency":"GBP","price":60.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"住宿附加費","name":"寄宿家庭聖誕節附加費","currency":"GBP","price":70.0,"fixed":0,"unit":"每週","wf":1,"wt":99}]},"托基":{"courses":[{"name":"General English","category":"通用英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":300.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":290.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":250.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":220.0,"fixed":0,"peak":20.0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":320.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":310.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":280.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":240.0,"fixed":0,"peak":20.0}]},{"name":"Intensive English","category":"強化英語課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":370.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":360.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":330.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":280.0,"fixed":0,"peak":20.0}]},{"name":"Business Supplementary","category":"商務英語補充課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":370.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":360.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":330.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":280.0,"fixed":0,"peak":20.0}]},{"name":"雅思考試補充課程 (IELTS Supplementary)","category":"考試準備課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":4,"price":370.0,"fixed":0,"peak":20.0},{"wf":5,"wt":11,"price":360.0,"fixed":0,"peak":20.0},{"wf":12,"wt":19,"price":330.0,"fixed":0,"peak":20.0},{"wf":20,"wt":52,"price":280.0,"fixed":0,"peak":20.0}]},{"name":"海外語言課程 (Classic Program for 50+)","category":"50+ 專屬課程","currency":"GBP","unit":"每週","tiers":[{"wf":1,"wt":2,"price":370.0,"fixed":0,"peak":20.0}]}],"accomm":[{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐/共用衛浴)","currency":"GBP","price":190.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐/獨立衛浴)","currency":"GBP","price":240.0,"fixed":0,"unit":"每週","note":"獨立衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"雙人房 (每週14餐/共用衛浴)","currency":"GBP","price":170.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐/共用衛浴)","currency":"GBP","price":210.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐/獨立衛浴)","currency":"GBP","price":270.0,"fixed":0,"unit":"每週","note":"獨立衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"雙人房 (每週14餐/共用衛浴)","currency":"GBP","price":190.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"學生公寓","name":"St Michael's (Single)","currency":"GBP","price":250.0,"fixed":0,"unit":"每週","note":"單人房、獨立衛浴、最低年齡18歲"}],"fees":[{"category":"申請費","name":"申請及註冊費 (Application Fee)","currency":"GBP","price":0,"fixed":140.0,"unit":"次","wf":1,"wt":99},{"category":"住宿費","name":"住宿安置費 (Accommodation Placement Fee)","currency":"GBP","price":0,"fixed":40.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"變更費 (Change Fee)","currency":"GBP","price":0,"fixed":70.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"希斯羅 (Heathrow) 機場接機","currency":"GBP","price":0,"fixed":380.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"蓋特威克 (Gatwick) 機場接機","currency":"GBP","price":0,"fixed":480.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"埃克塞特 (Exeter) 機場接機","currency":"GBP","price":0,"fixed":115.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"布里斯托 (Bristol) 機場接機","currency":"GBP","price":0,"fixed":210.0,"unit":"次","wf":1,"wt":99},{"category":"保險費","name":"醫療與旅行保險","currency":"GBP","price":10.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":120.0,"fixed":0,"unit":"堂","wf":1,"wt":4},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":110.0,"fixed":0,"unit":"堂","wf":5,"wt":9},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":100.0,"fixed":0,"unit":"堂","wf":10,"wt":19},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"GBP","price":90.0,"fixed":0,"unit":"堂","wf":20,"wt":99},{"category":"課程服務","name":"保證上午課程 (Guaranteed Morning Class)","currency":"GBP","price":20.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"實習","name":"虛擬實習 (Virtual Internship)","currency":"GBP","price":0,"fixed":1120.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (12個月)","currency":"GBP","price":0,"fixed":100.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (3個月)","currency":"GBP","price":0,"fixed":50.0,"unit":"次","wf":1,"wt":99},{"category":"課程服務","name":"專業沉浸式體驗 (Professional Immersion)","currency":"GBP","price":0,"fixed":800.0,"unit":"次","wf":1,"wt":99},{"category":"其他服務","name":"寄宿家庭特殊飲食 (Special Diet)","currency":"GBP","price":40.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"行李寄存 (Luggage Retainer)","currency":"GBP","price":60.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"住宿附加費","name":"寄宿家庭聖誕節附加費","currency":"GBP","price":70.0,"fixed":0,"unit":"每週","wf":1,"wt":99}]},"都柏林":{"courses":[{"name":"General English","category":"通用英語課程","currency":"EUR","unit":"每週","tiers":[{"wf":1,"wt":4,"price":370.0,"fixed":0,"peak":30.0},{"wf":5,"wt":11,"price":350.0,"fixed":0,"peak":30.0},{"wf":12,"wt":19,"price":330.0,"fixed":0,"peak":30.0},{"wf":20,"wt":52,"price":300.0,"fixed":0,"peak":30.0}]},{"name":"Semi-Intensive English","category":"半強化英語課程","currency":"EUR","unit":"每週","tiers":[{"wf":1,"wt":4,"price":410.0,"fixed":0,"peak":30.0},{"wf":5,"wt":11,"price":400.0,"fixed":0,"peak":30.0},{"wf":12,"wt":19,"price":380.0,"fixed":0,"peak":30.0},{"wf":20,"wt":52,"price":330.0,"fixed":0,"peak":30.0}]},{"name":"Intensive English","category":"強化英語課程","currency":"EUR","unit":"每週","tiers":[{"wf":1,"wt":4,"price":460.0,"fixed":0,"peak":30.0},{"wf":5,"wt":11,"price":440.0,"fixed":0,"peak":30.0},{"wf":12,"wt":19,"price":410.0,"fixed":0,"peak":30.0},{"wf":20,"wt":52,"price":370.0,"fixed":0,"peak":30.0}]},{"name":"Business Supplementary","category":"商務英語補充課程","currency":"EUR","unit":"每週","tiers":[{"wf":1,"wt":4,"price":460.0,"fixed":0,"peak":30.0},{"wf":5,"wt":11,"price":440.0,"fixed":0,"peak":30.0},{"wf":12,"wt":19,"price":410.0,"fixed":0,"peak":30.0},{"wf":20,"wt":52,"price":370.0,"fixed":0,"peak":30.0}]},{"name":"Cambridge General","category":"劍橋考試課程","currency":"EUR","unit":"每週","tiers":[{"wf":1,"wt":4,"price":370.0,"fixed":0,"peak":30.0},{"wf":5,"wt":11,"price":350.0,"fixed":0,"peak":30.0},{"wf":12,"wt":19,"price":330.0,"fixed":0,"peak":30.0},{"wf":20,"wt":52,"price":300.0,"fixed":0,"peak":30.0}]},{"name":"Cambridge Supplementary or Intensive","category":"劍橋考試課程","currency":"EUR","unit":"每週","tiers":[{"wf":1,"wt":4,"price":460.0,"fixed":0,"peak":30.0},{"wf":5,"wt":11,"price":440.0,"fixed":0,"peak":30.0},{"wf":12,"wt":19,"price":410.0,"fixed":0,"peak":30.0},{"wf":20,"wt":52,"price":370.0,"fixed":0,"peak":30.0}]},{"name":"雅思補充/強化課程 (IELTS Supplementary/Intensive)","category":"考試準備課程","currency":"EUR","unit":"每週","tiers":[{"wf":1,"wt":4,"price":460.0,"fixed":0,"peak":30.0},{"wf":5,"wt":11,"price":440.0,"fixed":0,"peak":30.0},{"wf":12,"wt":19,"price":410.0,"fixed":0,"peak":30.0},{"wf":20,"wt":52,"price":370.0,"fixed":0,"peak":30.0}]},{"name":"CELTA Teacher Training","category":"教師培訓","currency":"EUR","unit":"每週","tiers":[{"wf":1,"wt":4,"price":410.0,"fixed":0,"peak":0}]}],"accomm":[{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐/共用衛浴)","currency":"EUR","price":260.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"單人房 (每週14餐/獨立衛浴)","currency":"EUR","price":350.0,"fixed":0,"unit":"每週","note":"獨立衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲+)","name":"雙人房 (每週14餐/共用衛浴)","currency":"EUR","price":230.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡18歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐/共用衛浴)","currency":"EUR","price":290.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"單人房 (每週14餐/獨立衛浴)","currency":"EUR","price":370.0,"fixed":0,"unit":"每週","note":"獨立衛浴、最低年齡16歲"},{"type":"寄宿家庭 (18歲以下)","name":"雙人房 (每週14餐/共用衛浴)","currency":"EUR","price":260.0,"fixed":0,"unit":"每週","note":"共用衛浴、最低年齡16歲"},{"type":"學生公寓","name":"LIV Student (Single)","currency":"EUR","price":450.0,"fixed":0,"unit":"每週","note":"單人房、獨立衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Arasain P&V (Premium Single)","currency":"EUR","price":440.0,"fixed":0,"unit":"每週","note":"高級單人房、獨立衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Arasain P&V (Standard Single)","currency":"EUR","price":430.0,"fixed":0,"unit":"每週","note":"標準單人房、獨立衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Brewer's Close (Single)","currency":"EUR","price":435.0,"fixed":0,"unit":"每週","note":"單人房、獨立衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Cork Street (Studio)","currency":"EUR","price":580.0,"fixed":0,"unit":"每週","note":"獨立套間、獨立衛浴、最低年齡18歲"},{"type":"學生公寓","name":"Heyday (Single)","currency":"EUR","price":450.0,"fixed":0,"unit":"每週","note":"單人房、獨立衛浴、最低年齡18歲"}],"fees":[{"category":"申請費","name":"申請及註冊費 (Application Fee)","currency":"EUR","price":0,"fixed":160.0,"unit":"次","wf":1,"wt":99},{"category":"住宿費","name":"住宿安置費 (Accommodation Placement Fee)","currency":"EUR","price":0,"fixed":40.0,"unit":"次","wf":1,"wt":99},{"category":"服務費","name":"變更費 (Change Fee)","currency":"EUR","price":0,"fixed":70.0,"unit":"次","wf":1,"wt":99},{"category":"接機費","name":"都柏林 (Dublin) 機場接機","currency":"EUR","price":0,"fixed":100.0,"unit":"次","wf":1,"wt":99},{"category":"保險費","name":"醫療與旅行保險","currency":"EUR","price":20.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"保險費","name":"MEDIPEL 醫療與在籍學員保障 (非歐盟)","currency":"EUR","price":0,"fixed":160.0,"unit":"次","wf":1,"wt":99},{"category":"保險費","name":"在籍學員保障 (非歐盟)","currency":"EUR","price":0,"fixed":50.0,"unit":"次","wf":1,"wt":99},{"category":"考試費","name":"雅思考試費 (IELTS Exam Fee)","currency":"EUR","price":0,"fixed":240.0,"unit":"次","wf":1,"wt":99},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"EUR","price":100.0,"fixed":0,"unit":"堂","wf":1,"wt":4},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"EUR","price":90.0,"fixed":0,"unit":"堂","wf":5,"wt":9},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"EUR","price":80.0,"fixed":0,"unit":"堂","wf":10,"wt":19},{"category":"課程服務","name":"一對一課程 (One-to-One)","currency":"EUR","price":70.0,"fixed":0,"unit":"堂","wf":20,"wt":99},{"category":"課程升級","name":"超級強化升級課程 (Super Intensive Upgrade)","currency":"EUR","price":140.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"課程服務","name":"保證上午課程 (Guaranteed Morning Class)","currency":"EUR","price":20.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"實習","name":"虛擬實習 (Virtual Internship)","currency":"EUR","price":0,"fixed":1080.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (12個月)","currency":"EUR","price":0,"fixed":120.0,"unit":"次","wf":1,"wt":99},{"category":"線上資源","name":"K+ Online (3個月)","currency":"EUR","price":0,"fixed":60.0,"unit":"次","wf":1,"wt":99},{"category":"課程服務","name":"專業沉浸式體驗 (Professional Immersion)","currency":"EUR","price":0,"fixed":800.0,"unit":"次","wf":1,"wt":99},{"category":"其他服務","name":"寄宿家庭特殊飲食 (Special Diet)","currency":"EUR","price":60.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"其他服務","name":"行李寄存 (Luggage Retainer)","currency":"EUR","price":60.0,"fixed":0,"unit":"每週","wf":1,"wt":99},{"category":"住宿附加費","name":"寄宿家庭聖誕節附加費","currency":"EUR","price":70.0,"fixed":0,"unit":"每週","wf":1,"wt":99}]}}}
+;
+
+const COUNTRY_MAP = {
+  EP:{Brisbane:'🇦🇺 澳洲','Canary Wharf':'🇬🇧 英國',Birmingham:'🇬🇧 英國',Leeds:'🇬🇧 英國',Dublin:'🇮🇪 愛爾蘭',Berlin:'🇩🇪 德國',Paris:'🇫🇷 法國',Toronto:'🇨🇦 加拿大',Dubai:'🇦🇪 杜拜',Malta:'🇲🇹 馬爾他'},
+  ILSC:{Brisbane:'🇦🇺 澳洲',Melbourne:'🇦🇺 澳洲',Sydney:'🇦🇺 澳洲',Perth:'🇦🇺 澳洲','Gold Coast':'🇦🇺 澳洲','New Delhi':'🇮🇳 印度',Vancouver:'🇨🇦 加拿大',Toronto:'🇨🇦 加拿大','Montréal':'🇨🇦 加拿大','Adelaide, Brisbane, Melbourne, Perth, Sydney':'🇦🇺 澳洲多校區','Brisbane, Melbourne, Sydney':'🇦🇺 澳洲多校區','Adelaide, Perth':'🇦🇺 澳洲多校區','All AU Campuses':'🇦🇺 澳洲全校','All CA Campuses':'🇨🇦 加拿大全校','Melbourne, Sydney':'🇦🇺 澳洲','Toronto, Vancouver':'🇨🇦 加拿大'},
+  Kaplan:{波士頓:'🇺🇸 美國',芝加哥:'🇺🇸 美國',洛杉磯:'🇺🇸 美國',紐約:'🇺🇸 美國','紐約 30+':'🇺🇸 美國',聖巴巴拉:'🇺🇸 美國','舊金山-伯克利':'🇺🇸 美國',溫哥華:'🇨🇦 加拿大',多倫多:'🇨🇦 加拿大','多倫多 30+':'🇨🇦 加拿大',倫敦:'🇬🇧 英國','倫敦 30+':'🇬🇧 英國',牛津:'🇬🇧 英國',劍橋:'🇬🇧 英國',愛丁堡:'🇬🇧 英國',曼徹斯特:'🇬🇧 英國',伯恩茅斯:'🇬🇧 英國','伯恩茅斯 30+':'🇬🇧 英國',利物浦:'🇬🇧 英國','利物浦 30+':'🇬🇧 英國',托基:'🇬🇧 英國',都柏林:'🇮🇪 愛爾蘭'}
+};
+const CUR_SYM={AUD:'A$',GBP:'£',EUR:'€',USD:'US$',CAD:'C$'};
+const STEPS=[
+  {name:'選擇學校',en:'Select School'},
+  {name:'校區與課程',en:'Campus & Course'},
+  {name:'週數與日期',en:'Duration & Date'},
+  {name:'住宿安排',en:'Accommodation'},
+  {name:'加購項目',en:'Add-ons'},
+  {name:'折扣方案',en:'Discount'},
+  {name:'確認報價',en:'Confirm Quote'},
+];
+
+let state={step:0,school:null,campus:null,course:null,weeks:4,startDate:'',accomm:null,extras:{},disc:{type:'原價',pct:0,fixed:0,schoolDiscount:null},studentName:'',studentEmail:'',notes:''};
+let rates=JSON.parse(localStorage.getItem('fy_rates')||'null')||{AUD:21.5,GBP:40.2,EUR:33.8,USD:32.1,CAD:23.5};
+let adminSettings=JSON.parse(localStorage.getItem('fy_admin')||'null')||{
+  fxBuffer:2,commissionPct:2,taxRate:5,quoteValidDays:30,
+  rateUpdatedAt:new Date().toISOString().split('T')[0],
+  rateAlertDays:7,
+  rebates:{EP:5,ILSC:5,Kaplan:5,IH:0,BESA:0,Winning:0},
+  discountPlans:[
+    {id:'dp1',school:'EP',campus:'Brisbane',label:'EP Brisbane 淡季優惠',pct:30,fixed:0,validFrom:'2026-04-01',validTo:'2026-06-30',active:true}
+  ]
+};
+let history=JSON.parse(localStorage.getItem('fy_history')||'[]');
+let companyInfo=JSON.parse(localStorage.getItem('fy_company')||'null')||{company:'放洋留遊學',phone:'',email:'',website:'',note:'以上報價僅供參考，實際費用依學校公告為準。'};
+
+function sf(v){try{const f=parseFloat(v);return isNaN(f)?0:f;}catch{return 0;}}
+function fmt(v,cur){return(CUR_SYM[cur]||cur)+Math.round(v).toLocaleString();}
+function twd(v,cur){return Math.round(v*(rates[cur]||1));}
+function isPeak(){const d=new Date(state.startDate||new Date());const m=d.getMonth();return m>=5&&m<=7;}
+function getTier(tiers,w){for(const t of tiers)if(w>=(t.wf||1)&&w<=(t.wt||99))return t;return tiers[tiers.length-1];}
+
+// ── Navigation ──
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const idx={wizard:0,history:1,settings:2,data:3};
+  document.querySelectorAll('.nav-item')[idx[id]??0].classList.add('active');
+  const titles={wizard:'新增報價',history:'歷史報價紀錄',settings:'匯率設定',data:'費用資料管理'};
+  document.getElementById('topbar-title').textContent=titles[id]||'';
+  document.getElementById('topbar-sub').textContent='';
+  if(id==='settings')renderSettings();
+  if(id==='history')renderHistory();
+  if(id==='wizard')renderWizard();
+  updateBadge();
+}
+
+// ── Wizard ──
+function renderWizard(){
+  const nav=document.getElementById('step-nav-items');
+  nav.innerHTML=STEPS.map((s,i)=>{
+    const done=i<state.step, active=i===state.step;
+    const cls=done?'done':active?'active':'';
+    const clickable=i<=state.step?'clickable':'';
+    const conn=i<STEPS.length-1?'<div class="step-connector"></div>':'';
+    return`<div class="step-item ${cls} ${clickable}" onclick="tryGoStep(${i})">
+      <div class="step-circle">${done?'✓':i+1}</div>
+      <div><div class="step-label">${s.name}</div><div class="step-en">${s.en}</div></div>
+    </div>${conn}`;
+  }).join('');
+  renderStep();
+}
+
+function tryGoStep(i){if(i<=state.step){state.step=i;renderWizard();renderQP();}}
+function next(){if(state.step<6){state.step++;renderWizard();renderQP();}}
+function prev(){if(state.step>0){state.step--;renderWizard();}}
+
+function renderStep(){
+  [step0,step1,step2,step3,step4,step5disc,step6confirm][state.step]();
+}
+
+// Step 0
+function step0(){
+  const schools=['EP','ILSC','Kaplan'];
+  const coming=['IH','BESA','Winning'];
+  const html=`<div class="step-header">
+    <div class="step-num-tag">步驟 1 / 7</div>
+    <div class="step-title">選擇語言學校</div>
+    <div class="step-desc">Select Language School</div>
+  </div>
+  <div class="form-section">
+    <div class="form-section-title">合作學校</div>
+    <div class="school-grid">
+      ${schools.map(s=>{
+        const sel=state.school===s;
+        const cnt=Object.keys(SCHOOL_DATA[s]).length;
+        return`<div class="school-card ${sel?'selected':''}" onclick="pickSchool('${s}')">
+          <div class="school-logo">${s[0]}</div>
+          <div class="school-name">${s}</div>
+          <div class="school-sub">${cnt} 個校區</div>
+          <div class="school-check">${sel?'✓':''}</div>
+        </div>`;
+      }).join('')}
+      ${coming.map(s=>`<div class="school-card disabled">
+        <div class="school-logo" style="opacity:.4">${s[0]}</div>
+        <div class="school-name" style="color:var(--text3)">${s}</div>
+        <div class="school-sub">即將上線</div>
+      </div>`).join('')}
+    </div>
+  </div>
+  <div class="step-footer">
+    <div></div>
+    <button class="btn btn-pink" onclick="next()" ${!state.school?'disabled':''}>下一步 →</button>
+  </div>`;
+  document.getElementById('step-content').innerHTML=html;
+}
+
+function pickSchool(s){
+  if(state.school!==s){state.school=s;state.campus=null;state.course=null;state.accomm=null;state.extras={};}
+  step0();
+}
+
+// Step 1
+function step1(){
+  if(!state.school){state.step=0;renderWizard();return;}
+  const campuses=Object.keys(SCHOOL_DATA[state.school]).filter(c=>SCHOOL_DATA[state.school][c].courses.length>0);
+  const countryMap=COUNTRY_MAP[state.school]||{};
+
+  let courseHTML='';
+  if(state.campus){
+    const courses=(SCHOOL_DATA[state.school][state.campus]?.courses||[]).filter(c=>c.unit!=='按堂計算'&&c.unit!=='堂');
+    courseHTML=`<div class="form-section">
+      <div class="form-section-title">課程選擇</div>
+      <div class="course-list">
+        ${courses.map(c=>{
+          const tier=getTier(c.tiers,state.weeks||4);
+          const price=tier.price||tier.fixed;
+          const sel=state.course?.name===c.name;
+          return`<div class="course-item ${sel?'selected':''}" onclick='pickCourse(${JSON.stringify(c)})'>
+            <div class="course-radio"></div>
+            <div style="flex:1"><div class="course-name">${c.name}</div><div class="course-cat">${c.category} · ${c.unit}</div></div>
+            <div style="text-align:right"><div class="course-price">${fmt(price,c.currency)}</div><div class="course-price-sub">/ 週參考</div></div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }
+
+  document.getElementById('step-content').innerHTML=`<div class="step-header">
+    <div class="step-num-tag">步驟 2 / 7</div>
+    <div class="step-title">校區與課程選擇</div>
+    <div class="step-desc">Campus & Course Selection</div>
+  </div>
+  <div class="form-section">
+    <div class="form-section-title">選擇校區</div>
+    <div class="campus-grid">
+      ${campuses.map(c=>{
+        const sel=state.campus===c;
+        const cur=(SCHOOL_DATA[state.school][c]?.courses[0]?.currency)||'';
+        return`<div class="campus-card ${sel?'selected':''}" onclick="pickCampus('${c.replace(/'/g,"\\'")}')">
+          <div class="campus-country">${countryMap[c]||''}</div>
+          <div class="campus-name">${c}</div>
+          <div class="campus-cur">${cur}</div>
+        </div>`;
+      }).join('')}
+    </div>
+  </div>
+  ${courseHTML}
+  <div class="step-footer">
+    <button class="btn" onclick="prev()">← 上一步</button>
+    <button class="btn btn-pink" onclick="next()" ${!state.campus||!state.course?'disabled':''}>下一步 →</button>
+  </div>`;
+}
+
+function pickCampus(c){state.campus=c;state.course=null;state.accomm=null;step1();}
+function pickCourse(c){state.course=c;step1();renderQP();}
+
+// Step 2
+function step2(){
+  const today=new Date().toISOString().split('T')[0];
+  document.getElementById('step-content').innerHTML=`<div class="step-header">
+    <div class="step-num-tag">步驟 3 / 7</div>
+    <div class="step-title">週數與日期</div>
+    <div class="step-desc">Duration & Start Date</div>
+  </div>
+  <div class="form-section">
+    <div class="form-section-title">課程時長</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">課程週數 <span>*</span></label>
+        <input class="form-input" type="number" id="inp-weeks" min="1" max="52" value="${state.weeks||4}" oninput="state.weeks=parseInt(this.value)||1;renderQP()">
+        <div class="form-hint">週數影響學費價格區間及教材費</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">開始日期 <span>*</span></label>
+        <input class="form-input" type="date" id="inp-date" value="${state.startDate||today}" onchange="state.startDate=this.value;checkPeak();renderQP()">
+      </div>
+    </div>
+    <div id="peak-notice"></div>
+  </div>
+  <div class="form-section">
+    <div class="form-section-title">學生資訊</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">學生姓名</label>
+        <input class="form-input" placeholder="王小明" value="${state.studentName}" oninput="state.studentName=this.value">
+      </div>
+      <div class="form-group">
+        <label class="form-label">電子信箱</label>
+        <input class="form-input" type="email" placeholder="student@email.com" value="${state.studentEmail}" oninput="state.studentEmail=this.value">
+      </div>
+    </div>
+  </div>
+  <div class="step-footer">
+    <button class="btn" onclick="prev()">← 上一步</button>
+    <button class="btn btn-pink" onclick="saveStep2()">下一步 →</button>
+  </div>`;
+  checkPeak();
+}
+
+function checkPeak(){
+  const n=document.getElementById('peak-notice');
+  if(!n)return;
+  const pk=isPeak();
+  n.innerHTML=pk?'<div class="notice"><strong>⚠ 旺季提醒：</strong>6–8 月為旺季，部分課程與住宿將加收旺季附加費，已自動計入報價。</div>':'';
+}
+function saveStep2(){
+  state.weeks=parseInt(document.getElementById('inp-weeks').value)||4;
+  state.startDate=document.getElementById('inp-date').value;
+  next();
+}
+
+// Step 3
+function step3(){
+  const campusData=state.school&&state.campus?SCHOOL_DATA[state.school][state.campus]:null;
+  const accomms=(campusData?.accomm||[]).filter(a=>a.type!=='押金'&&a.type!=='行政'&&a.type!=='額外加成');
+  const byType={};
+  accomms.forEach(a=>{if(!byType[a.type])byType[a.type]=[];byType[a.type].push(a);});
+  const noAccomm=state.accomm==='none';
+
+  const sections=Object.entries(byType).map(([type,items])=>`
+    <div class="form-section">
+      <div class="form-section-title">${type}</div>
+      <div class="accomm-grid">
+        ${items.map(a=>{
+          const price=a.price||a.fixed;
+          const unit=a.unit==='按週計算'||a.unit==='每週'?'/週':a.unit==='按天計算'?'/晚':'固定';
+          const sel=state.accomm&&state.accomm!=='none'&&state.accomm.name===a.name;
+          return`<div class="accomm-card ${sel?'selected':''}" onclick='pickAccomm(${JSON.stringify(a)})'>
+            <div class="accomm-type">${type}</div>
+            <div class="accomm-name">${a.name}</div>
+            <div class="accomm-price">${fmt(price,a.currency)} <span style="font-size:10px;color:var(--text3)">${unit}</span></div>
+            ${a.note&&a.note!=='nan'?`<div class="accomm-note">${a.note}</div>`:''}
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`).join('');
+
+  document.getElementById('step-content').innerHTML=`<div class="step-header">
+    <div class="step-num-tag">步驟 4 / 7</div>
+    <div class="step-title">住宿安排</div>
+    <div class="step-desc">Accommodation Selection</div>
+  </div>
+  ${sections||'<div class="info-notice">此校區無住宿選項，請自行安排或洽詢。</div>'}
+  <div class="form-section">
+    <div class="accomm-card ${noAccomm?'selected':''}" onclick="pickAccomm('none')" style="cursor:pointer">
+      <div class="accomm-type">不需要住宿</div>
+      <div class="accomm-name">自行安排住宿</div>
+      <div class="accomm-note">僅計算學費與行政費用</div>
+    </div>
+  </div>
+  <div class="step-footer">
+    <button class="btn" onclick="prev()">← 上一步</button>
+    <button class="btn btn-pink" onclick="next()" ${!state.accomm?'disabled':''}>下一步 →</button>
+  </div>`;
+}
+
+function pickAccomm(a){state.accomm=a;step3();renderQP();}
+
+// Step 4
+function step4(){
+  const campusData=state.school&&state.campus?SCHOOL_DATA[state.school][state.campus]:null;
+  const fees=campusData?.fees||[];
+  const extras=fees.filter(f=>['接機','保險','簽證','考試'].includes(f.category));
+
+  document.getElementById('step-content').innerHTML=`<div class="step-header">
+    <div class="step-num-tag">步驟 5 / 7</div>
+    <div class="step-title">加購項目</div>
+    <div class="step-desc">Additional Services</div>
+  </div>
+  ${extras.length>0?`<div class="form-section">
+    <div class="form-section-title">選購服務</div>
+    <div class="extra-list">
+      ${extras.map(f=>{
+        const on=!!state.extras[f.name];
+        const price=f.price||f.fixed;
+        return`<div class="extra-item ${on?'on':''}" onclick='toggleExtra(${JSON.stringify(f)})'>
+          <button class="toggle ${on?'on':''}" onclick="event.stopPropagation();toggleExtra(${JSON.stringify(f).replace(/"/g,"'")})"></button>
+          <div class="extra-info"><div class="extra-name">${f.name}</div><div class="extra-sub">${f.category} · ${f.unit}</div></div>
+          <div class="extra-price">${fmt(price,f.currency)}</div>
+        </div>`;
+      }).join('')}
+    </div>
+  </div>`:'<div class="info-notice">此校區無額外加購服務</div>'}
+  <div class="form-section">
+    <div class="form-section-title">備註</div>
+    <div class="form-group">
+      <input class="form-input" placeholder="其他備註事項…" value="${state.notes}" oninput="state.notes=this.value">
+    </div>
+  </div>
+  <div class="step-footer">
+    <button class="btn" onclick="prev()">← 上一步</button>
+    <button class="btn btn-pink" onclick="next()">下一步 →</button>
+  </div>`;
+}
+
+function toggleExtra(f){
+  if(state.extras[f.name])delete state.extras[f.name];else state.extras[f.name]=f;
+  step4();renderQP();
+}
+
+// Step 5 - Discount
+function step5disc(){
+  const d = state.disc;
+
+  // Filter matching school discount plans
+  const schoolDiscs = (adminSettings.discountPlans||[]).filter(function(p){
+    if(!p.active || p.school !== state.school) return false;
+    if(p.campus && p.campus !== state.campus) return false;
+    if(!state.startDate) return true;
+    var dt = new Date(state.startDate);
+    var from = p.validFrom ? new Date(p.validFrom) : null;
+    var to   = p.validTo   ? new Date(p.validTo)   : null;
+    if(from && dt < from) return false;
+    if(to   && dt > to)   return false;
+    return true;
+  });
+  window._sdPlans = schoolDiscs;
+
+  var cPlans = [
+    {type:'原價',     label:'原價',           sub:'不套用公司折扣',   pct:0,  fixed:0},
+    {type:'優惠價',   label:'優惠價',          sub:'公司季節優惠方案', pct:(d.type==='優惠價'?d.pct:10), fixed:0},
+    {type:'出清價',   label:'出清價',          sub:'特殊出清方案',     pct:(d.type==='出清價'?d.pct:20), fixed:0},
+    {type:'折抵3000', label:'折抵 NT$3,000',  sub:'固定金額折抵',     pct:0,  fixed:3000},
+    {type:'折抵6000', label:'折抵 NT$6,000',  sub:'固定金額折抵',     pct:0,  fixed:6000},
+  ];
+
+  // ── Build HTML ──
+  var sdRows = '';
+  if(schoolDiscs.length > 0){
+    schoolDiscs.forEach(function(p, i){
+      var on = d.schoolDiscount && d.schoolDiscount.id === p.id;
+      var priceLbl = p.pct>0 ? '-'+p.pct+'%' : p.fixed>0 ? '-NT$'+p.fixed.toLocaleString() : '—';
+      sdRows += '<div class="course-item'+(on?' selected':'')+'" data-sidx="'+i+'" data-action="sd">'
+        +'<div class="course-radio"></div>'
+        +'<div style="flex:1"><div class="course-name">'+p.label+'</div>'
+        +'<div class="course-cat">廠商折扣 · '+(p.validFrom||'')+(p.validTo?' ～ '+p.validTo:'')+'</div></div>'
+        +'<div style="text-align:right"><div class="course-price">'+priceLbl+'</div></div>'
+        +'</div>';
+    });
+    sdRows += '<div class="course-item'+(d.schoolDiscount?'':' selected')+'" data-action="sd-none">'
+      +'<div class="course-radio"></div><div><div class="course-name">不套用廠商折扣</div></div></div>';
+  }
+
+  var sdSection = schoolDiscs.length > 0
+    ? '<div class="form-section" style="border:1.5px solid #bae6fd">'
+      +'<div class="form-section-title" style="color:#0369a1">🏫 廠商折扣</div>'
+      +'<div style="font-size:11px;color:var(--text3);margin-bottom:10px">學校提供的期間限定折扣</div>'
+      +'<div class="course-list">'+sdRows+'</div></div>'
+    : '<div class="info-notice">此學校 / 校區目前無廠商折扣方案</div>';
+
+  var coRows = '';
+  cPlans.forEach(function(p){
+    var sel = d.type === p.type;
+    var priceLbl = p.pct>0 ? '-'+p.pct+'%' : p.fixed>0 ? '-NT$'+p.fixed.toLocaleString() : '不折扣';
+    coRows += '<div class="course-item'+(sel?' selected':'')+'" data-action="cd"'
+      +' data-dtype="'+p.type+'" data-dpct="'+p.pct+'" data-dfixed="'+p.fixed+'">'
+      +'<div class="course-radio"></div>'
+      +'<div style="flex:1"><div class="course-name">'+p.label+'</div>'
+      +'<div class="course-cat">公司折扣 · '+p.sub+'</div></div>'
+      +'<div style="text-align:right"><div class="course-price">'+priceLbl+'</div></div>'
+      +'</div>';
+  });
+
+  var customPct = (d.type==='優惠價'||d.type==='出清價')
+    ? '<div class="form-group" style="margin-top:10px;max-width:200px">'
+      +'<label class="form-label">自訂折扣 %（0–99）</label>'
+      +'<input class="form-input" id="disc-pct-inp" type="number" min="0" max="99" value="'+d.pct+'">'
+      +'</div>'
+    : '';
+
+  var coSection = '<div class="form-section">'
+    +'<div class="form-section-title">🏷️ 公司折扣</div>'
+    +'<div style="font-size:11px;color:var(--text3);margin-bottom:10px">選擇公司折扣類型，可與廠商折扣疊加</div>'
+    +'<div class="course-list">'+coRows+'</div>'
+    +customPct+'</div>';
+
+  document.getElementById('step-content').innerHTML =
+    '<div class="step-header">'
+    +'<div class="step-num-tag">步驟 6 / 7</div>'
+    +'<div class="step-title">折扣方案</div>'
+    +'<div class="step-desc">Discount Selection</div>'
+    +'</div>'
+    + sdSection + coSection
+    +'<div class="step-footer">'
+    +'<button class="btn" id="s5-prev">← 上一步</button>'
+    +'<button class="btn btn-pink" id="s5-next">下一步 →</button>'
+    +'</div>';
+
+  // ── Direct bindings — no delegation, no re-render ──
+  document.getElementById('s5-prev').onclick = function(){ prev(); };
+  document.getElementById('s5-next').onclick = function(){ next(); };
+
+  document.querySelectorAll('[data-action]').forEach(function(el){
+    el.onclick = function(e){
+      var action = this.dataset.action;
+      if(action === 'sd'){
+        state.disc.schoolDiscount = window._sdPlans[parseInt(this.dataset.sidx)] || null;
+      } else if(action === 'sd-none'){
+        state.disc.schoolDiscount = null;
+      } else if(action === 'cd'){
+        state.disc.type  = this.dataset.dtype;
+        state.disc.pct   = parseFloat(this.dataset.dpct)   || 0;
+        state.disc.fixed = parseFloat(this.dataset.dfixed) || 0;
+      }
+      // Update selected class without re-rendering
+      document.querySelectorAll('[data-action="sd"],[data-action="sd-none"]').forEach(function(x){
+        var isSD = x.dataset.action==='sd';
+        var isSDNone = x.dataset.action==='sd-none';
+        if(isSD) x.classList.toggle('selected',
+          !!(state.disc.schoolDiscount && window._sdPlans[parseInt(x.dataset.sidx)] &&
+             state.disc.schoolDiscount.id === window._sdPlans[parseInt(x.dataset.sidx)].id));
+        if(isSDNone) x.classList.toggle('selected', !state.disc.schoolDiscount);
+      });
+      document.querySelectorAll('[data-action="cd"]').forEach(function(x){
+        x.classList.toggle('selected', x.dataset.dtype === state.disc.type);
+      });
+      renderQP();
+    };
+  });
+
+  var pctInp = document.getElementById('disc-pct-inp');
+  if(pctInp) pctInp.oninput = function(){ state.disc.pct = parseInt(this.value)||0; renderQP(); };
+}
+
+
+// Step 6 - Confirm
+function step6confirm(){
+  document.getElementById('btn-save').style.display='flex';
+  const calc=calculate();
+  const pk=isPeak();
+  const fxPct=(((calc.fxBuf||1)-1)*100).toFixed(0);
+  const commPct=((calc.commPct||0)*100).toFixed(0);
+
+  // Build items rows
+  let itemRows='';
+  calc.items.forEach(i=>{
+    itemRows+='<div class="qp-row">'
+      +'<div><div class="qp-item-name">'+i.name+(pk?'<span class="peak-badge">旺季</span>':'')+'</div>'
+      +'<div class="qp-item-note">'+i.note+'</div></div>'
+      +'<div style="text-align:right"><div class="qp-item-price">'+i.display+'</div>'
+      +'<div class="qp-item-twd">≈ NT$'+i.twd.toLocaleString()+'</div></div>'
+      +'</div>';
+  });
+
+  // Build internal breakdown
+  let intRows='<div class="qp-row" style="background:#f8f8fa;padding:6px 8px;border-radius:6px;margin:2px 0">'
+    +'<div class="qp-item-name" style="color:var(--text3)">台幣成本（含匯差 +'+fxPct+'%）</div>'
+    +'<div class="qp-item-price" style="color:var(--text3)">NT$ '+calc.costTWD.toLocaleString()+'</div></div>'
+    +'<div class="qp-row" style="background:#f8f8fa;padding:6px 8px;border-radius:6px;margin:2px 0">'
+    +'<div class="qp-item-name" style="color:var(--text3)">未稅售價（含獎金 +'+commPct+'%）</div>'
+    +'<div class="qp-item-price" style="color:var(--text3)">NT$ '+calc.preTaxSell.toLocaleString()+'</div></div>';
+
+  // Discount rows
+  let discRows='';
+  (calc.discLines||[]).forEach(d=>{
+    const isSchool=d.type==='school';
+    discRows+='<div class="qp-row">'
+      +'<div class="qp-item-name" style="color:'+(isSchool?'#0369a1':'#e91e8c')+'">'
+      +(isSchool?'🏫 ':' 🏷️ ')+d.label+'</div>'
+      +'<div class="qp-item-price" style="color:#10b981">－NT$ '+Math.abs(d.amt).toLocaleString()+'</div>'
+      +'</div>';
+  });
+
+  document.getElementById('step-content').innerHTML=
+    '<div class="step-header">'
+    +'<div class="step-num-tag">步驟 7 / 7</div>'
+    +'<div class="step-title">確認報價</div>'
+    +'<div class="step-desc">Confirm & Export</div>'
+    +'</div>'
+
+    +'<div class="form-section">'
+    +'<div class="form-section-title">報價摘要</div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:4px">'
+    +'<div><div style="font-size:10px;color:var(--text3);margin-bottom:2px">學校 · 校區</div><div style="font-size:14px;font-weight:600">'+state.school+' · '+state.campus+'</div></div>'
+    +'<div><div style="font-size:10px;color:var(--text3);margin-bottom:2px">課程週數</div><div style="font-size:14px;font-weight:600">'+state.weeks+' 週</div></div>'
+    +'<div><div style="font-size:10px;color:var(--text3);margin-bottom:2px">課程名稱</div><div style="font-size:13px">'+(state.course?.name||'—')+'</div></div>'
+    +'<div><div style="font-size:10px;color:var(--text3);margin-bottom:2px">開始日期</div><div style="font-size:13px">'+(state.startDate||'—')+'</div></div>'
+    +'</div></div>'
+
+    +'<div class="form-section">'
+    +'<div class="form-section-title">費用明細（外幣）</div>'
+    +itemRows+'</div>'
+
+    +'<div class="form-section" style="background:#fafafa">'
+    +'<div class="form-section-title" style="color:var(--text3)">計費層（顧問內部參考）</div>'
+    +intRows
+    +(discRows?('<div style="margin-top:8px;margin-bottom:4px;font-size:10px;font-weight:600;color:var(--text3);letter-spacing:.06em;text-transform:uppercase">折扣明細</div>'+discRows):'')
+    +'<div class="qp-row" style="margin-top:4px"><div class="qp-item-name" style="color:var(--text3)">營業稅 '+(adminSettings.taxRate||5)+'%</div>'
+    +'<div class="qp-item-price" style="color:var(--text3)">NT$ '+calc.taxAmt.toLocaleString()+'</div></div>'
+    +'</div>'
+
+    +'<div style="background:var(--pink);border-radius:10px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">'
+    +'<div><div style="font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.75)">含稅售價 · 給學生</div>'
+    +'<div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:2px">'+calc.totalOrig+'</div></div>'
+    +'<div style="font-size:26px;font-weight:700;color:#fff">NT$ '+calc.finalTWD.toLocaleString()+'</div>'
+    +'</div>'
+
+    +'<div class="notice">旺季（6–8月）費用已計入。匯率、匯差、獎金、稅率以系統設定為準。報價僅供參考。</div>'
+    // Profit panel (admin only - check by role in future; for now always shown)
+    +'<div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:16px 18px;margin-top:12px">'
+    +'<div style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#059669;margin-bottom:10px">淨利試算（管理員）</div>'
+    +'<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #dcfce7;font-size:12px"><span style="color:#555">含稅售價</span><span style="font-weight:600">NT$ '+calc.finalTWD.toLocaleString()+'</span></div>'
+    +'<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #dcfce7;font-size:12px"><span style="color:#555">－ 台幣成本（含匯差）</span><span style="color:#dc2626;font-weight:500">－NT$ '+calc.costTWD.toLocaleString()+'</span></div>'
+    +'<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #dcfce7;font-size:12px"><span style="color:#555">＋ 預估回傭（'+calc.rebatePct+'%）</span><span style="color:#059669;font-weight:500">＋NT$ '+calc.rebateTWD.toLocaleString()+'</span></div>'
+    +'<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #dcfce7;font-size:12px"><span style="color:#555">－ 顧問獎金</span><span style="color:#dc2626;font-weight:500">－NT$ '+calc.commissionTWD.toLocaleString()+'</span></div>'
+    +'<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #dcfce7;font-size:12px"><span style="color:#555">－ 營業稅</span><span style="color:#dc2626;font-weight:500">－NT$ '+calc.taxAmt.toLocaleString()+'</span></div>'
+    +'<div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:8px">'
+    +'<div><div style="font-size:11px;font-weight:600;color:#15803d">預估淨利</div><div style="font-size:10px;color:#6b7280;margin-top:1px">回傭為預估值，以學校結算為準</div></div>'
+    +'<div style="text-align:right"><div style="font-size:22px;font-weight:700;color:#15803d">NT$ '+calc.netProfit.toLocaleString()+'</div>'
+    +'<div style="font-size:12px;font-weight:600;color:#059669">淨利率 '+calc.netMargin.toFixed(1)+'%</div></div>'
+    +'</div></div>'
+    +'<div class="step-footer">'
+    +'<button class="btn" onclick="prev()">← 上一步</button>'
+    +'<div style="display:flex;gap:8px">'
+    +'<button class="btn" id="btn-internal-pdf">📊 內部報價單</button>'
+    +'<button class="btn btn-pink" id="btn-student-pdf">📄 學生報價單</button>'
+    +'</div></div>';
+  setTimeout(()=>{
+    const bi=document.getElementById('btn-internal-pdf');
+    const bs=document.getElementById('btn-student-pdf');
+    if(bi)bi.addEventListener('click',()=>exportPDF('internal'));
+    if(bs)bs.addEventListener('click',()=>exportPDF('student'));
+  },0);
+}
+
+// ── Calculate ──
+function calculate(){
+  if(!state.school||!state.campus||!state.course)return{items:[],costTWD:0,preTaxSell:0,discountAmt:0,taxAmt:0,finalTWD:0,totalOrig:'',discLines:[],fxBuf:1,commPct:0,rebatePct:0,rebateTWD:0,commissionTWD:0,netProfit:0,netMargin:0,rawCostTWD:0};
+  const campusData=SCHOOL_DATA[state.school][state.campus];
+  const fees=campusData?.fees||[];
+  const w=state.weeks||4;
+  const pk=isPeak();
+  const items=[];
+
+  // Course
+  const c=state.course;
+  const tier=getTier(c.tiers,w);
+  const baseP=tier.price||tier.fixed;
+  const cur=c.currency;
+  const isWkly=c.unit==='按週計算'||c.unit==='每週';
+  const pkAdd=pk?(tier.peak||0):0;
+  const cAmt=isWkly?(baseP+pkAdd)*w:baseP;
+  items.push({name:c.name,note:isWkly?(w+'週 × '+fmt(baseP,cur)+(pkAdd>0?' + 旺季'+fmt(pkAdd,cur)+'/週':'')):'固定費用',amt:cAmt,twd:twd(cAmt,cur),currency:cur,display:fmt(cAmt,cur)});
+
+  // Admin (auto)
+  fees.filter(f=>['教材','註冊'].includes(f.category)&&w>=(f.wf||1)&&w<=(f.wt||99)).forEach(f=>{
+    const p=f.price||f.fixed; if(!p)return;
+    const isW=f.unit==='每週'||f.unit==='按週計算';
+    const a=isW?p*w:p;
+    items.push({name:f.name,note:'自動計入',amt:a,twd:twd(a,f.currency),currency:f.currency,display:fmt(a,f.currency)});
+  });
+
+  // Accomm
+  if(state.accomm&&state.accomm!=='none'){
+    const a=state.accomm;
+    const aP=a.price||a.fixed;
+    const aC=a.currency;
+    const aW=a.unit==='按週計算'||a.unit==='每週';
+    const aA=aW?aP*w:aP;
+    items.push({name:a.name,note:aW?(w+'週 × '+fmt(aP,aC)):'固定費用',amt:aA,twd:twd(aA,aC),currency:aC,display:fmt(aA,aC)});
+    const arr=fees.find(f=>f.category==='行政'&&(f.name.includes('住宿')||f.name.includes('安排')));
+    if(arr){const p=arr.price||arr.fixed;if(p>0)items.push({name:arr.name,note:'住宿行政費',amt:p,twd:twd(p,arr.currency),currency:arr.currency,display:fmt(p,arr.currency)});}
+  }
+
+  // Extras
+  Object.values(state.extras).forEach(f=>{
+    const p=f.price||f.fixed; const aC=f.currency;
+    const isW=f.unit==='每週'||f.unit==='按週計算';
+    const a=isW?p*w:p;
+    items.push({name:f.name,note:f.category,amt:a,twd:twd(a,aC),currency:aC,display:fmt(a,aC)});
+  });
+
+  // ── 外幣成本 → 台幣成本（含匯差緩衝）──
+  const fxBuf=1+(adminSettings.fxBuffer||0)/100;
+  const costTWD=Math.round(items.reduce((s,i)=>s+(i.twd||0),0)*fxBuf);
+
+  // ── 顧問獎金 ──
+  const commPct=(adminSettings.commissionPct||0)/100;
+  const preTaxSell=Math.round(costTWD*(1+commPct));
+
+  // ── 折扣層 ──
+  const disc=state.disc||{type:'原價',pct:0,fixed:0,schoolDiscount:null};
+  const discLines=[];
+
+  // 廠商折扣（% 折）
+  let afterSchoolDisc=preTaxSell;
+  if(disc.schoolDiscount){
+    const sd=disc.schoolDiscount;
+    const sdAmt=sd.pct>0?Math.round(preTaxSell*sd.pct/100):(sd.fixed||0);
+    afterSchoolDisc=preTaxSell-sdAmt;
+    discLines.push({label:sd.label+'（廠商折扣）',amt:-sdAmt,type:'school'});
+  }
+
+  // 公司折扣
+  let afterCoDisc=afterSchoolDisc;
+  if(disc.type!=='原價'){
+    let coAmt=0;
+    if(disc.pct>0) coAmt=Math.round(afterSchoolDisc*disc.pct/100);
+    else if(disc.fixed>0) coAmt=disc.fixed;
+    afterCoDisc=afterSchoolDisc-coAmt;
+    if(coAmt>0) discLines.push({label:disc.type+'（公司折扣）',amt:-coAmt,type:'company'});
+  }
+
+  const discountAmt=preTaxSell-afterCoDisc;
+  const taxAmt=Math.round(afterCoDisc*(adminSettings.taxRate||5)/100);
+  const finalTWD=afterCoDisc+taxAmt;
+
+  const byCur={};items.forEach(i=>{byCur[i.currency]=(byCur[i.currency]||0)+i.amt;});
+  const totalOrig=Object.entries(byCur).map(([c,v])=>fmt(v,c)).join(' + ');
+
+  // ── 淨利試算 ──
+  const rebatePct=(adminSettings.rebates&&adminSettings.rebates[state.school])||0;
+  const rawCostTWD=items.reduce((s,i)=>s+(i.twd||0),0);
+  const rebateTWD=Math.round(rawCostTWD*rebatePct/100);
+  const commissionTWD=preTaxSell-costTWD;
+  const netProfit=finalTWD-costTWD+rebateTWD-commissionTWD-taxAmt;
+  const netMargin=finalTWD>0?Math.round(netProfit/finalTWD*1000)/10:0;
+
+  return{items,costTWD,preTaxSell,discountAmt,taxAmt,finalTWD,totalOrig,discLines,fxBuf,commPct,
+    rebatePct,rebateTWD,commissionTWD,netProfit,netMargin,rawCostTWD};
+}
+
+// ── Quote Panel (Internal view - shows all layers) ──
+function renderQP(){
+  const calc=calculate();
+  const body=document.getElementById('qp-body');
+  const meta=document.getElementById('qp-meta');
+  if(!state.school){body.innerHTML='<div class="qp-empty"><div class="qp-empty-icon">📋</div>完成選擇後<br>費用將自動顯示於此</div>';return;}
+  meta.textContent=[state.school,state.campus,state.weeks?(state.weeks+'週'):''].filter(Boolean).join(' · ');
+  if(!calc.items.length){body.innerHTML='<div class="qp-empty">選擇課程後即顯示報價</div>';return;}
+  const pk=isPeak();
+
+  // Items
+  let html='<div class="qp-section-title">費用項目（外幣）</div>';
+  calc.items.forEach(i=>{
+    html+='<div class="qp-row">'
+      +'<div><div class="qp-item-name">'+i.name+(pk?'<span class="peak-badge">旺季</span>':'')+'</div>'
+      +'<div class="qp-item-note">'+( i.note||'')+'</div></div>'
+      +'<div style="text-align:right"><div class="qp-item-price">'+i.display+'</div>'
+      +'<div class="qp-item-twd">NT$'+i.twd.toLocaleString()+'</div></div>'
+      +'</div>';
+  });
+
+  // Pricing layers
+  html+='<div class="qp-divider"></div>';
+  html+='<div class="qp-section-title">計費層（內部）</div>';
+  html+='<div class="qp-row"><div><div class="qp-item-name">台幣成本</div>'
+    +'<div class="qp-item-note">含匯差緩衝 +'+(((calc.fxBuf||1)-1)*100).toFixed(0)+'%</div></div>'
+    +'<div style="text-align:right"><div class="qp-item-price" style="color:var(--text)">NT$ '+calc.costTWD.toLocaleString()+'</div></div></div>';
+  html+='<div class="qp-row"><div><div class="qp-item-name">未稅售價</div>'
+    +'<div class="qp-item-note">含顧問獎金 +'+(((calc.commPct||0))*100).toFixed(0)+'%</div></div>'
+    +'<div style="text-align:right"><div class="qp-item-price" style="color:var(--text)">NT$ '+calc.preTaxSell.toLocaleString()+'</div></div></div>';
+
+  // Discounts
+  if(calc.discLines&&calc.discLines.length>0){
+    html+='<div class="qp-divider"></div>';
+    html+='<div class="qp-section-title">折扣明細</div>';
+    calc.discLines.forEach(d=>{
+      const isSchool=d.type==='school';
+      html+='<div class="qp-row">'
+        +'<div><div class="qp-item-name">'+d.label+'</div>'
+        +'<div class="qp-item-note" style="color:'+(isSchool?'#0369a1':'#9d174d')+'">'+( isSchool?'🏫 廠商':'🏷️ 公司')+'</div></div>'
+        +'<div style="text-align:right"><div class="qp-item-price" style="color:#10b981">-NT$ '+(Math.abs(d.amt)).toLocaleString()+'</div></div>'
+        +'</div>';
+    });
+  }
+
+  // Tax + Final
+  html+='<div class="qp-divider"></div>';
+  html+='<div class="qp-row"><div><div class="qp-item-name">營業稅</div>'
+    +'<div class="qp-item-note">'+(adminSettings.taxRate||5)+'%</div></div>'
+    +'<div style="text-align:right"><div class="qp-item-price" style="color:var(--text)">NT$ '+calc.taxAmt.toLocaleString()+'</div></div></div>';
+
+  html+='<div class="qp-total-section">'
+    +'<div class="qp-total-label">含稅售價（給學生）</div>'
+    +'<div class="qp-total-amount">NT$ '+calc.finalTWD.toLocaleString()+'</div>'
+    +'<div class="qp-total-sub">外幣原價：'+calc.totalOrig+'</div>'
+    +'</div>';
+  html+='<div style="font-size:10px;color:var(--text3);margin-top:10px;line-height:1.7">'
+    +'匯率：'+Object.entries(rates).map(([c,r])=>c+' = '+r).join('・')
+    +'</div>';
+  if(calc.netProfit!==undefined){
+    const npColor=calc.netProfit>=0?'#059669':'#dc2626';
+    html+='<div style="margin-top:10px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:7px;padding:9px 11px">'
+      +'<div style="font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#059669;margin-bottom:5px">淨利試算</div>'
+      +'<div style="display:flex;justify-content:space-between;font-size:12px">'
+      +'<span style="color:var(--text2)">回傭 '+calc.rebatePct+'%</span>'
+      +'<span style="color:#059669;font-weight:500">+NT$'+calc.rebateTWD.toLocaleString()+'</span></div>'
+      +'<div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:5px;padding-top:5px;border-top:1px solid #dcfce7">'
+      +'<span style="font-size:11px;font-weight:600;color:#15803d">預估淨利</span>'
+      +'<div style="text-align:right"><span style="font-size:16px;font-weight:700;color:'+npColor+'">NT$'+calc.netProfit.toLocaleString()+'</span>'
+      +'<span style="font-size:10px;color:'+npColor+';margin-left:4px">'+calc.netMargin.toFixed(1)+'%</span></div>'
+      +'</div></div>';
+  }
+
+  body.innerHTML=html;
+}
+
+// ── Save ──
+function saveQuote(){
+  const calc=calculate();
+  const q={id:Date.now(),date:new Date().toLocaleDateString('zh-TW'),studentName:state.studentName||'未填',studentEmail:state.studentEmail,school:state.school,campus:state.campus,course:state.course?.name,weeks:state.weeks,startDate:state.startDate,accomm:state.accomm==='none'?null:state.accomm?.name,costTWD:calc.costTWD,preTaxSell:calc.preTaxSell,finalTWD:calc.finalTWD,totalOrig:calc.totalOrig,items:calc.items,discLines:calc.discLines,status:'draft'};
+  history.unshift(q);
+  localStorage.setItem('fy_history',JSON.stringify(history));
+  updateBadge();
+  alert('✅ 報價已儲存！\n'+q.studentName+' · '+state.school+' '+state.campus+'\nNT$ '+Math.round(calc.finalTWD).toLocaleString());
+}
+
+function resetWizard(){
+  if(!confirm('確定要重新填寫？'))return;
+  state={step:0,school:null,campus:null,course:null,weeks:4,startDate:'',accomm:null,extras:{},disc:{type:'原價',pct:0,fixed:0,schoolDiscount:null},studentName:'',studentEmail:'',notes:''};
+  document.getElementById('btn-save').style.display='none';
+  renderWizard();renderQP();
+}
+
+function updateBadge(){document.getElementById('history-badge').textContent=history.length;}
+
+// ── Settings ──
+function renderSettings(){
+  const curs=[{c:'AUD',f:'🇦🇺',n:'澳幣'},{c:'GBP',f:'🇬🇧',n:'英鎊'},{c:'EUR',f:'🇪🇺',n:'歐元'},{c:'USD',f:'🇺🇸',n:'美元'},{c:'CAD',f:'🇨🇦',n:'加幣'}];
+  document.getElementById('rate-grid').innerHTML=curs.map(x=>`<div class="rate-item">
+    <div class="rate-top"><span class="rate-flag">${x.f}</span><div><div class="rate-code">${x.c}</div><div class="rate-name">${x.n}</div></div></div>
+    <div class="rate-row"><span class="rate-label">1 ${x.c} =</span><input class="rate-input" id="r-${x.c}" type="number" value="${rates[x.c]}" step="0.1" min="0.1"><span class="rate-label">TWD</span></div>
+  </div>`).join('');
+  document.getElementById('s-company').value=companyInfo.company;
+  document.getElementById('s-phone').value=companyInfo.phone;
+  document.getElementById('s-email').value=companyInfo.email;
+  document.getElementById('s-website').value=companyInfo.website;
+  document.getElementById('s-note').value=companyInfo.note;
+  const fxEl=document.getElementById('a-fxbuf');
+  const coEl=document.getElementById('a-comm');
+  const txEl=document.getElementById('a-tax');
+  const vEl=document.getElementById('a-valid');
+  const aEl=document.getElementById('a-alert');
+  if(fxEl)fxEl.value=adminSettings.fxBuffer||2;
+  if(coEl)coEl.value=adminSettings.commissionPct||2;
+  if(txEl)txEl.value=adminSettings.taxRate||5;
+  if(vEl)vEl.value=adminSettings.quoteValidDays||30;
+  if(aEl)aEl.value=adminSettings.rateAlertDays||7;
+  renderRebateGrid();
+  renderDiscountPlans();
+  renderRateFreshness();
+}
+
+function renderRebateGrid(){
+  const el=document.getElementById('rebate-grid');
+  if(!el)return;
+  const schools=Object.keys(SCHOOL_DATA);
+  const flags={EP:'🌏',ILSC:'🌏',Kaplan:'🌏',IH:'🌏',BESA:'🌏',Winning:'🌏'};
+  const rebates=adminSettings.rebates||{};
+  el.innerHTML=schools.map(s=>`
+    <div class="rate-item">
+      <div class="rate-top">
+        <span class="rate-flag">${flags[s]||'🏫'}</span>
+        <div><div class="rate-code">${s}</div><div class="rate-name">回傭率</div></div>
+      </div>
+      <div class="rate-row">
+        <input class="rate-input" id="reb-${s}" type="number" value="${rebates[s]||0}" step="0.1" min="0" max="50">
+        <span class="rate-label"> %</span>
+      </div>
+      <div style="font-size:10px;color:var(--text3);margin-top:5px">預估：A$100 → 回傭 A$${((rebates[s]||0)).toFixed(1)}</div>
+    </div>`).join('');
+}
+
+function saveRates(){
+  ['AUD','GBP','EUR','USD','CAD'].forEach(cur=>{const v=parseFloat(document.getElementById('r-'+cur).value);if(!isNaN(v))rates[cur]=v;});
+  localStorage.setItem('fy_rates',JSON.stringify(rates));
+  adminSettings.rateUpdatedAt=new Date().toISOString().split('T')[0];
+  localStorage.setItem('fy_admin',JSON.stringify(adminSettings));
+  const m=document.getElementById('rate-msg');m.textContent='✓ 匯率已儲存';setTimeout(()=>m.textContent='',2500);
+  renderRateFreshness();
+}
+
+function renderRateFreshness(){
+  const el=document.getElementById('rate-freshness');
+  if(!el)return;
+  const updated=adminSettings.rateUpdatedAt||'';
+  if(!updated){el.innerHTML='<span style="color:var(--text3);font-size:10px">尚未記錄更新日期</span>';return;}
+  const days=Math.floor((Date.now()-new Date(updated).getTime())/(1000*60*60*24));
+  const alertDays=adminSettings.rateAlertDays||7;
+  const color=days>=alertDays?'#dc2626':'#059669';
+  const icon=days>=alertDays?'⚠️':'✓';
+  el.innerHTML='<div style="font-size:11px;color:'+color+';font-weight:500">'+icon+' 上次更新：'+updated+'</div>'
+    +'<div style="font-size:10px;color:var(--text3);margin-top:2px">距今 '+days+' 天'+(days>=alertDays?' · <span style="color:#dc2626">建議更新</span>':'')+'</div>';
+}
+
+function saveSettings(){
+  companyInfo={company:document.getElementById('s-company').value,phone:document.getElementById('s-phone').value,email:document.getElementById('s-email').value,website:document.getElementById('s-website').value,note:document.getElementById('s-note').value};
+  localStorage.setItem('fy_company',JSON.stringify(companyInfo));alert('✅ 設定已儲存');
+}
+
+// ── History ──
+function renderHistory(){
+  const list=document.getElementById('history-list');
+  if(!history.length){list.innerHTML=`<div class="empty-state"><div class="empty-state-icon">📋</div><div class="empty-state-title">尚無報價紀錄</div><div class="empty-state-sub">建立第一份報價後將顯示於此</div></div>`;return;}
+  list.innerHTML=history.map(q=>`<div class="history-row">
+    <div class="td td-name">${q.studentName}</div>
+    <div class="td">${q.school} · ${q.campus}</div>
+    <div class="td" style="font-size:11px">${q.course||'—'}</div>
+    <div class="td td-amount">NT$ ${Math.round(q.finalTWD||q.totalTWD||0).toLocaleString()}</div>
+    <div class="td"><span class="status-pill ${q.status==='draft'?'status-draft':'status-sent'}">${q.status==='draft'?'草稿':'已寄出'}</span></div>
+    <div class="td"><button class="btn btn-sm" onclick="loadQ(${q.id})">載入</button></div>
+  </div>`).join('');
+}
+
+function filterHistory(q){
+  document.querySelectorAll('.history-row').forEach(r=>{r.style.display=r.textContent.toLowerCase().includes(q.toLowerCase())?'':'none';});
+}
+
+function loadQ(id){
+  const q=history.find(h=>h.id===id);if(!q)return;
+  showPage('wizard');state.school=q.school;state.campus=q.campus;state.weeks=q.weeks;state.startDate=q.startDate;state.studentName=q.studentName;state.step=5;
+  renderWizard();
+}
+
+// ── PDF Export ──
+function exportPDF(mode='student'){
+  const calc=calculate();
+  const pk=isPeak();
+  const ci=companyInfo;
+  const studentLabel=state.studentName||'報價單';
+  const dateStr=new Date().toLocaleDateString('zh-TW').replace(/\//g,'-');
+
+  const html=`<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>報價單 - ${studentLabel}</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans TC',sans-serif;color:#1a1a2e;font-size:13px;background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{max-width:720px;margin:0 auto;padding:48px}
+.header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px;padding-bottom:20px;border-bottom:3px solid #e91e8c}
+.co-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#e91e8c;font-weight:600;margin-bottom:5px}
+.co-name{font-size:24px;font-weight:700;color:#1a1a2e}
+.doc-title{font-size:30px;font-weight:700;color:#e91e8c;text-align:right;letter-spacing:.05em}
+.doc-date{font-size:12px;color:#999;text-align:right;margin-top:5px}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:28px;border:1.5px solid #fce4f3;border-radius:10px;overflow:hidden}
+.info-cell{padding:12px 16px;background:#fce4f3}
+.info-cell:nth-child(odd){background:#fce4f3}
+.info-cell:nth-child(even){background:#fdf0f9}
+.info-label{font-size:9px;font-weight:700;color:#c01070;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.info-val{font-size:14px;font-weight:600;color:#1a1a2e}
+.section-label{font-size:10px;font-weight:700;color:#e91e8c;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;padding-bottom:7px;border-bottom:1.5px solid #fce4f3}
+table{width:100%;border-collapse:collapse;margin-bottom:16px}
+thead tr{background:#f8f8fa}
+thead th{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#777;padding:9px 10px;text-align:left;border-bottom:1.5px solid #e8e8f0}
+thead th:last-child,thead th:nth-last-child(2){text-align:right}
+tbody tr{border-bottom:1px solid #f0f0f5}
+tbody tr:last-child{border-bottom:none}
+tbody td{padding:11px 10px;font-size:12px;color:#333;vertical-align:top}
+tbody td:last-child,tbody td:nth-last-child(2){text-align:right}
+.note-col{color:#999;font-size:11px}
+.orig-col{font-weight:600;color:#555}
+.twd-col{font-weight:700;color:#e91e8c}
+.peak-tag{font-size:9px;background:#fff7ed;color:#d97706;border:1px solid #fde68a;padding:1px 6px;border-radius:4px;margin-left:6px;font-weight:600}
+.total-box{background:#e91e8c;border-radius:10px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;margin-top:4px;margin-bottom:28px}
+.total-left .tl-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:4px}
+.total-left .tl-orig{font-size:12px;color:rgba(255,255,255,.65)}
+.total-amt{font-size:32px;font-weight:700;color:#fff}
+.footer{border-top:1px solid #eee;padding-top:18px;display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.footer-note{font-size:10px;color:#999;line-height:1.8;flex:1}
+.footer-contact{font-size:11px;color:#666;text-align:right;line-height:2}
+.footer-co{font-size:13px;font-weight:700;color:#1a1a2e;margin-bottom:4px;text-align:right}
+@page{margin:12mm;size:A4}
+@media print{body{padding:0}.page{padding:0;max-width:100%}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div>
+      <div class="co-label">Language School Quotation</div>
+      <div class="co-name">${ci.company}</div>
+    </div>
+    <div>
+      <div class="doc-title">QUOTATION</div>
+      <div class="doc-date">${dateStr}</div>
+    </div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-cell"><div class="info-label">學生姓名 Student</div><div class="info-val">${state.studentName||'—'}</div></div>
+    <div class="info-cell"><div class="info-label">電子信箱 Email</div><div class="info-val">${state.studentEmail||'—'}</div></div>
+    <div class="info-cell"><div class="info-label">學校 · 校區</div><div class="info-val">${state.school} · ${state.campus}</div></div>
+    <div class="info-cell"><div class="info-label">週數 / 開始日期</div><div class="info-val">${state.weeks} 週 &nbsp;/&nbsp; ${state.startDate||'待定'}</div></div>
+  </div>
+
+  <div class="section-label">費用明細 Cost Breakdown</div>
+  <table>
+    <thead><tr><th>費用項目</th><th>說明</th><th>原幣金額</th><th>新台幣換算</th></tr></thead>
+    <tbody>
+      ${calc.items.map(i=>`<tr>
+        <td>${i.name}${pk?'<span class="peak-tag">旺季</span>':''}</td>
+        <td class="note-col">${isInternal?(i.note||''):''}</td>
+        <td class="orig-col">${i.display}</td>
+        <td class="twd-col">NT$ ${i.twd.toLocaleString()}</td>
+      </tr>`).join('')}
+      ${(calc.discLines||[]).length>0 && !isInternal?`<tr style="border-top:1.5px solid #fce4f3">
+        <td colspan="2" style="color:#e91e8c;font-weight:600">優惠折扣</td>
+        <td></td>
+        <td class="twd-col" style="color:#10b981">-NT$ ${calc.discountAmt.toLocaleString()}</td>
+      </tr>`:''}
+    </tbody>
+  </table>
+
+  <div class="total-box">
+    <div class="total-left">
+      <div class="tl-label">${isInternal?'含稅售價 (Internal) ':'含稅售價 Estimated Total '}</div>
+      <div class="tl-orig">≈ ${calc.totalOrig}</div>
+    </div>
+    <div class="total-amt">NT$ ${calc.finalTWD.toLocaleString()}</div>
+  </div>
+  ${isInternal?`<div style="margin-top:12px;background:#f8f8fa;border-radius:8px;padding:12px;font-size:11px;color:#555">
+    <div style="font-weight:600;margin-bottom:6px;color:#333">內部計費明細</div>
+    <div style="display:flex;justify-content:space-between;padding:3px 0"><span>外幣成本換台幣</span><span>NT$ ${calc.rawCostTWD.toLocaleString()}</span></div>
+    <div style="display:flex;justify-content:space-between;padding:3px 0"><span>匯差緩衝 (+${(((calc.fxBuf||1)-1)*100).toFixed(0)}%)</span><span>NT$ ${(calc.costTWD-calc.rawCostTWD).toLocaleString()}</span></div>
+    <div style="display:flex;justify-content:space-between;padding:3px 0"><span>台幣成本</span><span>NT$ ${calc.costTWD.toLocaleString()}</span></div>
+    <div style="display:flex;justify-content:space-between;padding:3px 0"><span>顧問獎金 (+${(((calc.commPct||0))*100).toFixed(0)}%)</span><span>NT$ ${calc.commissionTWD.toLocaleString()}</span></div>
+    <div style="display:flex;justify-content:space-between;padding:3px 0;font-weight:600"><span>未稅售價</span><span>NT$ ${calc.preTaxSell.toLocaleString()}</span></div>
+    ${(calc.discLines||[]).map(d=>`<div style="display:flex;justify-content:space-between;padding:3px 0;color:#e91e8c"><span>${d.label}</span><span>-NT$ ${Math.abs(d.amt).toLocaleString()}</span></div>`).join('')}
+    <div style="display:flex;justify-content:space-between;padding:3px 0"><span>營業稅 ${adminSettings.taxRate||5}%</span><span>NT$ ${calc.taxAmt.toLocaleString()}</span></div>
+    <div style="border-top:1.5px solid #e8e8f0;margin-top:6px;padding-top:6px">
+    <div style="display:flex;justify-content:space-between;padding:3px 0;color:#059669"><span>＋ 預估回傭 (${calc.rebatePct}%)</span><span>+NT$ ${calc.rebateTWD.toLocaleString()}</span></div>
+    <div style="display:flex;justify-content:space-between;padding:4px 0;font-weight:700;font-size:12px;margin-top:4px"><span style="color:#15803d">預估淨利</span><span style="color:#15803d">NT$ ${calc.netProfit.toLocaleString()} &nbsp;(${calc.netMargin.toFixed(1)}%)</span></div>
+    </div>
+  </div>`:''}
+
+  <div class="footer">
+    <div class="footer-note">${ci.note}<br><br>匯率參考：${Object.entries(rates).map(([c,r])=>`1 ${c} = ${r} TWD`).join('　')}</div>
+    <div>
+      <div class="footer-co">${ci.company}</div>
+      <div class="footer-contact">${[ci.phone,ci.email,ci.website].filter(Boolean).join('<br>')}</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>`;
+
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;
+  a.download=`${isInternal?'內部報價_':'報價單_'}${studentLabel}_${dateStr}.html`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url),3000);
+
+  // Also show preview instruction
+  const btn=document.querySelector('#step-content .btn-pink[onclick="exportPDF()"]');
+  if(btn){
+    const tip=document.createElement('div');
+    tip.style.cssText='font-size:11px;color:var(--text3);margin-top:10px;background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:9px 12px;line-height:1.7';
+    tip.innerHTML='✅ 報價單已下載！<br>開啟下載的 .html 檔案後，按 <strong>Ctrl+P</strong>（Mac: ⌘+P）即可列印或儲存為 PDF。';
+    btn.parentElement.appendChild(tip);
+    setTimeout(()=>tip.remove(),8000);
+  }
+}
+
+function saveAdmin(){
+  adminSettings.fxBuffer=parseFloat(document.getElementById('a-fxbuf').value)||0;
+  adminSettings.commissionPct=parseFloat(document.getElementById('a-comm').value)||0;
+  adminSettings.taxRate=parseFloat(document.getElementById('a-tax').value)||5;
+  const vEl=document.getElementById('a-valid');
+  const aEl=document.getElementById('a-alert');
+  if(vEl)adminSettings.quoteValidDays=parseInt(vEl.value)||30;
+  if(aEl)adminSettings.rateAlertDays=parseInt(aEl.value)||7;
+  localStorage.setItem('fy_admin',JSON.stringify(adminSettings));
+  const m=document.getElementById('admin-msg');m.textContent='✓ 已儲存';setTimeout(()=>m.textContent='',2000);
+}
+
+function saveRebates(){
+  const schools=Object.keys(SCHOOL_DATA);
+  if(!adminSettings.rebates)adminSettings.rebates={};
+  schools.forEach(s=>{
+    const el=document.getElementById('reb-'+s);
+    if(el)adminSettings.rebates[s]=parseFloat(el.value)||0;
+  });
+  localStorage.setItem('fy_admin',JSON.stringify(adminSettings));
+  const m=document.getElementById('rebate-msg');m.textContent='✓ 已儲存';setTimeout(()=>m.textContent='',2000);
+}
+
+function renderDiscountPlans(){
+  const el=document.getElementById('discount-plan-list');
+  if(!el)return;
+  const plans=adminSettings.discountPlans||[];
+  if(!plans.length){el.innerHTML='<div style="font-size:12px;color:var(--text3);padding:8px 0">尚無折扣方案</div>';return;}
+  el.innerHTML=plans.map((p,i)=>'<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:8px;display:flex;gap:10px;align-items:flex-start">'
+    +'<div style="flex:1">'
+    +'<div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:4px">'+p.label+'</div>'
+    +'<div style="font-size:11px;color:var(--text3)">'+p.school+(p.campus?' · '+p.campus:'')
+    +' &nbsp;|&nbsp; '+(p.pct>0?'-'+p.pct+'%':p.fixed>0?'-NT$'+p.fixed:'—')
+    +' &nbsp;|&nbsp; '+(p.validFrom||'')+(p.validTo?' ～ '+p.validTo:'')+'</div>'
+    +'</div>'
+    +'<label style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text3);cursor:pointer">'
+    +'<input type="checkbox" data-pidx="'+i+'" '+(p.active?'checked':'')+'> 啟用</label>'
+    +'<button class="btn btn-sm" data-didx="'+i+'" style="color:var(--danger,#ef4444);border-color:transparent">刪除</button>'
+    +'</div>').join('');
+  // Bind change/click events
+  el.querySelectorAll('input[data-pidx]').forEach(inp=>{
+    inp.addEventListener('change',function(){togglePlan(parseInt(this.dataset.pidx),this.checked);});
+  });
+  el.querySelectorAll('button[data-didx]').forEach(btn=>{
+    btn.addEventListener('click',function(){deletePlan(parseInt(this.dataset.didx));});
+  });
+}
+
+function addDiscountPlan(){
+  const schools=Object.keys(SCHOOL_DATA);
+  const schoolOpts=schools.map(s=>'<option>'+s+'</option>').join('');
+  const modal=document.createElement('div');
+  modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:9999';
+  modal.innerHTML='<div style="background:#fff;border-radius:14px;padding:24px;width:440px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,.2)">'
+    +'<div style="font-size:16px;font-weight:700;margin-bottom:16px;color:var(--text)">新增廠商折扣方案</div>'
+    +'<div style="display:grid;gap:10px">'
+    +'<div class="form-group"><label class="form-label">方案名稱</label><input class="form-input" id="np-label" placeholder="EP Brisbane 淡季優惠"></div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'
+    +'<div class="form-group"><label class="form-label">學校</label><select class="form-select" id="np-school">'+schoolOpts+'</select></div>'
+    +'<div class="form-group"><label class="form-label">校區（留空=全部）</label><input class="form-input" id="np-campus" placeholder="Brisbane"></div>'
+    +'</div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'
+    +'<div class="form-group"><label class="form-label">折扣 %（0=不用）</label><input class="form-input" type="number" id="np-pct" value="0" min="0" max="99"></div>'
+    +'<div class="form-group"><label class="form-label">固定折抵 NT$</label><input class="form-input" type="number" id="np-fixed" value="0" min="0"></div>'
+    +'</div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'
+    +'<div class="form-group"><label class="form-label">開始日期</label><input class="form-input" type="date" id="np-from"></div>'
+    +'<div class="form-group"><label class="form-label">結束日期</label><input class="form-input" type="date" id="np-to"></div>'
+    +'</div>'
+    +'</div>'
+    +'<div style="display:flex;gap:8px;margin-top:16px;justify-content:flex-end">'
+    +'<button class="btn" id="modal-cancel-btn">取消</button>'
+    +'<button class="btn btn-pink" onclick="confirmAddPlan(this)">新增</button>'
+    +'</div></div>';
+  document.body.appendChild(modal);
+  document.getElementById('modal-cancel-btn').addEventListener('click',function(){this.closest('[style*="fixed"]').remove();});
+}
+
+function confirmAddPlan(btn){
+  const m=btn.closest('[style*="fixed"]');
+  const plan={
+    id:'dp'+Date.now(),
+    label:document.getElementById('np-label').value||'新方案',
+    school:document.getElementById('np-school').value,
+    campus:document.getElementById('np-campus').value||'',
+    pct:parseFloat(document.getElementById('np-pct').value)||0,
+    fixed:parseFloat(document.getElementById('np-fixed').value)||0,
+    validFrom:document.getElementById('np-from').value||'',
+    validTo:document.getElementById('np-to').value||'',
+    active:true
+  };
+  adminSettings.discountPlans.push(plan);
+  localStorage.setItem('fy_admin',JSON.stringify(adminSettings));
+  m.remove();
+  renderDiscountPlans();
+}
+
+function togglePlan(i,v){adminSettings.discountPlans[i].active=v;localStorage.setItem('fy_admin',JSON.stringify(adminSettings));}
+function deletePlan(i){if(!confirm('確定刪除此方案？'))return;adminSettings.discountPlans.splice(i,1);localStorage.setItem('fy_admin',JSON.stringify(adminSettings));renderDiscountPlans();}
+
+// Init
+renderWizard();renderQP();updateBadge();
