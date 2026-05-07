@@ -304,16 +304,6 @@ hr{border:none;border-top:1px solid var(--border);margin:14px 0}
       <span class="nav-badge" id="history-badge">0</span>
     </button>
 
-    <div class="nav-section-label">分析報表</div>
-    <button class="nav-item" onclick="showPage('dashboard')">
-      <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>
-      報價分析
-    </button>
-    <button class="nav-item" onclick="showPage('profit')">
-      <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
-      淨利報表
-    </button>
-
     <div class="nav-section-label">系統設定</div>
     <button class="nav-item" onclick="showPage('settings')">
       <svg class="nav-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/></svg>
@@ -516,36 +506,6 @@ hr{border:none;border-top:1px solid var(--border);margin:14px 0}
 
   </div>
 
-    <!-- ══ Dashboard ══ -->
-    <div class="page" id="page-dashboard">
-      <div class="page-wrap">
-        <div class="page-header">
-          <div class="page-title-tag">管理員專屬</div>
-          <div class="page-title">報價分析 Dashboard</div>
-        </div>
-        <div id="dashboard-body"></div>
-      </div>
-    </div>
-
-    <!-- ══ Profit Report ══ -->
-    <div class="page" id="page-profit">
-      <div class="page-wrap">
-        <div class="page-header" style="display:flex;align-items:center;justify-content:space-between">
-          <div>
-            <div class="page-title-tag">管理員專屬</div>
-            <div class="page-title">淨利報表</div>
-          </div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <select class="form-select" id="profit-filter-school" style="font-size:12px;padding:5px 10px">
-              <option value="">全部學校</option>
-              <option>EP</option><option>ILSC</option><option>Kaplan</option>
-            </select>
-            <input type="month" class="form-input" id="profit-filter-month" style="font-size:12px;padding:5px 10px;max-width:150px">
-          </div>
-        </div>
-        <div id="profit-body"></div>
-      </div>
-    </div>
 
   </div>
 </main>
@@ -604,8 +564,6 @@ function switchUser(uid){
   // Re-render current page
   const activePage=document.querySelector('.page.active');
   if(activePage&&activePage.id==='page-history') renderHistory();
-  if(activePage&&activePage.id==='page-dashboard') renderDashboard();
-  if(activePage&&activePage.id==='page-profit') renderProfitReport();
   updateBadge();
 }
 
@@ -1781,127 +1739,6 @@ function confirmAddPlan(btn){
 
 function togglePlan(i,v){adminSettings.discountPlans[i].active=v;localStorage.setItem('fy_admin',JSON.stringify(adminSettings));}
 function deletePlan(i){if(!confirm('確定刪除此方案？'))return;adminSettings.discountPlans.splice(i,1);localStorage.setItem('fy_admin',JSON.stringify(adminSettings));renderDiscountPlans();}
-
-// ── Dashboard ──
-function renderDashboard(){
-  const el=document.getElementById('dashboard-body');
-  const isAdmin=currentUser.role==='admin';
-  if(!isAdmin){el.innerHTML='<div class="empty-state"><div class="empty-icon">🔐</div><div class="empty-title">管理員專屬</div><div class="empty-sub">請切換為管理員身份查看</div></div>';return;}
-  if(!history.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">📊</div><div class="empty-title">尚無報價資料</div></div>';return;}
-
-  const total=history.length;
-  const totalRevenue=history.reduce((s,q)=>s+(q.finalTWD||0),0);
-  const totalProfit=history.reduce((s,q)=>s+(q.netProfit||0),0);
-  const avgMargin=total>0?Math.round(totalProfit/totalRevenue*1000)/10:0;
-
-  // School breakdown
-  const bySchool={};
-  history.forEach(q=>{if(q.school){bySchool[q.school]=(bySchool[q.school]||0)+1;}});
-
-  // Advisor breakdown
-  const byAdvisor={};
-  history.forEach(q=>{const n=q.advisorName||'未知';byAdvisor[n]=(byAdvisor[n]||0)+1;});
-
-  const statCard=(icon,label,val,sub,col)=>`<div class="stat-card" style="border-color:${col||'var(--border)'};flex:1;min-width:140px">
-    <div style="font-size:20px;margin-bottom:4px">${icon}</div>
-    <div style="font-size:22px;font-weight:700;color:${col||'var(--text)'}">${val}</div>
-    <div style="font-size:11px;font-weight:600;color:var(--text2);margin-top:2px">${label}</div>
-    ${sub?`<div style="font-size:10px;color:var(--text3);margin-top:2px">${sub}</div>`:''}
-  </div>`;
-
-  const barRow=(label,val,max,col)=>{const pct=max>0?Math.round(val/max*100):0;return`<div style="margin-bottom:10px">
-    <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px">
-      <span style="color:var(--text2)">${label}</span><span style="font-weight:600">${val} 筆</span>
-    </div>
-    <div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden">
-      <div style="background:${col||'var(--pink)'};height:100%;width:${pct}%;border-radius:4px;transition:width .4s"></div>
-    </div>
-  </div>`;};
-
-  const maxSch=Math.max(...Object.values(bySchool));
-  const maxAdv=Math.max(...Object.values(byAdvisor));
-  const schoolColors={EP:'#e91e8c',ILSC:'#7c3aed',Kaplan:'#0369a1'};
-
-  el.innerHTML=`
-    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px">
-      ${statCard('📋','總報價件數',total,'件','var(--text)')}
-      ${statCard('💰','總含稅售價','NT$ '+Math.round(totalRevenue/10000)+'萬','累計','#0369a1')}
-      ${statCard('📈','預估淨利','NT$ '+Math.round(totalProfit/10000)+'萬','合計','#059669')}
-      ${statCard('🎯','平均淨利率',avgMargin.toFixed(1)+'%','整體','#7c3aed')}
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-      <div class="settings-card">
-        <div class="settings-card-title">各學校成交件數</div>
-        ${Object.entries(bySchool).sort((a,b)=>b[1]-a[1]).map(([s,v])=>barRow(s,v,maxSch,schoolColors[s]||'var(--pink)')).join('')}
-      </div>
-      <div class="settings-card">
-        <div class="settings-card-title">顧問報價件數</div>
-        ${Object.entries(byAdvisor).sort((a,b)=>b[1]-a[1]).map(([n,v])=>barRow(n,v,maxAdv,'#e91e8c')).join('')}
-      </div>
-    </div>`;
-}
-
-// ── Profit Report ──
-function renderProfitReport(){
-  const el=document.getElementById('profit-body');
-  const isAdmin=currentUser.role==='admin';
-  if(!isAdmin){el.innerHTML='<div class="empty-state"><div class="empty-icon">🔐</div><div class="empty-title">管理員專屬</div></div>';return;}
-
-  const school=document.getElementById('profit-filter-school')?.value||'';
-  const month=document.getElementById('profit-filter-month')?.value||'';
-
-  let qs=history.filter(q=>{
-    if(school&&q.school!==school)return false;
-    if(month&&q.date){
-      const d=q.date.replace(/\//g,'-');
-      if(!d.startsWith(month))return false;
-    }
-    return true;
-  });
-
-  if(!qs.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">💹</div><div class="empty-title">此篩選條件無資料</div></div>';return;}
-
-  const totRev=qs.reduce((s,q)=>s+(q.finalTWD||0),0);
-  const totProfit=qs.reduce((s,q)=>s+(q.netProfit||0),0);
-  const avgM=totRev>0?Math.round(totProfit/totRev*1000)/10:0;
-
-  const rows=qs.map(q=>{
-    const margin=q.finalTWD>0?Math.round((q.netProfit||0)/(q.finalTWD)*1000)/10:0;
-    const marginColor=margin>=15?'#059669':margin>=5?'#d97706':'#dc2626';
-    return`<div class="history-row">
-      <div class="td" style="font-weight:500">${q.studentName}</div>
-      <div class="td" style="font-size:11px">${q.school||'—'} · ${q.campus||'—'}</div>
-      <div class="td" style="font-size:11px;color:var(--text3)">${q.advisorName||'—'}</div>
-      <div class="td td-amount">NT$ ${Math.round(q.finalTWD||0).toLocaleString()}</div>
-      <div class="td td-amount" style="color:#059669">+NT$ ${Math.round(q.rebateTWD||0).toLocaleString()}</div>
-      <div class="td td-amount" style="color:${marginColor};font-weight:700">NT$ ${Math.round(q.netProfit||0).toLocaleString()}</div>
-      <div class="td" style="color:${marginColor};font-weight:600;text-align:right">${margin.toFixed(1)}%</div>
-      <div class="td" style="font-size:11px;color:var(--text3)">${q.date||'—'}</div>
-    </div>`;
-  }).join('');
-
-  el.innerHTML=`
-    <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
-      <div class="stat-card" style="flex:1;min-width:120px"><div style="font-size:18px;font-weight:700;color:#0369a1">NT$ ${Math.round(totRev/10000)}萬</div><div style="font-size:11px;color:var(--text2)">含稅售價合計</div></div>
-      <div class="stat-card" style="flex:1;min-width:120px"><div style="font-size:18px;font-weight:700;color:#059669">NT$ ${Math.round(totProfit/10000)}萬</div><div style="font-size:11px;color:var(--text2)">預估淨利合計</div></div>
-      <div class="stat-card" style="flex:1;min-width:120px"><div style="font-size:18px;font-weight:700;color:#7c3aed">${avgM.toFixed(1)}%</div><div style="font-size:11px;color:var(--text2)">平均淨利率</div></div>
-      <div class="stat-card" style="flex:1;min-width:120px"><div style="font-size:18px;font-weight:700">${qs.length} 筆</div><div style="font-size:11px;color:var(--text2)">報價筆數</div></div>
-    </div>
-    <div class="history-table">
-      <div class="table-head">
-        <div class="th">學生</div><div class="th">學校・校區</div><div class="th">顧問</div>
-        <div class="th">含稅售價</div><div class="th">回傭</div><div class="th">預估淨利</div>
-        <div class="th">淨利率</div><div class="th">日期</div>
-      </div>
-      ${rows}
-    </div>`;
-
-  // Bind filters
-  ['profit-filter-school','profit-filter-month'].forEach(id=>{
-    const el2=document.getElementById(id);
-    if(el2&&!el2._bound){el2.addEventListener('change',renderProfitReport);el2._bound=true;}
-  });
-}
 
 // Init
 renderWizard();renderQP();updateBadge();
