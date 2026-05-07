@@ -82,7 +82,7 @@ function step0(){
   const schools=['EP','ILSC','Kaplan'];
   const coming=['IH','BESA','Winning'];
   const html=`<div class="step-header">
-    <div class="step-num-tag">步驟 1 / 7</div>
+    <div class="step-num-tag">步驟 1 / 6</div>
     <div class="step-title">選擇語言學校</div>
     <div class="step-desc">Select Language School</div>
   </div>
@@ -145,7 +145,7 @@ function step1(){
   }
 
   document.getElementById('step-content').innerHTML=`<div class="step-header">
-    <div class="step-num-tag">步驟 2 / 7</div>
+    <div class="step-num-tag">步驟 2 / 6</div>
     <div class="step-title">校區與課程選擇</div>
     <div class="step-desc">Campus & Course Selection</div>
   </div>
@@ -319,127 +319,137 @@ function toggleExtra(f){
 
 // Step 5 - Discount
 function step5disc(){
-  const d = state.disc;
-
-  // Filter matching school discount plans
-  const schoolDiscs = (adminSettings.discountPlans||[]).filter(function(p){
-    if(!p.active || p.school !== state.school) return false;
-    if(p.campus && p.campus !== state.campus) return false;
-    if(!state.startDate) return true;
-    var dt = new Date(state.startDate);
-    var from = p.validFrom ? new Date(p.validFrom) : null;
-    var to   = p.validTo   ? new Date(p.validTo)   : null;
-    if(from && dt < from) return false;
-    if(to   && dt > to)   return false;
+  const d=state.disc;
+  const schoolDiscs=(adminSettings.discountPlans||[]).filter(p=>{
+    if(!p.active||p.school!==state.school)return false;
+    if(p.campus&&p.campus!==state.campus)return false;
+    if(!state.startDate)return true;
+    const dt=new Date(state.startDate);
+    const from=p.validFrom?new Date(p.validFrom):null;
+    const to=p.validTo?new Date(p.validTo):null;
+    if(from&&dt<from)return false;
+    if(to&&dt>to)return false;
     return true;
   });
-  window._sdPlans = schoolDiscs;
+  window._sdPlans=schoolDiscs;
 
-  var cPlans = [
-    {type:'原價',     label:'原價',           sub:'不套用公司折扣',   pct:0,  fixed:0},
-    {type:'優惠價',   label:'優惠價',          sub:'公司季節優惠方案', pct:(d.type==='優惠價'?d.pct:10), fixed:0},
-    {type:'出清價',   label:'出清價',          sub:'特殊出清方案',     pct:(d.type==='出清價'?d.pct:20), fixed:0},
-    {type:'折抵3000', label:'折抵 NT$3,000',  sub:'固定金額折抵',     pct:0,  fixed:3000},
-    {type:'折抵6000', label:'折抵 NT$6,000',  sub:'固定金額折抵',     pct:0,  fixed:6000},
+  const cPlans=[
+    {type:'原價',label:'原價',sub:'不套用公司折扣',pct:0,fixed:0},
+    {type:'優惠價',label:'優惠價',sub:'公司季節優惠方案',pct:d.type==='優惠價'?d.pct:10,fixed:0},
+    {type:'出清價',label:'出清價',sub:'特殊出清方案',pct:d.type==='出清價'?d.pct:20,fixed:0},
+    {type:'折抵3000',label:'折抵 NT$3,000',sub:'固定金額折抵',pct:0,fixed:3000},
+    {type:'折抵6000',label:'折抵 NT$6,000',sub:'固定金額折抵',pct:0,fixed:6000},
   ];
 
-  // ── Build HTML ──
-  var sdRows = '';
-  if(schoolDiscs.length > 0){
-    schoolDiscs.forEach(function(p, i){
-      var on = d.schoolDiscount && d.schoolDiscount.id === p.id;
-      var priceLbl = p.pct>0 ? '-'+p.pct+'%' : p.fixed>0 ? '-NT$'+p.fixed.toLocaleString() : '—';
-      sdRows += '<div class="course-item'+(on?' selected':'')+'" data-sidx="'+i+'" data-action="sd">'
+  // Build school discount rows
+  let sdHTML='';
+  if(schoolDiscs.length>0){
+    let rows=schoolDiscs.map((p,i)=>{
+      const on=d.schoolDiscount&&d.schoolDiscount.id===p.id;
+      const priceLabel=p.pct>0?'-'+p.pct+'%':p.fixed>0?'-NT$'+p.fixed.toLocaleString():'—';
+      return '<div class="course-item disc-sd-item'+(on?' selected':'')+'" data-sidx="'+i+'">'
         +'<div class="course-radio"></div>'
         +'<div style="flex:1"><div class="course-name">'+p.label+'</div>'
         +'<div class="course-cat">廠商折扣 · '+(p.validFrom||'')+(p.validTo?' ～ '+p.validTo:'')+'</div></div>'
-        +'<div style="text-align:right"><div class="course-price">'+priceLbl+'</div></div>'
+        +'<div style="text-align:right"><div class="course-price">'+priceLabel+'</div></div>'
         +'</div>';
-    });
-    sdRows += '<div class="course-item'+(d.schoolDiscount?'':' selected')+'" data-action="sd-none">'
+    }).join('');
+    const noSel=d.schoolDiscount?'':'selected';
+    rows+='<div class="course-item disc-sd-none '+ noSel +'">'
       +'<div class="course-radio"></div><div><div class="course-name">不套用廠商折扣</div></div></div>';
-  }
-
-  var sdSection = schoolDiscs.length > 0
-    ? '<div class="form-section" style="border:1.5px solid #bae6fd">'
+    sdHTML='<div class="form-section" style="border:1.5px solid #bae6fd">'
       +'<div class="form-section-title" style="color:#0369a1">🏫 廠商折扣</div>'
       +'<div style="font-size:11px;color:var(--text3);margin-bottom:10px">學校提供的期間限定折扣</div>'
-      +'<div class="course-list">'+sdRows+'</div></div>'
-    : '<div class="info-notice">此學校 / 校區目前無廠商折扣方案</div>';
+      +'<div class="course-list" id="disc-sd-list">'+rows+'</div></div>';
+  } else {
+    sdHTML='<div class="info-notice">此學校 / 校區目前無廠商折扣方案</div>';
+  }
 
-  var coRows = '';
-  cPlans.forEach(function(p){
-    var sel = d.type === p.type;
-    var priceLbl = p.pct>0 ? '-'+p.pct+'%' : p.fixed>0 ? '-NT$'+p.fixed.toLocaleString() : '不折扣';
-    coRows += '<div class="course-item'+(sel?' selected':'')+'" data-action="cd"'
-      +' data-dtype="'+p.type+'" data-dpct="'+p.pct+'" data-dfixed="'+p.fixed+'">'
+  // Build company discount rows
+  const coRows=cPlans.map(p=>{
+    const sel=d.type===p.type;
+    const priceLabel=p.pct>0?'-'+p.pct+'%':p.fixed>0?'-NT$'+p.fixed.toLocaleString():'不折扣';
+    return '<div class="course-item disc-cd-item'+(sel?' selected':'')+'" data-dtype="'+p.type+'" data-dpct="'+p.pct+'" data-dfixed="'+p.fixed+'">'
       +'<div class="course-radio"></div>'
-      +'<div style="flex:1"><div class="course-name">'+p.label+'</div>'
-      +'<div class="course-cat">公司折扣 · '+p.sub+'</div></div>'
-      +'<div style="text-align:right"><div class="course-price">'+priceLbl+'</div></div>'
+      +'<div style="flex:1"><div class="course-name">'+p.label+'</div><div class="course-cat">公司折扣 · '+p.sub+'</div></div>'
+      +'<div style="text-align:right"><div class="course-price">'+priceLabel+'</div></div>'
       +'</div>';
-  });
+  }).join('');
 
-  var customPct = (d.type==='優惠價'||d.type==='出清價')
-    ? '<div class="form-group" style="margin-top:10px;max-width:200px">'
-      +'<label class="form-label">自訂折扣 %（0–99）</label>'
-      +'<input class="form-input" id="disc-pct-inp" type="number" min="0" max="99" value="'+d.pct+'">'
-      +'</div>'
-    : '';
-
-  var coSection = '<div class="form-section">'
+  const showCustomPct=(d.type==='優惠價'||d.type==='出清價');
+  const coHTML='<div class="form-section">'
     +'<div class="form-section-title">🏷️ 公司折扣</div>'
     +'<div style="font-size:11px;color:var(--text3);margin-bottom:10px">選擇公司折扣類型，可與廠商折扣疊加</div>'
-    +'<div class="course-list">'+coRows+'</div>'
-    +customPct+'</div>';
+    +'<div class="course-list" id="disc-cd-list">'+coRows+'</div>'
+    +(showCustomPct
+      ?'<div class="form-group" style="margin-top:10px;max-width:200px">'
+        +'<label class="form-label">自訂折扣 %（0–99）</label>'
+        +'<input class="form-input" id="disc-pct-inp" type="number" min="0" max="99" value="'+d.pct+'">'
+        +'</div>'
+      :'')
+    +'</div>';
 
-  document.getElementById('step-content').innerHTML =
+  document.getElementById('step-content').innerHTML=
     '<div class="step-header">'
     +'<div class="step-num-tag">步驟 6 / 7</div>'
     +'<div class="step-title">折扣方案</div>'
     +'<div class="step-desc">Discount Selection</div>'
     +'</div>'
-    + sdSection + coSection
+    +sdHTML+coHTML
     +'<div class="step-footer">'
-    +'<button class="btn" id="s5-prev">← 上一步</button>'
-    +'<button class="btn btn-pink" id="s5-next">下一步 →</button>'
+    +'<button class="btn" id="disc-prev-btn">← 上一步</button>'
+    +'<button class="btn btn-pink" id="disc-next-btn">下一步 →</button>'
     +'</div>';
 
-  // ── Direct bindings — no delegation, no re-render ──
-  document.getElementById('s5-prev').onclick = function(){ prev(); };
-  document.getElementById('s5-next').onclick = function(){ next(); };
+  // Bind ALL buttons directly after render — no delegation
+  document.getElementById('disc-prev-btn').onclick=function(){prev();};
+  document.getElementById('disc-next-btn').onclick=function(){next();};
 
-  document.querySelectorAll('[data-action]').forEach(function(el){
-    el.onclick = function(e){
-      var action = this.dataset.action;
-      if(action === 'sd'){
-        state.disc.schoolDiscount = window._sdPlans[parseInt(this.dataset.sidx)] || null;
-      } else if(action === 'sd-none'){
-        state.disc.schoolDiscount = null;
-      } else if(action === 'cd'){
-        state.disc.type  = this.dataset.dtype;
-        state.disc.pct   = parseFloat(this.dataset.dpct)   || 0;
-        state.disc.fixed = parseFloat(this.dataset.dfixed) || 0;
-      }
-      // Update selected class without re-rendering
-      document.querySelectorAll('[data-action="sd"],[data-action="sd-none"]').forEach(function(x){
-        var isSD = x.dataset.action==='sd';
-        var isSDNone = x.dataset.action==='sd-none';
-        if(isSD) x.classList.toggle('selected',
-          !!(state.disc.schoolDiscount && window._sdPlans[parseInt(x.dataset.sidx)] &&
-             state.disc.schoolDiscount.id === window._sdPlans[parseInt(x.dataset.sidx)].id));
-        if(isSDNone) x.classList.toggle('selected', !state.disc.schoolDiscount);
-      });
-      document.querySelectorAll('[data-action="cd"]').forEach(function(x){
-        x.classList.toggle('selected', x.dataset.dtype === state.disc.type);
-      });
-      renderQP();
+  // Bind school discount items
+  document.querySelectorAll('.disc-sd-item').forEach(function(el){
+    el.onclick=function(){
+      const idx=parseInt(this.dataset.sidx);
+      state.disc.schoolDiscount=window._sdPlans[idx]||null;
+      _updateDiscUI();renderQP();
+    };
+  });
+  const sdNoneEl=document.querySelector('.disc-sd-none');
+  if(sdNoneEl) sdNoneEl.onclick=function(){
+    state.disc.schoolDiscount=null;
+    _updateDiscUI();renderQP();
+  };
+
+  // Bind company discount items
+  document.querySelectorAll('.disc-cd-item').forEach(function(el){
+    el.onclick=function(){
+      state.disc.type=this.dataset.dtype;
+      state.disc.pct=parseFloat(this.dataset.dpct)||0;
+      state.disc.fixed=parseFloat(this.dataset.dfixed)||0;
+      _updateDiscUI();renderQP();
     };
   });
 
-  var pctInp = document.getElementById('disc-pct-inp');
-  if(pctInp) pctInp.oninput = function(){ state.disc.pct = parseInt(this.value)||0; renderQP(); };
+  const pctInp=document.getElementById('disc-pct-inp');
+  if(pctInp) pctInp.oninput=function(){state.disc.pct=parseInt(this.value)||0;renderQP();};
 }
+
+// Update discount UI selection state WITHOUT re-rendering entire step
+function _updateDiscUI(){
+  const d=state.disc;
+  // Update school discount selection
+  document.querySelectorAll('.disc-sd-item').forEach(function(el){
+    const idx=parseInt(el.dataset.sidx);
+    const p=window._sdPlans&&window._sdPlans[idx];
+    el.classList.toggle('selected', !!(d.schoolDiscount&&p&&d.schoolDiscount.id===p.id));
+  });
+  const sdNoneEl=document.querySelector('.disc-sd-none');
+  if(sdNoneEl) sdNoneEl.classList.toggle('selected',!d.schoolDiscount);
+  // Update company discount selection
+  document.querySelectorAll('.disc-cd-item').forEach(function(el){
+    el.classList.toggle('selected', el.dataset.dtype===d.type);
+  });
+}
+
 
 
 // Step 6 - Confirm
@@ -534,17 +544,14 @@ function step6confirm(){
     +'<button class="btn" id="btn-internal-pdf">📊 內部報價單</button>'
     +'<button class="btn btn-pink" id="btn-student-pdf">📄 學生報價單</button>'
     +'</div></div>';
-  setTimeout(()=>{
-    const bi=document.getElementById('btn-internal-pdf');
-    const bs=document.getElementById('btn-student-pdf');
-    if(bi)bi.addEventListener('click',()=>exportPDF('internal'));
-    if(bs)bs.addEventListener('click',()=>exportPDF('student'));
-  },0);
+  // Direct binding — no setTimeout needed
+  document.getElementById('btn-internal-pdf').onclick = function(){ exportPDF('internal'); };
+  document.getElementById('btn-student-pdf').onclick  = function(){ exportPDF('student');   };
 }
 
 // ── Calculate ──
 function calculate(){
-  if(!state.school||!state.campus||!state.course)return{items:[],costTWD:0,preTaxSell:0,discountAmt:0,taxAmt:0,finalTWD:0,totalOrig:'',discLines:[],fxBuf:1,commPct:0,rebatePct:0,rebateTWD:0,commissionTWD:0,netProfit:0,netMargin:0,rawCostTWD:0};
+  if(!state.school||!state.campus||!state.course)return{items:[],costTWD:0,preTaxSell:0,discountAmt:0,taxAmt:0,finalTWD:0,totalOrig:'',discLines:[]};
   const campusData=SCHOOL_DATA[state.school][state.campus];
   const fees=campusData?.fees||[];
   const w=state.weeks||4;
@@ -957,24 +964,39 @@ tbody td:last-child,tbody td:nth-last-child(2){text-align:right}
 </body>
 </html>`;
 
-  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;
-  a.download=`${isInternal?'內部報價_':'報價單_'}${studentLabel}_${dateStr}.html`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  setTimeout(()=>URL.revokeObjectURL(url),3000);
+  // Data URI download — works on GitHub Pages and all modern browsers
+  const filename = (isInternal?'內部報價_':'報價單_') + studentLabel + '_' + dateStr + '.html';
+  try {
+    // Method 1: Blob (preferred, works in most cases)
+    const blob = new Blob([html], {type:'text/html;charset=utf-8'});
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(()=>URL.revokeObjectURL(url), 3000);
+  } catch(e) {
+    // Method 2: data URI fallback
+    const encoded = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
+    const a = document.createElement('a');
+    a.href = encoded;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
 
-  // Also show preview instruction
-  const btn=document.querySelector('#step-content .btn-pink[onclick="exportPDF()"]');
-  if(btn){
-    const tip=document.createElement('div');
-    tip.style.cssText='font-size:11px;color:var(--text3);margin-top:10px;background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:9px 12px;line-height:1.7';
-    tip.innerHTML='✅ 報價單已下載！<br>開啟下載的 .html 檔案後，按 <strong>Ctrl+P</strong>（Mac: ⌘+P）即可列印或儲存為 PDF。';
-    btn.parentElement.appendChild(tip);
-    setTimeout(()=>tip.remove(),8000);
+  // Show success tip near the buttons
+  const footer = document.querySelector('.step-footer');
+  if(footer && !footer.querySelector('.dl-tip')){
+    const tip = document.createElement('div');
+    tip.className = 'dl-tip';
+    tip.style.cssText = 'font-size:11px;color:var(--text3);margin-top:10px;background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:9px 12px;line-height:1.7;width:100%';
+    tip.innerHTML = '✅ 報價單已下載！開啟 .html 後按 <strong>Ctrl+P</strong>（Mac: ⌘+P）列印 / 儲存 PDF。';
+    footer.appendChild(tip);
+    setTimeout(()=>tip.remove(), 6000);
   }
 }
 
