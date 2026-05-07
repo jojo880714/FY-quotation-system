@@ -542,8 +542,8 @@ function step6confirm(){
     +'<div class="step-footer">'
     +'<button class="btn" onclick="prev()">← 上一步</button>'
     +'<div style="display:flex;gap:8px">'
-    +'<button class="btn" id="btn-internal-pdf">📊 內部報價單</button>'
-    +'<button class="btn btn-pink" id="btn-student-pdf">📄 學生報價單</button>'
+    +'<button class="btn" id="btn-internal-pdf">📊 內部報價（PNG）</button>'
+    +'<button class="btn btn-pink" id="btn-student-pdf">📄 學生報價（PNG）</button>'
     +'</div></div>';
   // Direct binding — no setTimeout needed
   document.getElementById('btn-internal-pdf').onclick = function(){ exportPDF('internal'); };
@@ -861,164 +861,201 @@ function loadQ(id){
 
 // ── PDF Export ──
 function exportPDF(mode='student'){
-  const calc=calculate();
-  const pk=isPeak();
-  const ci=companyInfo;
-  const studentLabel=state.studentName||'報價單';
-  const dateStr=new Date().toLocaleDateString('zh-TW').replace(/\//g,'-');
+  const calc      = calculate();
+  const isInternal = mode === 'internal';
+  const pk         = isPeak();
+  const ci         = companyInfo;
+  const studentLabel = state.studentName || '報價單';
+  const dateStr    = new Date().toLocaleDateString('zh-TW').replace(/\//g,'-');
 
-  const html=`<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-<meta charset="UTF-8">
-<title>報價單 - ${studentLabel}</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap');
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Noto Sans TC',sans-serif;color:#1a1a2e;font-size:13px;background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.page{max-width:720px;margin:0 auto;padding:48px}
-.header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px;padding-bottom:20px;border-bottom:3px solid #e91e8c}
-.co-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#e91e8c;font-weight:600;margin-bottom:5px}
-.co-name{font-size:24px;font-weight:700;color:#1a1a2e}
-.doc-title{font-size:30px;font-weight:700;color:#e91e8c;text-align:right;letter-spacing:.05em}
-.doc-date{font-size:12px;color:#999;text-align:right;margin-top:5px}
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:28px;border:1.5px solid #fce4f3;border-radius:10px;overflow:hidden}
-.info-cell{padding:12px 16px;background:#fce4f3}
-.info-cell:nth-child(odd){background:#fce4f3}
-.info-cell:nth-child(even){background:#fdf0f9}
-.info-label{font-size:9px;font-weight:700;color:#c01070;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
-.info-val{font-size:14px;font-weight:600;color:#1a1a2e}
-.section-label{font-size:10px;font-weight:700;color:#e91e8c;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;padding-bottom:7px;border-bottom:1.5px solid #fce4f3}
-table{width:100%;border-collapse:collapse;margin-bottom:16px}
-thead tr{background:#f8f8fa}
-thead th{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#777;padding:9px 10px;text-align:left;border-bottom:1.5px solid #e8e8f0}
-thead th:last-child,thead th:nth-last-child(2){text-align:right}
-tbody tr{border-bottom:1px solid #f0f0f5}
-tbody tr:last-child{border-bottom:none}
-tbody td{padding:11px 10px;font-size:12px;color:#333;vertical-align:top}
-tbody td:last-child,tbody td:nth-last-child(2){text-align:right}
-.note-col{color:#999;font-size:11px}
-.orig-col{font-weight:600;color:#555}
-.twd-col{font-weight:700;color:#e91e8c}
-.peak-tag{font-size:9px;background:#fff7ed;color:#d97706;border:1px solid #fde68a;padding:1px 6px;border-radius:4px;margin-left:6px;font-weight:600}
-.total-box{background:#e91e8c;border-radius:10px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;margin-top:4px;margin-bottom:28px}
-.total-left .tl-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:4px}
-.total-left .tl-orig{font-size:12px;color:rgba(255,255,255,.65)}
-.total-amt{font-size:32px;font-weight:700;color:#fff}
-.footer{border-top:1px solid #eee;padding-top:18px;display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
-.footer-note{font-size:10px;color:#999;line-height:1.8;flex:1}
-.footer-contact{font-size:11px;color:#666;text-align:right;line-height:2}
-.footer-co{font-size:13px;font-weight:700;color:#1a1a2e;margin-bottom:4px;text-align:right}
-@page{margin:12mm;size:A4}
-@media print{body{padding:0}.page{padding:0;max-width:100%}}
-</style>
-</head>
-<body>
-<div class="page">
-  <div class="header">
-    <div>
-      <div class="co-label">Language School Quotation</div>
-      <div class="co-name">${ci.company}</div>
-    </div>
-    <div>
-      <div class="doc-title">QUOTATION</div>
-      <div class="doc-date">${dateStr}</div>
-    </div>
-  </div>
+  // ── Build the card DOM we want to screenshot ──
+  const wrap = document.createElement('div');
+  wrap.style.cssText = [
+    'position:fixed','top:-9999px','left:-9999px',
+    'width:720px','background:#fff','padding:40px',
+    'font-family:"Noto Sans TC",sans-serif','font-size:13px','color:#1a1a2e',
+    'border-radius:0','z-index:-1'
+  ].join(';');
 
-  <div class="info-grid">
-    <div class="info-cell"><div class="info-label">學生姓名 Student</div><div class="info-val">${state.studentName||'—'}</div></div>
-    <div class="info-cell"><div class="info-label">電子信箱 Email</div><div class="info-val">${state.studentEmail||'—'}</div></div>
-    <div class="info-cell"><div class="info-label">學校 · 校區</div><div class="info-val">${state.school} · ${state.campus}</div></div>
-    <div class="info-cell"><div class="info-label">週數 / 開始日期</div><div class="info-val">${state.weeks} 週 &nbsp;/&nbsp; ${state.startDate||'待定'}</div></div>
-  </div>
+  // header
+  const headerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;
+                margin-bottom:28px;padding-bottom:16px;border-bottom:3px solid #e91e8c">
+      <div>
+        <div style="font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+                    color:#e91e8c;font-weight:600;margin-bottom:4px">Language School Quotation</div>
+        <div style="font-size:22px;font-weight:700">${ci.company}</div>
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:26px;font-weight:700;color:#e91e8c;letter-spacing:.05em">QUOTATION</div>
+        <div style="font-size:11px;color:#999;margin-top:3px">${dateStr}${isInternal?' &#12288;[內部版本]':''}</div>
+      </div>
+    </div>`;
 
-  <div class="section-label">費用明細 Cost Breakdown</div>
-  <table>
-    <thead><tr><th>費用項目</th><th>說明</th><th>原幣金額</th><th>新台幣換算</th></tr></thead>
-    <tbody>
-      ${calc.items.map(i=>`<tr>
-        <td>${i.name}${pk?'<span class="peak-tag">旺季</span>':''}</td>
-        <td class="note-col">${isInternal?(i.note||''):''}</td>
-        <td class="orig-col">${i.display}</td>
-        <td class="twd-col">NT$ ${i.twd.toLocaleString()}</td>
-      </tr>`).join('')}
-      ${(calc.discLines||[]).length>0 && !isInternal?`<tr style="border-top:1.5px solid #fce4f3">
-        <td colspan="2" style="color:#e91e8c;font-weight:600">優惠折扣</td>
-        <td></td>
-        <td class="twd-col" style="color:#10b981">-NT$ ${calc.discountAmt.toLocaleString()}</td>
-      </tr>`:''}
-    </tbody>
-  </table>
+  // info grid
+  const infoHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;margin-bottom:22px;
+                border:1.5px solid #fce4f3;border-radius:8px;overflow:hidden">
+      ${[
+        ['學生姓名 Student', state.studentName||'—'],
+        ['電子信箱 Email',   state.studentEmail||'—'],
+        ['學校 · 校區',      (state.school||'')+'・'+(state.campus||'')],
+        ['週數 / 開始日期',  (state.weeks||'')+'週 / '+(state.startDate||'待定')],
+      ].map((r,i)=>`
+        <div style="padding:10px 14px;background:${i%2===0?'#fce4f3':'#fdf0f9'}">
+          <div style="font-size:9px;font-weight:700;color:#c01070;letter-spacing:.1em;
+                      text-transform:uppercase;margin-bottom:3px">${r[0]}</div>
+          <div style="font-size:13px;font-weight:600">${r[1]}</div>
+        </div>`).join('')}
+    </div>`;
 
-  <div class="total-box">
-    <div class="total-left">
-      <div class="tl-label">${isInternal?'含稅售價 (Internal) ':'含稅售價 Estimated Total '}</div>
-      <div class="tl-orig">≈ ${calc.totalOrig}</div>
-    </div>
-    <div class="total-amt">NT$ ${calc.finalTWD.toLocaleString()}</div>
-  </div>
-  ${isInternal?`<div style="margin-top:12px;background:#f8f8fa;border-radius:8px;padding:12px;font-size:11px;color:#555">
-    <div style="font-weight:600;margin-bottom:6px;color:#333">內部計費明細</div>
-    <div style="display:flex;justify-content:space-between;padding:3px 0"><span>外幣成本換台幣</span><span>NT$ ${calc.rawCostTWD.toLocaleString()}</span></div>
-    <div style="display:flex;justify-content:space-between;padding:3px 0"><span>匯差緩衝 (+${(((calc.fxBuf||1)-1)*100).toFixed(0)}%)</span><span>NT$ ${(calc.costTWD-calc.rawCostTWD).toLocaleString()}</span></div>
-    <div style="display:flex;justify-content:space-between;padding:3px 0"><span>台幣成本</span><span>NT$ ${calc.costTWD.toLocaleString()}</span></div>
-    <div style="display:flex;justify-content:space-between;padding:3px 0"><span>顧問獎金 (+${(((calc.commPct||0))*100).toFixed(0)}%)</span><span>NT$ ${calc.commissionTWD.toLocaleString()}</span></div>
-    <div style="display:flex;justify-content:space-between;padding:3px 0;font-weight:600"><span>未稅售價</span><span>NT$ ${calc.preTaxSell.toLocaleString()}</span></div>
-    ${(calc.discLines||[]).map(d=>`<div style="display:flex;justify-content:space-between;padding:3px 0;color:#e91e8c"><span>${d.label}</span><span>-NT$ ${Math.abs(d.amt).toLocaleString()}</span></div>`).join('')}
-    <div style="display:flex;justify-content:space-between;padding:3px 0"><span>營業稅 ${adminSettings.taxRate||5}%</span><span>NT$ ${calc.taxAmt.toLocaleString()}</span></div>
-    <div style="border-top:1.5px solid #e8e8f0;margin-top:6px;padding-top:6px">
-    <div style="display:flex;justify-content:space-between;padding:3px 0;color:#059669"><span>＋ 預估回傭 (${calc.rebatePct}%)</span><span>+NT$ ${calc.rebateTWD.toLocaleString()}</span></div>
-    <div style="display:flex;justify-content:space-between;padding:4px 0;font-weight:700;font-size:12px;margin-top:4px"><span style="color:#15803d">預估淨利</span><span style="color:#15803d">NT$ ${calc.netProfit.toLocaleString()} &nbsp;(${calc.netMargin.toFixed(1)}%)</span></div>
-    </div>
-  </div>`:''}
+  // items table
+  const thStyle = 'font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;' +
+                  'color:#777;padding:8px 10px;text-align:left;border-bottom:1.5px solid #e8e8f0;background:#f8f8fa';
+  const tdStyle = 'padding:10px 10px;font-size:12px;color:#333;vertical-align:top;border-bottom:1px solid #f0f0f5';
+  const discRows = (!isInternal && (calc.discLines||[]).length > 0)
+    ? `<tr>
+        <td colspan="2" style="${tdStyle};color:#e91e8c;font-weight:600;border-top:1.5px solid #fce4f3">優惠折扣</td>
+        <td style="${tdStyle};border-top:1.5px solid #fce4f3"></td>
+        <td style="${tdStyle};font-weight:700;color:#10b981;text-align:right;border-top:1.5px solid #fce4f3">
+          -NT$ ${calc.discountAmt.toLocaleString()}</td>
+       </tr>` : '';
 
-  <div class="footer">
-    <div class="footer-note">${ci.note}<br><br>匯率參考：${Object.entries(rates).map(([c,r])=>`1 ${c} = ${r} TWD`).join('　')}</div>
-    <div>
-      <div class="footer-co">${ci.company}</div>
-      <div class="footer-contact">${[ci.phone,ci.email,ci.website].filter(Boolean).join('<br>')}</div>
-    </div>
-  </div>
-</div>
-</body>
-</html>`;
+  const tableHTML = `
+    <div style="font-size:10px;font-weight:700;color:#e91e8c;letter-spacing:.1em;
+                text-transform:uppercase;margin-bottom:8px;padding-bottom:6px;
+                border-bottom:1.5px solid #fce4f3">費用明細 Cost Breakdown</div>
+    <table style="width:100%;border-collapse:collapse;margin-bottom:14px">
+      <thead><tr>
+        <th style="${thStyle}">費用項目</th>
+        <th style="${thStyle}">${isInternal?'說明':''}</th>
+        <th style="${thStyle};text-align:right">原幣金額</th>
+        <th style="${thStyle};text-align:right">新台幣換算</th>
+      </tr></thead>
+      <tbody>
+        ${calc.items.map(i=>`<tr>
+          <td style="${tdStyle}">${i.name}${pk?'<span style="font-size:9px;background:#fff7ed;color:#d97706;border:1px solid #fde68a;padding:1px 5px;border-radius:4px;margin-left:5px;font-weight:600">旺季</span>':''}</td>
+          <td style="${tdStyle};color:#999;font-size:11px">${isInternal?(i.note||''):''}</td>
+          <td style="${tdStyle};font-weight:600;color:#555;text-align:right">${i.display}</td>
+          <td style="${tdStyle};font-weight:700;color:#e91e8c;text-align:right">NT$ ${i.twd.toLocaleString()}</td>
+        </tr>`).join('')}
+        ${discRows}
+      </tbody>
+    </table>`;
 
-  // Data URI download — works on GitHub Pages and all modern browsers
-  const filename = (isInternal?'內部報價_':'報價單_') + studentLabel + '_' + dateStr + '.html';
-  try {
-    // Method 1: Blob (preferred, works in most cases)
-    const blob = new Blob([html], {type:'text/html;charset=utf-8'});
-    const url  = URL.createObjectURL(blob);
-    const a    = document.createElement('a');
-    a.href     = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(()=>URL.revokeObjectURL(url), 3000);
-  } catch(e) {
-    // Method 2: data URI fallback
-    const encoded = 'data:text/html;charset=utf-8,' + encodeURIComponent(html);
-    const a = document.createElement('a');
-    a.href = encoded;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  }
+  // total box
+  const totalHTML = `
+    <div style="background:#e91e8c;border-radius:10px;padding:16px 20px;
+                display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+      <div>
+        <div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+                    color:rgba(255,255,255,.75);margin-bottom:3px">
+          ${isInternal?'含稅售價 (Internal)':'含稅售價 Estimated Total'}</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.65)">≈ ${calc.totalOrig}</div>
+      </div>
+      <div style="font-size:28px;font-weight:700;color:#fff">NT$ ${calc.finalTWD.toLocaleString()}</div>
+    </div>`;
 
-  // Show success tip near the buttons
-  const footer = document.querySelector('.step-footer');
-  if(footer && !footer.querySelector('.dl-tip')){
-    const tip = document.createElement('div');
-    tip.className = 'dl-tip';
-    tip.style.cssText = 'font-size:11px;color:var(--text3);margin-top:10px;background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:9px 12px;line-height:1.7;width:100%';
-    tip.innerHTML = '✅ 報價單已下載！開啟 .html 後按 <strong>Ctrl+P</strong>（Mac: ⌘+P）列印 / 儲存 PDF。';
-    footer.appendChild(tip);
-    setTimeout(()=>tip.remove(), 6000);
-  }
+  // internal breakdown
+  const internalHTML = isInternal ? `
+    <div style="background:#f8f8fa;border-radius:8px;padding:12px 14px;font-size:11px;
+                color:#555;margin-bottom:16px">
+      <div style="font-weight:600;margin-bottom:8px;color:#333">內部計費明細</div>
+      ${[
+        ['外幣原始成本', 'NT$ '+calc.rawCostTWD.toLocaleString(), ''],
+        ...(calc.schoolDiscAmt>0?[['廠商折扣省下', 'NT$ '+calc.schoolDiscAmt.toLocaleString(), '#0369a1']]:[] ),
+        ['台幣成本（含匯差 +'+((calc.fxBuf-1)*100).toFixed(0)+'%）', 'NT$ '+calc.costTWD.toLocaleString(), ''],
+        ['顧問獎金 (+'+((calc.commPct||0)*100).toFixed(0)+'%)', 'NT$ '+calc.commissionTWD.toLocaleString(), ''],
+        ['未稅售價', 'NT$ '+calc.preTaxSell.toLocaleString(), '#333'],
+        ...((calc.discLines||[]).map(d=>[d.label, '-NT$ '+Math.abs(d.amt).toLocaleString(), '#e91e8c'])),
+        ['營業稅 '+(adminSettings.taxRate||5)+'%', 'NT$ '+calc.taxAmt.toLocaleString(), ''],
+      ].map(([l,v,col])=>`
+        <div style="display:flex;justify-content:space-between;padding:3px 0;
+                    ${col?'color:'+col+';font-weight:600':''}">
+          <span>${l}</span><span>${v}</span>
+        </div>`).join('')}
+      <div style="border-top:1.5px solid #e8e8f0;margin-top:6px;padding-top:6px">
+        <div style="display:flex;justify-content:space-between;padding:3px 0;color:#059669">
+          <span>＋ 預估回傭 (${calc.rebatePct}%)</span>
+          <span>+NT$ ${calc.rebateTWD.toLocaleString()}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:4px 0;
+                    font-weight:700;font-size:12px;margin-top:3px">
+          <span style="color:#15803d">預估淨利</span>
+          <span style="color:#15803d">NT$ ${calc.netProfit.toLocaleString()} (${calc.netMargin.toFixed(1)}%)</span>
+        </div>
+      </div>
+    </div>` : '';
+
+  // footer
+  const footerHTML = `
+    <div style="border-top:1px solid #eee;padding-top:14px;
+                display:flex;justify-content:space-between;align-items:flex-start;gap:16px">
+      <div style="font-size:10px;color:#999;line-height:1.9;flex:1">
+        ${ci.note||''}<br>
+        匯率參考：${Object.entries(rates).map(([cur,r])=>'1 '+cur+' = '+r+' TWD').join('　')}
+      </div>
+      <div style="text-align:right">
+        <div style="font-size:13px;font-weight:700;margin-bottom:3px">${ci.company}</div>
+        <div style="font-size:11px;color:#666;line-height:1.9">
+          ${[ci.phone,ci.email,ci.website].filter(Boolean).join('<br>')}
+        </div>
+      </div>
+    </div>`;
+
+  wrap.innerHTML = headerHTML + infoHTML + tableHTML + totalHTML + internalHTML + footerHTML;
+  document.body.appendChild(wrap);
+
+  // ── Screenshot with html2canvas ──
+  const filename = (isInternal?'內部報價_':'報價單_') + studentLabel + '_' + dateStr + '.png';
+
+  // Show loading state on button
+  const btnId = isInternal ? 'btn-internal-pdf' : 'btn-student-pdf';
+  const btn   = document.getElementById(btnId);
+  const origTxt = btn ? btn.innerHTML : '';
+  if(btn){ btn.disabled=true; btn.innerHTML='⏳ 產生中...'; }
+
+  html2canvas(wrap, {
+    scale: 2,
+    useCORS: true,
+    allowTaint: true,
+    backgroundColor: '#ffffff',
+    logging: false,
+    width: 720,
+  }).then(function(canvas){
+    document.body.removeChild(wrap);
+    if(btn){ btn.disabled=false; btn.innerHTML=origTxt; }
+
+    // Download
+    canvas.toBlob(function(blob){
+      const url = URL.createObjectURL(blob);
+      const a   = document.createElement('a');
+      a.href    = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(()=>URL.revokeObjectURL(url), 3000);
+
+      // Success tip
+      const footer = document.querySelector('.step-footer');
+      if(footer && !footer.querySelector('.dl-tip')){
+        const tip = document.createElement('div');
+        tip.className = 'dl-tip';
+        tip.style.cssText = 'font-size:11px;color:var(--text3);margin-top:10px;background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:9px 12px;line-height:1.7;width:100%';
+        tip.textContent = '✅ 報價單已下載為 PNG 圖片！';
+        footer.appendChild(tip);
+        setTimeout(()=>tip.remove(), 5000);
+      }
+    }, 'image/png');
+  }).catch(function(err){
+    document.body.removeChild(wrap);
+    if(btn){ btn.disabled=false; btn.innerHTML=origTxt; }
+    alert('截圖失敗：' + err.message);
+  });
 }
+
+
 
 function saveAdmin(){
   adminSettings.fxBuffer=parseFloat(document.getElementById('a-fxbuf').value)||0;
