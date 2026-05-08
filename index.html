@@ -3,6 +3,99 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs, doc, setDoc, deleteDoc, onSnapshot, query, orderBy }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAJjUX0jHwVA-zpjJ0oHRAIF_0uc3WupY0",
+    authDomain: "fy2026-223ce.firebaseapp.com",
+    projectId: "fy2026-223ce",
+    storageBucket: "fy2026-223ce.firebasestorage.app",
+    messagingSenderId: "243469041544",
+    appId: "1:243469041544:web:629ad979fc60dd0bdf443d"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
+  // ── 掛到 window 讓 app.js 可以呼叫 ──
+  window._db = db;
+  window._fbReady = true;
+
+  // ── Firestore helpers ──
+  window.fbSaveQuote = async function(q){
+    try{
+      await setDoc(doc(db,'quotes', String(q.id)), q);
+      return true;
+    } catch(e){ console.error('fbSaveQuote',e); return false; }
+  };
+
+  window.fbLoadQuotes = async function(){
+    try{
+      const snap = await getDocs(query(collection(db,'quotes'), orderBy('id','desc')));
+      return snap.docs.map(d=>d.data());
+    } catch(e){ console.error('fbLoadQuotes',e); return []; }
+  };
+
+  window.fbDeleteQuote = async function(id){
+    try{
+      await deleteDoc(doc(db,'quotes', String(id)));
+      return true;
+    } catch(e){ console.error('fbDeleteQuote',e); return false; }
+  };
+
+  window.fbSaveSettings = async function(key, data){
+    try{
+      await setDoc(doc(db,'settings', key), { value: JSON.stringify(data) });
+      return true;
+    } catch(e){ console.error('fbSaveSettings',e); return false; }
+  };
+
+  window.fbLoadSettings = async function(key){
+    try{
+      const snap = await getDocs(collection(db,'settings'));
+      const found = snap.docs.find(d=>d.id===key);
+      return found ? JSON.parse(found.data().value) : null;
+    } catch(e){ console.error('fbLoadSettings',e); return null; }
+  };
+
+  // ── 啟動時把 Firestore 報價同步回 localStorage ──
+  window.fbInit = async function(){
+    try{
+      const indicator = document.getElementById('sync-indicator');
+      if(indicator){ indicator.textContent='☁️ 同步中...'; indicator.style.color='#f59e0b'; }
+
+      // Load settings from Firestore (rates, admin)
+      const savedRates = await window.fbLoadSettings('rates');
+      const savedAdmin = await window.fbLoadSettings('admin');
+      if(savedRates){ localStorage.setItem('fy_rates', JSON.stringify(savedRates)); }
+      if(savedAdmin){ localStorage.setItem('fy_admin', JSON.stringify(savedAdmin)); }
+
+      // Load quotes
+      const fbQuotes = await window.fbLoadQuotes();
+      if(fbQuotes.length > 0){
+        // Merge with local — Firestore is source of truth
+        localStorage.setItem('fy_history', JSON.stringify(fbQuotes));
+      }
+
+      if(indicator){ indicator.textContent='☁️ 已同步'; indicator.style.color='#059669'; }
+      // Refresh UI
+      if(typeof updateBadge === 'function') updateBadge();
+      const hist = document.getElementById('history-list');
+      if(hist && typeof renderHistory === 'function') renderHistory();
+    } catch(e){
+      console.error('fbInit',e);
+      const indicator = document.getElementById('sync-indicator');
+      if(indicator){ indicator.textContent='⚠️ 同步失敗'; indicator.style.color='#dc2626'; }
+    }
+  };
+
+  // Run init after page loads
+  window.addEventListener('load', ()=>{ setTimeout(window.fbInit, 500); });
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>放洋留遊學 · 語言學校報價系統</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1315,6 +1408,13 @@ function saveQuote(){
   history.unshift(q);
   localStorage.setItem('fy_history',JSON.stringify(history));
   updateBadge();
+  // 同步到 Firestore
+  if(window.fbSaveQuote){
+    window.fbSaveQuote(q).then(ok=>{
+      const ind=document.getElementById('sync-indicator');
+      if(ind){ ind.textContent=ok?'☁️ 已同步':'⚠️ 雲端同步失敗'; ind.style.color=ok?'#059669':'#dc2626'; }
+    });
+  }
   alert('✅ 報價已儲存！\n'+q.studentName+' · '+state.school+' '+state.campus+'\nNT$ '+Math.round(calc.finalTWD).toLocaleString());
 }
 
@@ -1379,6 +1479,7 @@ function saveRates(){
   localStorage.setItem('fy_rates',JSON.stringify(rates));
   adminSettings.rateUpdatedAt=new Date().toISOString().split('T')[0];
   localStorage.setItem('fy_admin',JSON.stringify(adminSettings));
+  if(window.fbSaveSettings){ window.fbSaveSettings('rates',rates); window.fbSaveSettings('admin',adminSettings); }
   const m=document.getElementById('rate-msg');m.textContent='✓ 匯率已儲存';setTimeout(()=>m.textContent='',2500);
   renderRateFreshness();
 }
@@ -1649,6 +1750,7 @@ function saveAdmin(){
   if(vEl)adminSettings.quoteValidDays=parseInt(vEl.value)||30;
   if(aEl)adminSettings.rateAlertDays=parseInt(aEl.value)||7;
   localStorage.setItem('fy_admin',JSON.stringify(adminSettings));
+  if(window.fbSaveSettings){ window.fbSaveSettings('admin',adminSettings); }
   const m=document.getElementById('admin-msg');m.textContent='✓ 已儲存';setTimeout(()=>m.textContent='',2000);
 }
 
@@ -1660,6 +1762,7 @@ function saveRebates(){
     if(el)adminSettings.rebates[s]=parseFloat(el.value)||0;
   });
   localStorage.setItem('fy_admin',JSON.stringify(adminSettings));
+  if(window.fbSaveSettings){ window.fbSaveSettings('admin',adminSettings); }
   const m=document.getElementById('rebate-msg');m.textContent='✓ 已儲存';setTimeout(()=>m.textContent='',2000);
 }
 
