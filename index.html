@@ -1114,6 +1114,7 @@ function _updateDiscUI(){
 // Step 6 - Confirm
 function step6confirm(){
   document.getElementById('btn-save').style.display='flex';
+  const isAdmin=currentUser&&currentUser.role==='admin';
   const calc=calculate();
   const pk=isPeak();
   const fxPct=(((calc.fxBuf||1)-1)*100).toFixed(0);
@@ -1169,9 +1170,9 @@ function step6confirm(){
     +'<div class="form-section-title">費用明細（外幣）</div>'
     +itemRows+'</div>'
 
-    +'<div class="form-section" style="background:#fafafa">'
-    +'<div class="form-section-title" style="color:var(--text3)">計費層（顧問內部參考）</div>'
-    +intRows
+    +(isAdmin?('<div class="form-section" style="background:#fafafa">'
+    +'<div class="form-section-title" style="color:var(--text3)">計費層（管理員）</div>'
+    +intRows+'</div>'):'')
     +(discRows?('<div style="margin-top:8px;margin-bottom:4px;font-size:10px;font-weight:600;color:var(--text3);letter-spacing:.06em;text-transform:uppercase">折扣明細</div>'+discRows):'')
     +'<div class="qp-row" style="margin-top:4px"><div class="qp-item-name" style="color:var(--text3)">營業稅 '+(adminSettings.taxRate||5)+'%</div>'
     +'<div class="qp-item-price" style="color:var(--text3)">NT$ '+calc.taxAmt.toLocaleString()+'</div></div>'
@@ -1185,6 +1186,7 @@ function step6confirm(){
 
     +'<div class="notice">旺季（6–8月）費用已計入。匯率、匯差、獎金、稅率以系統設定為準。報價僅供參考。</div>'
     // Profit panel (admin only - check by role in future; for now always shown)
+    +(isAdmin?(
     +'<div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:16px 18px;margin-top:12px">'
     +'<div style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#059669;margin-bottom:10px">淨利試算（管理員）</div>'
     +'<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #dcfce7;font-size:12px"><span style="color:#555">含稅售價</span><span style="font-weight:600">NT$ '+calc.finalTWD.toLocaleString()+'</span></div>'
@@ -1198,6 +1200,8 @@ function step6confirm(){
     +'<div style="text-align:right"><div style="font-size:22px;font-weight:700;color:#15803d">NT$ '+calc.netProfit.toLocaleString()+'</div>'
     +'<div style="font-size:12px;font-weight:600;color:#059669">淨利率 '+calc.netMargin.toFixed(1)+'%</div></div>'
     +'</div></div>'
+
+    ):'') 
     +'<div class="step-footer">'
     +'<button class="btn" onclick="prev()">← 上一步</button>'
     +'<div style="display:flex;gap:8px">'
@@ -1339,22 +1343,25 @@ function renderQP(){
   });
 
   // Pricing layers
-  html+='<div class="qp-divider"></div>';
-  html+='<div class="qp-section-title">計費層（內部）</div>';
-  html+='<div class="qp-row"><div><div class="qp-item-name">外幣原始成本</div>'
-    +'<div class="qp-item-note">未含匯差</div></div>'
-    +'<div style="text-align:right"><div class="qp-item-price" style="color:var(--text)">NT$ '+calc.rawCostTWD.toLocaleString()+'</div></div></div>';
-  if((calc.schoolDiscAmt||0)>0){
-    html+='<div class="qp-row"><div><div class="qp-item-name" style="color:#0369a1">廠商折扣省下成本</div>'
-      +'<div class="qp-item-note" style="color:#0369a1">學校給放洋的優惠</div></div>'
-      +'<div style="text-align:right"><div class="qp-item-price" style="color:#0369a1">－NT$ '+calc.schoolDiscAmt.toLocaleString()+'</div></div></div>';
+  const qpIsAdmin=currentUser&&currentUser.role==='admin';
+  if(qpIsAdmin){
+    html+='<div class="qp-divider"></div>';
+    html+='<div class="qp-section-title">計費層（管理員）</div>';
+    html+='<div class="qp-row"><div><div class="qp-item-name">外幣原始成本</div>'
+      +'<div class="qp-item-note">未含匯差</div></div>'
+      +'<div style="text-align:right"><div class="qp-item-price" style="color:var(--text)">NT$ '+calc.rawCostTWD.toLocaleString()+'</div></div></div>';
+    if((calc.schoolDiscAmt||0)>0){
+      html+='<div class="qp-row"><div><div class="qp-item-name" style="color:#0369a1">廠商折扣省下成本</div>'
+        +'<div class="qp-item-note" style="color:#0369a1">學校給放洋的優惠</div></div>'
+        +'<div style="text-align:right"><div class="qp-item-price" style="color:#0369a1">－NT$ '+calc.schoolDiscAmt.toLocaleString()+'</div></div></div>';
+    }
+    html+='<div class="qp-row"><div><div class="qp-item-name">台幣成本（折後含匯差）</div>'
+      +'<div class="qp-item-note">匯差緩衝 +'+(((calc.fxBuf||1)-1)*100).toFixed(0)+'%</div></div>'
+      +'<div style="text-align:right"><div class="qp-item-price" style="color:var(--text)">NT$ '+calc.costTWD.toLocaleString()+'</div></div></div>';
+    html+='<div class="qp-row"><div><div class="qp-item-name">未稅售價</div>'
+      +'<div class="qp-item-note">含顧問獎金 +'+(((calc.commPct||0))*100).toFixed(0)+'%</div></div>'
+      +'<div style="text-align:right"><div class="qp-item-price" style="color:var(--text)">NT$ '+calc.preTaxSell.toLocaleString()+'</div></div></div>';
   }
-  html+='<div class="qp-row"><div><div class="qp-item-name">台幣成本（折後含匯差）</div>'
-    +'<div class="qp-item-note">匯差緩衝 +'+(((calc.fxBuf||1)-1)*100).toFixed(0)+'%</div></div>'
-    +'<div style="text-align:right"><div class="qp-item-price" style="color:var(--text)">NT$ '+calc.costTWD.toLocaleString()+'</div></div></div>';
-  html+='<div class="qp-row"><div><div class="qp-item-name">未稅售價</div>'
-    +'<div class="qp-item-note">含顧問獎金 +'+(((calc.commPct||0))*100).toFixed(0)+'%</div></div>'
-    +'<div style="text-align:right"><div class="qp-item-price" style="color:var(--text)">NT$ '+calc.preTaxSell.toLocaleString()+'</div></div></div>';
 
   // Discounts
   if(calc.discLines&&calc.discLines.length>0){
@@ -1384,7 +1391,7 @@ function renderQP(){
   html+='<div style="font-size:10px;color:var(--text3);margin-top:10px;line-height:1.7">'
     +'匯率：'+Object.entries(rates).map(([c,r])=>c+' = '+r).join('・')
     +'</div>';
-  if(calc.netProfit!==undefined){
+  if(qpIsAdmin&&calc.netProfit!==undefined){
     const npColor=calc.netProfit>=0?'#059669':'#dc2626';
     html+='<div style="margin-top:10px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:7px;padding:9px 11px">'
       +'<div style="font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#059669;margin-bottom:5px">淨利試算</div>'
