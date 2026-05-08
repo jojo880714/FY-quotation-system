@@ -1174,8 +1174,8 @@ function step6confirm(){
     +'<div class="form-section-title" style="color:var(--text3)">計費層（管理員）</div>'
     +intRows+'</div>'):'')
     +(discRows?('<div style="margin-top:8px;margin-bottom:4px;font-size:10px;font-weight:600;color:var(--text3);letter-spacing:.06em;text-transform:uppercase">折扣明細</div>'+discRows):'')
-    +'<div class="qp-row" style="margin-top:4px"><div class="qp-item-name" style="color:var(--text3)">營業稅 '+(adminSettings.taxRate||5)+'%</div>'
-    +'<div class="qp-item-price" style="color:var(--text3)">NT$ '+calc.taxAmt.toLocaleString()+'</div></div>'
+    +(isAdmin?('<div class="qp-row" style="margin-top:4px"><div class="qp-item-name" style="color:var(--text3)">營業稅 '+(adminSettings.taxRate||5)+'%</div>'
+    +'<div class="qp-item-price" style="color:var(--text3)">NT$ '+calc.taxAmt.toLocaleString()+'</div></div>'):'')
     +'</div>'
 
     +'<div style="background:var(--pink);border-radius:10px;padding:16px 18px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">'
