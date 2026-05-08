@@ -791,6 +791,13 @@ function saveQuote(){
   history.unshift(q);
   localStorage.setItem('fy_history',JSON.stringify(history));
   updateBadge();
+  // 同步到 Firestore
+  if(window.fbSaveQuote){
+    window.fbSaveQuote(q).then(ok=>{
+      const ind=document.getElementById('sync-indicator');
+      if(ind){ ind.textContent=ok?'☁️ 已同步':'⚠️ 雲端同步失敗'; ind.style.color=ok?'#059669':'#dc2626'; }
+    });
+  }
   alert('✅ 報價已儲存！\n'+q.studentName+' · '+state.school+' '+state.campus+'\nNT$ '+Math.round(calc.finalTWD).toLocaleString());
 }
 
@@ -855,6 +862,7 @@ function saveRates(){
   localStorage.setItem('fy_rates',JSON.stringify(rates));
   adminSettings.rateUpdatedAt=new Date().toISOString().split('T')[0];
   localStorage.setItem('fy_admin',JSON.stringify(adminSettings));
+  if(window.fbSaveSettings){ window.fbSaveSettings('rates',rates); window.fbSaveSettings('admin',adminSettings); }
   const m=document.getElementById('rate-msg');m.textContent='✓ 匯率已儲存';setTimeout(()=>m.textContent='',2500);
   renderRateFreshness();
 }
@@ -1125,6 +1133,7 @@ function saveAdmin(){
   if(vEl)adminSettings.quoteValidDays=parseInt(vEl.value)||30;
   if(aEl)adminSettings.rateAlertDays=parseInt(aEl.value)||7;
   localStorage.setItem('fy_admin',JSON.stringify(adminSettings));
+  if(window.fbSaveSettings){ window.fbSaveSettings('admin',adminSettings); }
   const m=document.getElementById('admin-msg');m.textContent='✓ 已儲存';setTimeout(()=>m.textContent='',2000);
 }
 
@@ -1136,6 +1145,7 @@ function saveRebates(){
     if(el)adminSettings.rebates[s]=parseFloat(el.value)||0;
   });
   localStorage.setItem('fy_admin',JSON.stringify(adminSettings));
+  if(window.fbSaveSettings){ window.fbSaveSettings('admin',adminSettings); }
   const m=document.getElementById('rebate-msg');m.textContent='✓ 已儲存';setTimeout(()=>m.textContent='',2000);
 }
 
