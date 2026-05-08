@@ -1215,7 +1215,7 @@ function step6confirm(){
 
 // ── Calculate ──
 function calculate(){
-  if(!state.school||!state.campus||!state.course)return{items:[],costTWD:0,preTaxSell:0,discountAmt:0,taxAmt:0,finalTWD:0,totalOrig:'',discLines:[],fxBuf:1,commPct:0,rebatePct:0,rebateTWD:0,commissionTWD:0,netProfit:0,netMargin:0,rawCostTWD:0,discountedCostTWD:0,schoolDiscAmt:0};
+  if(!state.school||!state.campus||!state.course)return{items:[],costTWD:0,preTaxSell:0,discountAmt:0,totalDiscount:0,taxAmt:0,finalTWD:0,totalOrig:'',discLines:[],fxBuf:1,commPct:0,rebatePct:0,rebateTWD:0,commissionTWD:0,netProfit:0,netMargin:0,rawCostTWD:0,discountedCostTWD:0,schoolDiscAmt:0};
   const campusData=SCHOOL_DATA[state.school][state.campus];
   const fees=campusData?.fees||[];
   const w=state.weeks||4;
@@ -1302,6 +1302,7 @@ function calculate(){
   const finalTWD = afterCoDisc + taxAmt;
 
   const discountAmt = preTaxSell - afterCoDisc;  // 公司折扣金額（for display）
+  const totalDiscount = schoolDiscAmt + discountAmt;  // 廠商 + 公司折扣合計
 
   const byCur = {};
   items.forEach(i=>{ byCur[i.currency] = (byCur[i.currency]||0) + i.amt; });
@@ -1316,7 +1317,7 @@ function calculate(){
   const netProfit = afterCoDisc - costTWD + rebateTWD;  // 稅前收入 - 實際成本 + 回傭
   const netMargin = finalTWD > 0 ? Math.round(netProfit / finalTWD * 1000) / 10 : 0;
 
-  return{items, costTWD, preTaxSell, discountAmt, taxAmt, finalTWD, totalOrig, discLines,
+  return{items, costTWD, preTaxSell, discountAmt, totalDiscount, taxAmt, finalTWD, totalOrig, discLines,
     fxBuf, commPct, rawCostTWD, discountedCostTWD, schoolDiscAmt,
     rebatePct, rebateTWD, commissionTWD, netProfit, netMargin};
 }
@@ -1604,12 +1605,14 @@ function exportPDF(mode='student'){
   const thStyle = 'font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;' +
                   'color:#777;padding:8px 10px;text-align:left;border-bottom:1.5px solid #e8e8f0;background:#f8f8fa';
   const tdStyle = 'padding:10px 10px;font-size:12px;color:#333;vertical-align:top;border-bottom:1px solid #f0f0f5';
-  const discRows = (!isInternal && (calc.discLines||[]).length > 0)
+  // Total discount = school discount + company discount
+  const totalDiscAmt = (calc.schoolDiscAmt||0) + (calc.discountAmt||0);
+  const discRows = (!isInternal && totalDiscAmt > 0)
     ? `<tr>
         <td colspan="2" style="${tdStyle};color:#e91e8c;font-weight:600;border-top:1.5px solid #fce4f3">優惠折扣</td>
         <td style="${tdStyle};border-top:1.5px solid #fce4f3"></td>
         <td style="${tdStyle};font-weight:700;color:#10b981;text-align:right;border-top:1.5px solid #fce4f3">
-          -NT$ ${calc.discountAmt.toLocaleString()}</td>
+          -NT$ ${totalDiscAmt.toLocaleString()}</td>
        </tr>` : '';
 
   const tableHTML = `
