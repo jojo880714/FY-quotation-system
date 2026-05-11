@@ -1972,103 +1972,109 @@ function renderDataDetail(){
   const camp = SCHOOL_DATA[dataState.school]?.[dataState.campus];
   if(!camp){ el.innerHTML=''; return; }
 
-  const th = (t,w) => `<th style="padding:7px 10px;font-size:10px;font-weight:600;letter-spacing:.05em;
-    text-transform:uppercase;color:#777;background:#f8f8fa;border-bottom:1.5px solid #e8e8f0;
-    text-align:left;white-space:nowrap;${w?'width:'+w:''}"> ${t}</th>`;
-  const td = (v,pink) => `<td style="padding:7px 10px;font-size:12px;border-bottom:1px solid #f0f0f5;
-    white-space:nowrap;color:${pink?'#e91e8c':'#333'}">${v!==undefined&&v!==null&&v!==''?v:'—'}</td>`;
+  const cur = (c,v) => c==='AUD'?'A$':c==='GBP'?'£':c==='EUR'?'€':c==='USD'?'US$':'$';
+  const fmtPrice = (item) => {
+    if(item.fixed>0) return cur(item.currency)+(item.fixed)+' 固定';
+    if(item.price>0) return cur(item.currency)+(item.price)+'/週';
+    return '—';
+  };
+  const badge = (txt,col) => txt
+    ? `<span style="font-size:10px;padding:2px 7px;border-radius:4px;background:${col||'#f3f4f6'};
+        color:${col?'#fff':'#555'};font-weight:500;white-space:nowrap">${txt}</span>`
+    : '';
 
-  // ── 課程 section（有 tiers）──
-  const courseRows = (camp.courses||[]).map(item=>{
+  // ── 課程 Cards ──
+  const courseCards = (camp.courses||[]).map(item=>{
     const tiers = item.tiers||[];
-    if(!tiers.length){
-      return `<tr>${td(item.name)}${td(item.category)}${td(item.currency)}${td(item.unit)}
-        ${td('—')}${td('—')}${td('—')}${td('—')}${td('—')}</tr>`;
-    }
-    return tiers.map((t,i)=>`<tr>
-      ${i===0?`<td style="padding:7px 10px;font-size:12px;border-bottom:1px solid #f0f0f5;
-        font-weight:500" rowspan="${tiers.length}">${item.name}</td>
-        <td style="padding:7px 10px;font-size:11px;color:#888;border-bottom:1px solid #f0f0f5"
-          rowspan="${tiers.length}">${item.category}</td>
-        <td style="padding:7px 10px;font-size:12px;border-bottom:1px solid #f0f0f5;white-space:nowrap"
-          rowspan="${tiers.length}">${item.currency}</td>
-        <td style="padding:7px 10px;font-size:11px;color:#888;border-bottom:1px solid #f0f0f5;white-space:nowrap"
-          rowspan="${tiers.length}">${item.unit}</td>`:''}
-      ${td(t.wf||'—')}${td(t.wt||'—')}
-      ${td(t.price>0?t.price:'—',t.price>0)}
-      ${td(t.fixed>0?t.fixed:'—',t.fixed>0)}
-      ${td(t.peak>0?'+'+t.peak:'—',t.peak>0)}
-    </tr>`).join('');
+    const tierRows = tiers.map(t=>{
+      const range = (t.wf===t.wt) ? t.wf+'週' : t.wf+'–'+t.wt+'週';
+      const price = t.price>0 ? cur(item.currency)+t.price+'/週' : t.fixed>0 ? cur(item.currency)+t.fixed+' 固定' : '—';
+      const peak = t.peak>0 ? `<span style="color:#d97706;font-size:10px;margin-left:6px">旺季 +${cur(item.currency)}${t.peak}</span>` : '';
+      return `<div style="display:flex;justify-content:space-between;align-items:center;
+        padding:5px 0;border-bottom:1px solid #f5f5f7">
+        <span style="font-size:11px;color:#888">${range}</span>
+        <span style="font-size:13px;font-weight:600;color:#e91e8c">${price}${peak}</span>
+      </div>`;
+    }).join('');
+    return `<div style="background:#fff;border:1px solid #eee;border-radius:10px;padding:12px 14px;margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+        <span style="font-size:13px;font-weight:600;color:#1a1a2e;flex:1">${item.name}</span>
+        ${badge(item.category,'#6b7280')}
+        ${badge(item.currency,'#0369a1')}
+      </div>
+      <div style="font-size:10px;color:#aaa;margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em">${item.unit}</div>
+      ${tierRows}
+    </div>`;
   }).join('');
 
   const courseSection = (camp.courses||[]).length ? `
     <div style="margin-bottom:18px">
-      <div style="font-size:11px;font-weight:600;color:var(--text2);margin-bottom:8px;
-        text-transform:uppercase;letter-spacing:.07em">課程 Courses (${(camp.courses||[]).length}筆)</div>
-      <div style="border:1px solid #e8e8f0;border-radius:8px;overflow:auto">
-        <table style="width:100%;border-collapse:collapse;min-width:600px">
-          <thead><tr>
-            ${th('課程名稱')}${th('類型',70)}${th('幣別',50)}${th('計費方式',90)}
-            ${th('週From',60)}${th('週To',60)}${th('週單價',70)}${th('固定價',70)}${th('旺季+',60)}
-          </tr></thead>
-          <tbody>${courseRows}</tbody>
-        </table>
+      <div style="font-size:11px;font-weight:600;color:#555;margin-bottom:10px;
+        text-transform:uppercase;letter-spacing:.07em;display:flex;align-items:center;gap:8px">
+        課程 Courses
+        <span style="background:#fce4f3;color:#e91e8c;font-size:10px;padding:2px 8px;border-radius:10px">
+          ${(camp.courses||[]).length} 筆</span>
       </div>
+      ${courseCards}
     </div>` : '';
 
-  // ── 住宿 section（直接有 price/fixed）──
-  const accommRows = (camp.accomm||[]).map(item=>`<tr>
-    ${td(item.name)}${td(item.type,false)}${td(item.currency)}${td(item.unit)}
-    ${td(item.price>0?item.price:'—',item.price>0)}
-    ${td(item.fixed>0?item.fixed:'—',item.fixed>0)}
-    <td style="padding:7px 10px;font-size:10px;color:#888;border-bottom:1px solid #f0f0f5">
-      ${item.note||'—'}</td>
-  </tr>`).join('');
+  // ── 住宿 Cards ──
+  const accommByType = {};
+  (camp.accomm||[]).forEach(item=>{
+    const t = item.type||'其他';
+    if(!accommByType[t]) accommByType[t]=[];
+    accommByType[t].push(item);
+  });
 
   const accommSection = (camp.accomm||[]).length ? `
     <div style="margin-bottom:18px">
-      <div style="font-size:11px;font-weight:600;color:var(--text2);margin-bottom:8px;
-        text-transform:uppercase;letter-spacing:.07em">住宿 Accommodation (${(camp.accomm||[]).length}筆)</div>
-      <div style="border:1px solid #e8e8f0;border-radius:8px;overflow:auto">
-        <table style="width:100%;border-collapse:collapse;min-width:500px">
-          <thead><tr>
-            ${th('住宿名稱')}${th('類型',80)}${th('幣別',50)}${th('計費方式',90)}
-            ${th('週單價',70)}${th('固定價',70)}${th('備註')}
-          </tr></thead>
-          <tbody>${accommRows}</tbody>
-        </table>
+      <div style="font-size:11px;font-weight:600;color:#555;margin-bottom:10px;
+        text-transform:uppercase;letter-spacing:.07em;display:flex;align-items:center;gap:8px">
+        住宿 Accommodation
+        <span style="background:#e0e7ff;color:#3730a3;font-size:10px;padding:2px 8px;border-radius:10px">
+          ${(camp.accomm||[]).length} 筆</span>
       </div>
+      ${Object.entries(accommByType).map(([type, items])=>`
+        <div style="font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:.06em;
+          margin-bottom:6px;margin-top:10px">${type}</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px">
+          ${items.map(item=>`
+            <div style="background:#fff;border:1px solid #eee;border-radius:10px;padding:11px 13px">
+              <div style="font-size:12px;font-weight:600;margin-bottom:5px;color:#1a1a2e;line-height:1.4">${item.name}</div>
+              <div style="font-size:15px;font-weight:700;color:#e91e8c;margin-bottom:4px">${fmtPrice(item)}</div>
+              ${item.note?`<div style="font-size:10px;color:#aaa;line-height:1.5">${item.note}</div>`:''}
+            </div>`).join('')}
+        </div>`).join('')}
     </div>` : '';
 
-  // ── 規費 section ──
-  const feeRows = (camp.fees||[]).map(item=>`<tr>
-    ${td(item.name)}${td(item.category,false)}${td(item.currency)}${td(item.unit)}
-    ${td(item.price>0?item.price:'—',item.price>0)}
-    ${td(item.fixed>0?item.fixed:'—',item.fixed>0)}
-    ${td(item.wf||'—')}${td(item.wt||'—')}
-  </tr>`).join('');
-
+  // ── 規費 Cards ──
   const feeSection = (camp.fees||[]).length ? `
     <div style="margin-bottom:18px">
-      <div style="font-size:11px;font-weight:600;color:var(--text2);margin-bottom:8px;
-        text-transform:uppercase;letter-spacing:.07em">規費 Fees (${(camp.fees||[]).length}筆)</div>
-      <div style="border:1px solid #e8e8f0;border-radius:8px;overflow:auto">
-        <table style="width:100%;border-collapse:collapse;min-width:500px">
-          <thead><tr>
-            ${th('費用名稱')}${th('類型',70)}${th('幣別',50)}${th('計費方式',90)}
-            ${th('週單價',70)}${th('固定價',70)}${th('週From',60)}${th('週To',60)}
-          </tr></thead>
-          <tbody>${feeRows}</tbody>
-        </table>
+      <div style="font-size:11px;font-weight:600;color:#555;margin-bottom:10px;
+        text-transform:uppercase;letter-spacing:.07em;display:flex;align-items:center;gap:8px">
+        規費 Fees
+        <span style="background:#dcfce7;color:#15803d;font-size:10px;padding:2px 8px;border-radius:10px">
+          ${(camp.fees||[]).length} 筆</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px">
+        ${(camp.fees||[]).map(item=>{
+          const range = (item.wf&&item.wt) ? item.wf+'–'+item.wt+'週適用' : '';
+          return `<div style="background:#fff;border:1px solid #eee;border-radius:10px;padding:11px 13px">
+            <div style="font-size:11px;color:#888;margin-bottom:3px">${item.category||''}</div>
+            <div style="font-size:12px;font-weight:600;margin-bottom:5px;color:#1a1a2e">${item.name}</div>
+            <div style="font-size:15px;font-weight:700;color:#059669">${fmtPrice(item)}</div>
+            ${range?`<div style="font-size:10px;color:#aaa;margin-top:3px">${range}</div>`:''}
+          </div>`;
+        }).join('')}
       </div>
     </div>` : '';
 
   el.innerHTML =
-    `<div style="font-size:14px;font-weight:600;margin-bottom:14px;color:var(--text)">
-      ${dataState.school} · ${dataState.campus}
-      <span style="font-size:11px;font-weight:400;color:var(--text3);margin-left:8px">
+    `<div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+      <div style="font-size:16px;font-weight:700;color:var(--text)">${dataState.school} · ${dataState.campus}</div>
+      <div style="font-size:11px;color:var(--text3)">
         課程 ${(camp.courses||[]).length} · 住宿 ${(camp.accomm||[]).length} · 規費 ${(camp.fees||[]).length}
-      </span>
+      </div>
     </div>`
     + courseSection + accommSection + feeSection;
 }
