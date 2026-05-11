@@ -167,3 +167,14 @@ GitHub Pages：將 `index.html` 與 `app.js` 放在同一目錄，開啟 GitHub 
 - 右側（50%）：費用資料 Card，overflow-y 可捲動
 - 頂部統計移到 Header 右側，改為緊湊橫排
 - **影響函數**：`renderDataPage()`、`renderDataCampuses()`
+
+---
+
+### 2026-05-11（Kaplan 30+ 校區住宿 fallback）
+
+#### Kaplan 30+ 校區住宿和規費 fallback
+- **問題**：Kaplan「多倫多 30+」等校區只有課程資料，住宿和規費是空的，導致報價時無法選住宿
+- **原因**：Excel 原始資料建立時 30+ 只放課程，住宿和規費視為與一般校區共用
+- **解法方案 A**：新增 `getEffectiveCampusData(school, campus)` helper，當 30+ 校區的 accomm 和 fees 為空時，自動 fallback 讀同城市一般校區的住宿和規費
+- **影響範圍**：報價精靈 Step 3（住宿選擇）、Step 4（加購）、`calculate()`，共 4 處
+- **新增函數**：`getEffectiveCampusData()`
