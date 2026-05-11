@@ -586,15 +586,38 @@ function step6confirm(){
     +'</div></div>'
 
     ):'') 
+    +'<div id="download-section" style="display:none;margin-top:0"></div>'
     +'<div class="step-footer">'
     +'<button class="btn" onclick="prev()">← 上一步</button>'
-    +'<div style="display:flex;gap:8px">'
-    +'<button class="btn" id="btn-internal-pdf">📊 內部報價（PNG）</button>'
-    +'<button class="btn btn-pink" id="btn-student-pdf">📄 學生報價（PNG）</button>'
-    +'</div></div>';
-  // Direct binding — no setTimeout needed
-  document.getElementById('btn-internal-pdf').onclick = function(){ exportPDF('internal'); };
-  document.getElementById('btn-student-pdf').onclick  = function(){ exportPDF('student');   };
+    +'<button class="btn btn-pink" id="btn-save-main" onclick="saveAndReveal()">✓ 儲存報價</button>'
+    +'</div>';
+}
+
+function saveAndReveal(){
+  // Run normal save
+  saveQuote();
+  // Show download section
+  const isAdmin = currentUser && currentUser.role === 'admin';
+  const dl = document.getElementById('download-section');
+  if(!dl) return;
+  dl.style.display = 'block';
+  dl.innerHTML =
+    '<div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:14px 18px;margin-bottom:12px">'
+    +'<div style="font-size:11px;font-weight:600;color:#15803d;margin-bottom:10px;letter-spacing:.05em">✅ 報價已儲存，請下載報價單</div>'
+    +'<div style="display:flex;gap:8px;flex-wrap:wrap">'
+    +(isAdmin?'<button class="btn" id="btn-dl-internal" style="background:#fff">📊 內部報價（PNG）</button>':'')
+    +'<button class="btn btn-pink" id="btn-dl-student">📄 學生報價（PNG）</button>'
+    +'</div>'
+    +'</div>';
+  if(isAdmin){
+    const bi = document.getElementById('btn-dl-internal');
+    if(bi) bi.onclick = function(){ exportPDF('internal'); };
+  }
+  const bs = document.getElementById('btn-dl-student');
+  if(bs) bs.onclick = function(){ exportPDF('student'); };
+  // Disable save button to avoid double save
+  const sb = document.getElementById('btn-save-main');
+  if(sb){ sb.textContent='✓ 已儲存'; sb.disabled=true; sb.style.opacity='0.6'; }
 }
 
 // ── Helper: 取得 campusData，30+ 校區 fallback 到同城市一般校區 ──
