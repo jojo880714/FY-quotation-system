@@ -1181,7 +1181,7 @@ function step6confirm(){
     +'<div style="font-size:26px;font-weight:700;color:#fff">NT$ '+calc.finalTWD.toLocaleString()+'</div>'
     +'</div>'
 
-    +'<div class="notice">旺季（6–8月）費用已計入。匯率、匯差、獎金、稅率以系統設定為準。報價僅供參考。</div>'
+    +'<div class="notice" style="margin-bottom:0">旺季（6–8月）費用已計入。匯率、匯差、獎金、稅率以系統設定為準。報價僅供參考。</div>'
     // Profit panel (admin only - check by role in future; for now always shown)
     +(isAdmin?(
     +'<div style="background:#f0fdf4;border:1.5px solid #86efac;border-radius:10px;padding:16px 18px;margin-top:12px">'
@@ -1199,7 +1199,7 @@ function step6confirm(){
     +'</div></div>'
 
     ):'') 
-    +'<div id="download-section" style="display:none;margin-top:0"></div>'
+    +'<div id="download-section" style="display:none;margin-top:8px"></div>'
     +'<div class="step-footer">'
     +'<button class="btn" onclick="prev()">← 上一步</button>'
     +'<button class="btn btn-pink" id="btn-save-main" onclick="saveAndReveal()">✓ 儲存報價</button>'
