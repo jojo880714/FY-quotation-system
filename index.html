@@ -886,7 +886,7 @@ function saveStep2(){
 
 // Step 3
 function step3(){
-  const campusData=state.school&&state.campus?SCHOOL_DATA[state.school][state.campus]:null;
+  const campusData=state.school&&state.campus?getEffectiveCampusData(state.school,state.campus):null;
   const accomms=(campusData?.accomm||[]).filter(a=>a.type!=='押金'&&a.type!=='行政'&&a.type!=='額外加成');
   const byType={};
   accomms.forEach(a=>{if(!byType[a.type])byType[a.type]=[];byType[a.type].push(a);});
@@ -933,7 +933,7 @@ function pickAccomm(a){state.accomm=a;step3();renderQP();}
 
 // Step 4
 function step4(){
-  const campusData=state.school&&state.campus?SCHOOL_DATA[state.school][state.campus]:null;
+  const campusData=state.school&&state.campus?getEffectiveCampusData(state.school,state.campus):null;
   const fees=campusData?.fees||[];
   const extras=fees.filter(f=>['接機','保險','簽證','考試'].includes(f.category));
 
@@ -1210,10 +1210,31 @@ function step6confirm(){
   document.getElementById('btn-student-pdf').onclick  = function(){ exportPDF('student');   };
 }
 
+// ── Helper: 取得 campusData，30+ 校區 fallback 到同城市一般校區 ──
+function getEffectiveCampusData(school, campus){
+  const data = SCHOOL_DATA[school]?.[campus];
+  if(!data) return null;
+  // 如果 accomm 和 fees 都是空的，嘗試找同城市一般校區
+  const hasAccomm = (data.accomm||[]).length > 0;
+  const hasFees   = (data.fees||[]).length > 0;
+  if(!hasAccomm && !hasFees && campus.includes(' 30+')){
+    const baseCampus = campus.replace(' 30+','').trim();
+    const baseData = SCHOOL_DATA[school]?.[baseCampus];
+    if(baseData){
+      return {
+        courses: data.courses,          // 30+ 自己的課程
+        accomm:  baseData.accomm || [], // 一般校區的住宿
+        fees:    baseData.fees   || [], // 一般校區的規費
+      };
+    }
+  }
+  return data;
+}
+
 // ── Calculate ──
 function calculate(){
   if(!state.school||!state.campus||!state.course)return{items:[],costTWD:0,preTaxSell:0,discountAmt:0,totalDiscount:0,taxAmt:0,finalTWD:0,totalOrig:'',discLines:[],fxBuf:1,commPct:0,rebatePct:0,rebateTWD:0,commissionTWD:0,netProfit:0,netMargin:0,rawCostTWD:0,discountedCostTWD:0,schoolDiscAmt:0};
-  const campusData=SCHOOL_DATA[state.school][state.campus];
+  const campusData=getEffectiveCampusData(state.school,state.campus);
   const fees=campusData?.fees||[];
   const w=state.weeks||4;
   const pk=isPeak();
