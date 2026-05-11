@@ -178,3 +178,12 @@ GitHub Pages：將 `index.html` 與 `app.js` 放在同一目錄，開啟 GitHub 
 - **解法方案 A**：新增 `getEffectiveCampusData(school, campus)` helper，當 30+ 校區的 accomm 和 fees 為空時，自動 fallback 讀同城市一般校區的住宿和規費
 - **影響範圍**：報價精靈 Step 3（住宿選擇）、Step 4（加購）、`calculate()`，共 4 處
 - **新增函數**：`getEffectiveCampusData()`
+
+---
+
+### 2026-05-11（住宿選取邏輯修正）
+
+#### 住宿選取判斷 — 改用 name + type + price 三者組合比對
+- **問題**：Kaplan 部分校區的住宿名稱相同（如「單人房 (每週14餐/共用衛浴)」），但 type 不同（18歲+ vs 18歲以下），導致選取一個時兩個同時高亮
+- **修正**：選取判斷從只比對 `name`，改為同時比對 `name + type + price + fixed`，確保唯一命中
+- **影響位置**：step3() 內的 accomm 渲染邏輯，第 902 行
