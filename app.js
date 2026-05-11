@@ -286,7 +286,7 @@ function step3(){
         ${items.map(a=>{
           const price=a.price||a.fixed;
           const unit=a.unit==='按週計算'||a.unit==='每週'?'/週':a.unit==='按天計算'?'/晚':'固定';
-          const sel=state.accomm&&state.accomm!=='none'&&state.accomm.name===a.name;
+          const sel=state.accomm&&state.accomm!=='none'&&state.accomm.name===a.name&&state.accomm.type===a.type&&state.accomm.price===a.price&&state.accomm.fixed===a.fixed;
           return`<div class="accomm-card ${sel?'selected':''}" onclick='pickAccomm(${JSON.stringify(a)})'>
             <div class="accomm-type">${type}</div>
             <div class="accomm-name">${a.name}</div>
