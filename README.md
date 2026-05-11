@@ -156,3 +156,14 @@ GitHub Pages：將 `index.html` 與 `app.js` 放在同一目錄，開啟 GitHub 
 - **住宿**：改為 Grid Card，依住宿類型分組（寄宿家庭、學生宿舍等），每張 Card 顯示名稱、單價、備註
 - **規費**：改為 Grid Card，顯示類型、名稱、金額、適用週數範圍
 - **影響函數**：`renderDataDetail()`
+
+---
+
+### 2026-05-11（費用資料管理頁版型調整）
+
+#### 費用資料管理 — 改為 50/50 分割版型
+- 移除 page-wrap 寬度限制，改為全寬
+- 左側（50%）：校區列表，每行顯示校區名稱 + 課程/住宿/規費筆數
+- 右側（50%）：費用資料 Card，overflow-y 可捲動
+- 頂部統計移到 Header 右側，改為緊湊橫排
+- **影響函數**：`renderDataPage()`、`renderDataCampuses()`
