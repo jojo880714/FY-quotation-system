@@ -1361,29 +1361,96 @@ function renderDataDetail(){
   const camp = SCHOOL_DATA[dataState.school]?.[dataState.campus];
   if(!camp){ el.innerHTML=''; return; }
 
-  const section = (title, items, cols) => {
-    if(!items||!items.length) return '';
-    const headers = cols.map(c=>`<th style="padding:7px 10px;font-size:10px;font-weight:600;
-      letter-spacing:.06em;text-transform:uppercase;color:#777;background:#f8f8fa;
-      border-bottom:1.5px solid #e8e8f0;text-align:left">${c}</th>`).join('');
-    const rows = items.map(item=>`<tr>${cols.map((col,i)=>{
-      const keys = ['name','category','currency','unit','price','fixed','wf','wt','peak'];
-      const key = keys[i];
-      const val = item[key]!==undefined ? item[key] : '—';
-      return `<td style="padding:8px 10px;font-size:12px;border-bottom:1px solid #f0f0f5;
-        color:${key==='price'||key==='fixed'?'#e91e8c':'#333'}">${val}</td>`;
-    }).join('')}</tr>`).join('');
-    return `<div style="margin-bottom:16px">
+  const th = (t,w) => `<th style="padding:7px 10px;font-size:10px;font-weight:600;letter-spacing:.05em;
+    text-transform:uppercase;color:#777;background:#f8f8fa;border-bottom:1.5px solid #e8e8f0;
+    text-align:left;white-space:nowrap;${w?'width:'+w:''}"> ${t}</th>`;
+  const td = (v,pink) => `<td style="padding:7px 10px;font-size:12px;border-bottom:1px solid #f0f0f5;
+    white-space:nowrap;color:${pink?'#e91e8c':'#333'}">${v!==undefined&&v!==null&&v!==''?v:'—'}</td>`;
+
+  // ── 課程 section（有 tiers）──
+  const courseRows = (camp.courses||[]).map(item=>{
+    const tiers = item.tiers||[];
+    if(!tiers.length){
+      return `<tr>${td(item.name)}${td(item.category)}${td(item.currency)}${td(item.unit)}
+        ${td('—')}${td('—')}${td('—')}${td('—')}${td('—')}</tr>`;
+    }
+    return tiers.map((t,i)=>`<tr>
+      ${i===0?`<td style="padding:7px 10px;font-size:12px;border-bottom:1px solid #f0f0f5;
+        font-weight:500" rowspan="${tiers.length}">${item.name}</td>
+        <td style="padding:7px 10px;font-size:11px;color:#888;border-bottom:1px solid #f0f0f5"
+          rowspan="${tiers.length}">${item.category}</td>
+        <td style="padding:7px 10px;font-size:12px;border-bottom:1px solid #f0f0f5;white-space:nowrap"
+          rowspan="${tiers.length}">${item.currency}</td>
+        <td style="padding:7px 10px;font-size:11px;color:#888;border-bottom:1px solid #f0f0f5;white-space:nowrap"
+          rowspan="${tiers.length}">${item.unit}</td>`:''}
+      ${td(t.wf||'—')}${td(t.wt||'—')}
+      ${td(t.price>0?t.price:'—',t.price>0)}
+      ${td(t.fixed>0?t.fixed:'—',t.fixed>0)}
+      ${td(t.peak>0?'+'+t.peak:'—',t.peak>0)}
+    </tr>`).join('');
+  }).join('');
+
+  const courseSection = (camp.courses||[]).length ? `
+    <div style="margin-bottom:18px">
       <div style="font-size:11px;font-weight:600;color:var(--text2);margin-bottom:8px;
-        text-transform:uppercase;letter-spacing:.07em">${title} (${items.length}筆)</div>
-      <div style="border:1px solid #e8e8f0;border-radius:8px;overflow:hidden">
-        <table style="width:100%;border-collapse:collapse">
-          <thead><tr>${headers}</tr></thead>
-          <tbody>${rows}</tbody>
+        text-transform:uppercase;letter-spacing:.07em">課程 Courses (${(camp.courses||[]).length}筆)</div>
+      <div style="border:1px solid #e8e8f0;border-radius:8px;overflow:auto">
+        <table style="width:100%;border-collapse:collapse;min-width:600px">
+          <thead><tr>
+            ${th('課程名稱')}${th('類型',70)}${th('幣別',50)}${th('計費方式',90)}
+            ${th('週From',60)}${th('週To',60)}${th('週單價',70)}${th('固定價',70)}${th('旺季+',60)}
+          </tr></thead>
+          <tbody>${courseRows}</tbody>
         </table>
       </div>
-    </div>`;
-  };
+    </div>` : '';
+
+  // ── 住宿 section（直接有 price/fixed）──
+  const accommRows = (camp.accomm||[]).map(item=>`<tr>
+    ${td(item.name)}${td(item.type,false)}${td(item.currency)}${td(item.unit)}
+    ${td(item.price>0?item.price:'—',item.price>0)}
+    ${td(item.fixed>0?item.fixed:'—',item.fixed>0)}
+    <td style="padding:7px 10px;font-size:10px;color:#888;border-bottom:1px solid #f0f0f5">
+      ${item.note||'—'}</td>
+  </tr>`).join('');
+
+  const accommSection = (camp.accomm||[]).length ? `
+    <div style="margin-bottom:18px">
+      <div style="font-size:11px;font-weight:600;color:var(--text2);margin-bottom:8px;
+        text-transform:uppercase;letter-spacing:.07em">住宿 Accommodation (${(camp.accomm||[]).length}筆)</div>
+      <div style="border:1px solid #e8e8f0;border-radius:8px;overflow:auto">
+        <table style="width:100%;border-collapse:collapse;min-width:500px">
+          <thead><tr>
+            ${th('住宿名稱')}${th('類型',80)}${th('幣別',50)}${th('計費方式',90)}
+            ${th('週單價',70)}${th('固定價',70)}${th('備註')}
+          </tr></thead>
+          <tbody>${accommRows}</tbody>
+        </table>
+      </div>
+    </div>` : '';
+
+  // ── 規費 section ──
+  const feeRows = (camp.fees||[]).map(item=>`<tr>
+    ${td(item.name)}${td(item.category,false)}${td(item.currency)}${td(item.unit)}
+    ${td(item.price>0?item.price:'—',item.price>0)}
+    ${td(item.fixed>0?item.fixed:'—',item.fixed>0)}
+    ${td(item.wf||'—')}${td(item.wt||'—')}
+  </tr>`).join('');
+
+  const feeSection = (camp.fees||[]).length ? `
+    <div style="margin-bottom:18px">
+      <div style="font-size:11px;font-weight:600;color:var(--text2);margin-bottom:8px;
+        text-transform:uppercase;letter-spacing:.07em">規費 Fees (${(camp.fees||[]).length}筆)</div>
+      <div style="border:1px solid #e8e8f0;border-radius:8px;overflow:auto">
+        <table style="width:100%;border-collapse:collapse;min-width:500px">
+          <thead><tr>
+            ${th('費用名稱')}${th('類型',70)}${th('幣別',50)}${th('計費方式',90)}
+            ${th('週單價',70)}${th('固定價',70)}${th('週From',60)}${th('週To',60)}
+          </tr></thead>
+          <tbody>${feeRows}</tbody>
+        </table>
+      </div>
+    </div>` : '';
 
   el.innerHTML =
     `<div style="font-size:14px;font-weight:600;margin-bottom:14px;color:var(--text)">
@@ -1392,9 +1459,7 @@ function renderDataDetail(){
         課程 ${(camp.courses||[]).length} · 住宿 ${(camp.accomm||[]).length} · 規費 ${(camp.fees||[]).length}
       </span>
     </div>`
-    + section('課程 Courses', camp.courses, ['名稱','類型','幣別','單位','單價','固定價','週數From','週數To','旺季加'])
-    + section('住宿 Accommodation', camp.accomm, ['名稱','類型','幣別','單位','單價','固定價','週數From','週數To'])
-    + section('規費 Fees', camp.fees, ['名稱','類型','幣別','單位','單價','固定價','週數From','週數To']);
+    + courseSection + accommSection + feeSection;
 }
 
 // Init
