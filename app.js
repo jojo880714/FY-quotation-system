@@ -817,7 +817,26 @@ function renderQP(){
 // ── Save ──
 function saveQuote(){
   const calc=calculate();
-  const q={id:Date.now(),date:new Date().toLocaleDateString('zh-TW'),advisorId:currentUser.id,advisorName:currentUser.name,studentName:state.studentName||'未填',studentEmail:state.studentEmail,school:state.school,campus:state.campus,course:state.course?.name,weeks:state.weeks,startDate:state.startDate,accomm:state.accomm==='none'?null:state.accomm?.name,costTWD:calc.costTWD,preTaxSell:calc.preTaxSell,finalTWD:calc.finalTWD,discountAmt:calc.discountAmt,totalOrig:calc.totalOrig,items:calc.items,discLines:calc.discLines,netProfit:calc.netProfit,netMargin:calc.netMargin,rebateTWD:calc.rebateTWD,schoolDiscAmt:calc.schoolDiscAmt,status:'draft'};
+  // 命名規則：學生-校區-出發日期-版本數
+  const baseName=(state.studentName||'未填')+'-'+(state.school||'')+'-'+(state.startDate||'未定');
+  const sameBase=history.filter(h=>h.baseName===baseName);
+  const version='v'+(sameBase.length+1);
+  const quoteName=baseName+'-'+version;
+  const q={id:Date.now(),date:new Date().toLocaleDateString('zh-TW'),quoteName,baseName,version,
+    advisorId:currentUser.id,advisorName:currentUser.name,
+    studentName:state.studentName||'未填',studentEmail:state.studentEmail,
+    school:state.school,campus:state.campus,course:state.course?.name,weeks:state.weeks,
+    startDate:state.startDate,accomm:state.accomm==='none'?null:state.accomm?.name,
+    costTWD:calc.costTWD,preTaxSell:calc.preTaxSell,finalTWD:calc.finalTWD,
+    discountAmt:calc.discountAmt,totalOrig:calc.totalOrig,items:calc.items,
+    discLines:calc.discLines,netProfit:calc.netProfit,netMargin:calc.netMargin,
+    rebateTWD:calc.rebateTWD,schoolDiscAmt:calc.schoolDiscAmt,
+    // 儲存完整 state 供複製用
+    _state:{school:state.school,campus:state.campus,course:state.course,
+      weeks:state.weeks,startDate:state.startDate,accomm:state.accomm,
+      extras:state.extras,disc:state.disc,
+      studentName:state.studentName,studentEmail:state.studentEmail,notes:state.notes},
+    status:'draft'};
   history.unshift(q);
   localStorage.setItem('fy_history',JSON.stringify(history));
   updateBadge();
@@ -931,17 +950,23 @@ function renderHistory(){
       const d=new Date(q.date.replace(/\//g,'-'));
       return(Date.now()-d.getTime())>validDays*86400000;
     })();
+    const qName = q.quoteName || (q.studentName+'-'+(q.school||'')+'-'+(q.startDate||''));
     return '<div class="history-row" style="'+(expired?'opacity:.65':'')+'">'+
-      '<div class="td td-name">'+q.studentName+'</div>'+
+      '<div class="td" style="min-width:0">'+
+        '<div style="font-weight:500;font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+qName+'</div>'+
+        '<div style="font-size:10px;color:var(--text3);margin-top:1px">'+(q.course||'—')+' · '+( q.weeks||'—')+'週</div>'+
+      '</div>'+
       '<div class="td">'+(q.school||'—')+' · '+(q.campus||'—')+'</div>'+
-      '<div class="td" style="font-size:11px">'+(q.course||'—')+'</div>'+
       '<div class="td td-amount">NT$ '+Math.round(q.finalTWD||q.totalTWD||0).toLocaleString()+'</div>'+
       '<div class="td">'+
         '<span class="status-pill '+(q.status==='draft'?'status-draft':'status-sent')+'">'+(q.status==='draft'?'草稿':'已寄出')+'</span>'+
         (expired?'<span style="font-size:10px;background:#fef2f2;color:#dc2626;border:1px solid #fecaca;border-radius:4px;padding:1px 6px;margin-left:4px">已過期</span>':'')+
         (isAdmin&&q.advisorName?'<div style="font-size:10px;color:var(--text3);margin-top:1px">'+q.advisorName+'</div>':'')+
       '</div>'+
-      '<div class="td"><button class="btn btn-sm" onclick="loadQ('+q.id+')">載入</button></div>'+
+      '<div class="td" style="display:flex;gap:6px">'+
+        '<button class="btn btn-sm" onclick="copyQ('+q.id+')">複製</button>'+
+        '<button class="btn btn-sm" onclick="loadQ('+q.id+')">載入</button>'+
+      '</div>'+
       '</div>';
   }).join('');
 }
@@ -951,9 +976,51 @@ function filterHistory(q){
 }
 
 function loadQ(id){
-  const q=history.find(h=>h.id===id);if(!q)return;
-  showPage('wizard');state.school=q.school;state.campus=q.campus;state.weeks=q.weeks;state.startDate=q.startDate;state.studentName=q.studentName;state.step=5;
-  renderWizard();
+  const q=history.find(h=>h.id===id);
+  if(!q)return;
+  if(q._state){
+    Object.assign(state, JSON.parse(JSON.stringify(q._state)));
+    state.step=6;
+  } else {
+    state.school=q.school||null;
+    state.campus=q.campus||null;
+    state.weeks=q.weeks||4;
+    state.startDate=q.startDate||'';
+    state.studentName=q.studentName||'';
+    state.studentEmail=q.studentEmail||'';
+    state.step=6;
+  }
+  showPage('wizard');
+  renderWizard();renderQP();
+}
+
+function copyQ(id){
+  const q=history.find(h=>h.id===id);
+  if(!q)return;
+  if(q._state){
+    Object.assign(state, JSON.parse(JSON.stringify(q._state)));
+  } else {
+    state.school=q.school||null;
+    state.campus=q.campus||null;
+    state.weeks=q.weeks||4;
+    state.startDate=q.startDate||'';
+    state.studentName=q.studentName||'';
+    state.studentEmail=q.studentEmail||'';
+    state.course=null;
+    state.accomm=null;
+    state.extras={};
+    state.disc={type:'原價',pct:0,fixed:0,schoolDiscount:null};
+  }
+  state.step=0;
+  showPage('wizard');
+  renderWizard();renderQP();
+  const toast=document.createElement('div');
+  toast.style.cssText='position:fixed;bottom:80px;left:50%;transform:translateX(-50%);'
+    +'background:#1a1a2e;color:#fff;font-size:12px;padding:10px 18px;border-radius:8px;'
+    +'z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,.2)';
+  toast.textContent='✅ 已複製報價，請確認或修改後重新儲存為新版本';
+  document.body.appendChild(toast);
+  setTimeout(()=>toast.remove(),3500);
 }
 
 // ── PDF Export ──
