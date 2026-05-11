@@ -90,6 +90,7 @@ function showPage(id){
   document.getElementById('topbar-title').textContent=titles[id]||'';
   document.getElementById('topbar-sub').textContent='';
   if(id==='settings')renderSettings();
+  if(id==='data')renderDataPage();
   if(id==='history')renderHistory();
   if(id==='wizard')renderWizard();
   updateBadge();
@@ -1281,6 +1282,120 @@ function confirmAddPlan(btn){
 
 function togglePlan(i,v){adminSettings.discountPlans[i].active=v;localStorage.setItem('fy_admin',JSON.stringify(adminSettings));}
 function deletePlan(i){if(!confirm('確定刪除此方案？'))return;adminSettings.discountPlans.splice(i,1);localStorage.setItem('fy_admin',JSON.stringify(adminSettings));renderDiscountPlans();}
+
+// ── Data Management Page ──
+let dataState = {school: Object.keys(SCHOOL_DATA)[0], campus: null};
+
+function renderDataPage(){
+  const schools = Object.keys(SCHOOL_DATA);
+  const comingSoon = ['IH','BESA','Winning'];
+
+  // Stats
+  const totalCampuses = schools.reduce((s,sch)=>s+Object.keys(SCHOOL_DATA[sch]).length,0);
+  const totalRules = schools.reduce((s,sch)=>s+Object.values(SCHOOL_DATA[sch]).reduce((s2,camp)=>
+    s2+(camp.courses||[]).length+(camp.accomm||[]).length+(camp.fees||[]).length,0),0);
+  const statsEl = document.getElementById('data-stats');
+  if(statsEl) statsEl.innerHTML = [
+    [schools.length+'','已上線學校'],
+    [totalCampuses+'','校區數量'],
+    [totalRules.toLocaleString(),'費用規則筆數'],
+  ].map(([n,l])=>`<div class="stat-card" style="flex:1;min-width:100px">
+    <div style="font-size:22px;font-weight:700;color:var(--pink)">${n}</div>
+    <div style="font-size:11px;color:var(--text3);margin-top:2px">${l}</div>
+  </div>`).join('');
+
+  // School tabs
+  const tabsEl = document.getElementById('data-school-tabs');
+  const allSchools = [...schools, ...comingSoon];
+  if(tabsEl) tabsEl.innerHTML = allSchools.map(s=>{
+    const active = s===dataState.school;
+    const avail = schools.includes(s);
+    return `<button onclick="${avail?`switchDataSchool('${s}')`:'void(0)'}"
+      style="padding:7px 16px;border-radius:8px;border:1px solid ${active?'var(--pink)':'var(--border)'};
+      background:${active?'var(--pink-light)':'var(--bg)'};color:${active?'var(--pink)':avail?'var(--text)':'var(--text3)'};
+      font-size:12px;font-weight:${active?'600':'400'};cursor:${avail?'pointer':'not-allowed'};
+      display:flex;align-items:center;gap:5px">
+      ${s}${!avail?'<span style="font-size:9px;background:#f3f4f6;color:#9ca3af;padding:1px 5px;border-radius:4px">待上架</span>':''}
+    </button>`;
+  }).join('');
+
+  // Campus list
+  renderDataCampuses();
+}
+
+function switchDataSchool(school){
+  dataState.school = school;
+  dataState.campus = null;
+  renderDataPage();
+}
+
+function renderDataCampuses(){
+  const campuses = Object.keys(SCHOOL_DATA[dataState.school]||{});
+  if(!dataState.campus) dataState.campus = campuses[0];
+
+  const listEl = document.getElementById('data-campus-list');
+  if(listEl) listEl.innerHTML = campuses.map(camp=>{
+    const active = camp===dataState.campus;
+    const data = SCHOOL_DATA[dataState.school][camp];
+    const count = (data.courses||[]).length+(data.accomm||[]).length+(data.fees||[]).length;
+    return `<div onclick="switchDataCampus('${camp}')"
+      style="padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--border);
+      background:${active?'var(--pink-light)':'transparent'};
+      border-left:3px solid ${active?'var(--pink)':'transparent'}">
+      <div style="font-size:12px;font-weight:${active?'600':'400'};color:${active?'var(--pink)':'var(--text)'}">${camp}</div>
+      <div style="font-size:10px;color:var(--text3);margin-top:1px">${count} 筆規則</div>
+    </div>`;
+  }).join('');
+
+  renderDataDetail();
+}
+
+function switchDataCampus(campus){
+  dataState.campus = campus;
+  renderDataCampuses();
+}
+
+function renderDataDetail(){
+  const el = document.getElementById('data-detail');
+  if(!el) return;
+  const camp = SCHOOL_DATA[dataState.school]?.[dataState.campus];
+  if(!camp){ el.innerHTML=''; return; }
+
+  const section = (title, items, cols) => {
+    if(!items||!items.length) return '';
+    const headers = cols.map(c=>`<th style="padding:7px 10px;font-size:10px;font-weight:600;
+      letter-spacing:.06em;text-transform:uppercase;color:#777;background:#f8f8fa;
+      border-bottom:1.5px solid #e8e8f0;text-align:left">${c}</th>`).join('');
+    const rows = items.map(item=>`<tr>${cols.map((col,i)=>{
+      const keys = ['name','category','currency','unit','price','fixed','wf','wt','peak'];
+      const key = keys[i];
+      const val = item[key]!==undefined ? item[key] : '—';
+      return `<td style="padding:8px 10px;font-size:12px;border-bottom:1px solid #f0f0f5;
+        color:${key==='price'||key==='fixed'?'#e91e8c':'#333'}">${val}</td>`;
+    }).join('')}</tr>`).join('');
+    return `<div style="margin-bottom:16px">
+      <div style="font-size:11px;font-weight:600;color:var(--text2);margin-bottom:8px;
+        text-transform:uppercase;letter-spacing:.07em">${title} (${items.length}筆)</div>
+      <div style="border:1px solid #e8e8f0;border-radius:8px;overflow:hidden">
+        <table style="width:100%;border-collapse:collapse">
+          <thead><tr>${headers}</tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+    </div>`;
+  };
+
+  el.innerHTML =
+    `<div style="font-size:14px;font-weight:600;margin-bottom:14px;color:var(--text)">
+      ${dataState.school} · ${dataState.campus}
+      <span style="font-size:11px;font-weight:400;color:var(--text3);margin-left:8px">
+        課程 ${(camp.courses||[]).length} · 住宿 ${(camp.accomm||[]).length} · 規費 ${(camp.fees||[]).length}
+      </span>
+    </div>`
+    + section('課程 Courses', camp.courses, ['名稱','類型','幣別','單位','單價','固定價','週數From','週數To','旺季加'])
+    + section('住宿 Accommodation', camp.accomm, ['名稱','類型','幣別','單位','單價','固定價','週數From','週數To'])
+    + section('規費 Fees', camp.fees, ['名稱','類型','幣別','單位','單價','固定價','週數From','週數To']);
+}
 
 // Init
 renderWizard();renderQP();updateBadge();
